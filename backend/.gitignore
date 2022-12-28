@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### firebase config
+firebase-configuration-key-popeye.json
