@@ -11,11 +11,21 @@ public class ProgramSession {
 
     private List<Exercise> exerciseList;
     private int day;
-    private float timePerSession;
 
-    public ProgramSession(List<Exercise> exerciseList, int day, float timePerSession) {
+    public ProgramSession(List<Exercise> exerciseList, int day) {
         this.exerciseList = exerciseList;
         this.day = day;
-        this.timePerSession = timePerSession;
+    }
+
+    public int getSecondsPerSession() {
+        return exerciseList.stream()
+            .mapToInt(exercise -> exercise.getLenghtInSeconds())
+            .sum();
+    }
+
+    public void updateRestTime(int restTime) {
+        for (int i = 0; i < exerciseList.size(); i++) {
+            exerciseList.get(i).setRest(restTime);
+        }
     }
 }
