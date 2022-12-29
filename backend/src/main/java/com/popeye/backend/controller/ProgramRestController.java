@@ -1,6 +1,7 @@
 package com.popeye.backend.controller;
 
 import com.popeye.backend.entity.Exercise;
+import com.popeye.backend.entity.Program;
 import com.popeye.backend.entity.ProgramSession;
 import com.popeye.backend.entity.Userinput;
 import com.popeye.backend.repos.FirebaseRepository;
@@ -52,7 +53,7 @@ public class ProgramRestController {
     }
 
     @PostMapping("/beginnerprogram")
-    public List<ProgramSession> getBeginnerProgram(@RequestBody Userinput userinput) {
+    public Program getBeginnerProgram(@RequestBody Userinput userinput) {
         return programService.createBeginnerProgram(userinput);
     }
 }

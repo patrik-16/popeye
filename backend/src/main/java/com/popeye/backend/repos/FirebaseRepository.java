@@ -65,6 +65,15 @@ public class FirebaseRepository {
         }
     }
 
+    public List<?> getAllDocumentsByCollectionWithCondition(String collection, Class<?> expectedClass, String field, Object equalsValue) {
+        ApiFuture<QuerySnapshot> documentReference = firebaseConfig.getDB().collection(collection).whereEqualTo(field, equalsValue).get();
+        QuerySnapshot resultsAsSnapshot = (QuerySnapshot) getDocumentReferences(documentReference, collection);
+        if (resultsAsSnapshot.getDocuments() != null) {
+            return resultsAsSnapshot.getDocuments().stream().map(curr -> curr.toObject(expectedClass)).collect(Collectors.toList());
+        } else {
+            return Collections.emptyList();
+        }
+    }
 
     public Object getDocumentByDocumentId(String collection, String documentId, Class expectedClass) {
         DocumentSnapshot documentReference;
