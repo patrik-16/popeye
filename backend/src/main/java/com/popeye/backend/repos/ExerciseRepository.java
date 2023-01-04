@@ -39,7 +39,7 @@ public class ExerciseRepository {
 
     private List<Exercise> getExercisesByExperienceAndDifficulty(Experience experience, Difficulty difficulty) {
         if (experience == Experience.BEGINNER) {
-            return (List<Exercise>) firebaseRepository.getAllDocumentsByCollectionWithCondition("Beginnerexercises", Exercise.class, "difficulty", difficulty.getValue());
+            return (List<Exercise>) firebaseRepository.getAllDocumentsByCollectionWithCondition("Beginnerexercises", Exercise.class, "difficulty", difficulty);
         } else {
             //TODO implement for advanced experience
             return Collections.emptyList();

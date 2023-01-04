@@ -17,42 +17,42 @@ import java.util.List;
 @RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ProgramRestController {
 
-    @Autowired
-    FirebaseRepository firebaseRepository;
+        @Autowired
+        FirebaseRepository firebaseRepository;
 
-    @Autowired
-    ProgramService programService;
+        @Autowired
+        ProgramService programService;
 
-    //Requestbody wie bei HTTP methoden
-    @PostMapping("/hypertrophyexercises")
-    public void hypertrophyExercises(@RequestBody List<Exercise> hypertrophyExercises) {
-        for (Exercise ex : hypertrophyExercises) {
-            firebaseRepository.createWithDocumentId("Hypertrophyexercises", ex.getName(), ex);
+        //Requestbody wie bei HTTP methoden
+        @PostMapping("/hypertrophyexercises")
+        public void hypertrophyExercises(@RequestBody List<Exercise> hypertrophyExercises) {
+            for (Exercise ex : hypertrophyExercises) {
+                firebaseRepository.createWithDocumentId("Hypertrophyexercises", ex.getName(), ex);
+            }
         }
-    }
 
-    @PostMapping("/strengthexercises")
-    public void strengthExercises(@RequestBody List<Exercise> strengthExercises) {
-        for (Exercise ex : strengthExercises) {
-            firebaseRepository.createWithDocumentId("Strengthexercises", ex.getName(), ex);
+        @PostMapping("/strengthexercises")
+        public void strengthExercises(@RequestBody List<Exercise> strengthExercises) {
+            for (Exercise ex : strengthExercises) {
+                firebaseRepository.createWithDocumentId("Strengthexercises", ex.getName(), ex);
+            }
         }
-    }
 
-    @PostMapping("/conditioningexercises")
-    public void conditioningExercises(@RequestBody List<Exercise> conditioningExercises) {
-        for (Exercise ex : conditioningExercises) {
-            firebaseRepository.createWithDocumentId("Conditioningexercises", ex.getName(), ex);
+        @PostMapping("/conditioningexercises")
+        public void conditioningExercises(@RequestBody List<Exercise> conditioningExercises) {
+            for (Exercise ex : conditioningExercises) {
+                firebaseRepository.createWithDocumentId("Conditioningexercises", ex.getName(), ex);
+            }
         }
-    }
 
-    @PostMapping("/beginnerexercises")
-    public void beginnerExercises(@RequestBody List<Exercise> beginnerExercises) {
-        for (Exercise ex : beginnerExercises) {
-            firebaseRepository.createWithDocumentId("Beginnerexercises", ex.getName(), ex);
+        @PostMapping("/beginnerexercises")
+        public void beginnerExercises(@RequestBody List<Exercise> beginnerExercises) {
+            for (Exercise ex : beginnerExercises) {
+                firebaseRepository.createWithDocumentId("Beginnerexercises", ex.getName(), ex);
+            }
         }
-    }
 
-    @PostMapping("/beginnerprogram")
+        @PostMapping("/beginnerprogram")
     public Program getBeginnerProgram(@RequestBody Userinput userinput) {
         return programService.createBeginnerProgram(userinput);
     }

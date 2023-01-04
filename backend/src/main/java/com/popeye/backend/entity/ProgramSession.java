@@ -41,7 +41,7 @@ public class ProgramSession {
 
     public void updateSetNumberByDifficultyAndBodypart(Difficulty difficulty, Bodypart bodypart, int newSetNumber) {
         for (int i = 0; i < this.exerciseList.size(); i++) {
-            if (this.exerciseList.get(i).getDifficulty().equals(difficulty.getValue())) {
+            if (this.exerciseList.get(i).getDifficulty() == difficulty) {
                 if (this.exerciseList.get(i).getBodypart().contains(bodypart)) {
                     this.exerciseList.get(i).setSets(newSetNumber);
                 }
