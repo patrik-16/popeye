@@ -26,7 +26,7 @@ public class Exercise {
     public Exercise() {
     }
 
-    public int getLenghtInSeconds() {
+    public int returnLengthInSeconds() {
         return this.sets * ProgramConstants.SECONDS_PER_SET + this.sets * this.rest;
     }
 }

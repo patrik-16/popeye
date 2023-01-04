@@ -1,6 +1,7 @@
 package com.popeye.backend.services;
 
 import com.popeye.backend.entity.*;
+import com.popeye.backend.enums.Bodypart;
 import com.popeye.backend.enums.Difficulty;
 import com.popeye.backend.enums.TimePerDay;
 import com.popeye.backend.repos.ExerciseRepository;
@@ -15,7 +16,6 @@ public class ProgramService {
     ExerciseRepository exerciseRepository;
 
     public Program createBeginnerProgram(Userinput userinput) {
-
 /*will be important for ordering by goal
         for (int i = 0; i < beginnerExercises.size(); i++) {
             if (beginnerExercises.get(i).getBodypart().containsAll(userinput.getPriorities())) {
@@ -25,18 +25,17 @@ public class ProgramService {
                 beginnerExercises.add(0, foundEx);
             }
         }*/
-
-        // TODO: create enums to compare
-        if (userinput.getDaysPerWeek() == 1) {
-            return null; //TODO handle error exception in frontend
-        } else if (userinput.getDaysPerWeek() == 2) {
-            return generateTwoDayBeginnerProgram(userinput);
-        } else if (userinput.getDaysPerWeek() == 3) {
-            return generateThreeDayBeginnerProgram(userinput);
-        } else if (userinput.getDaysPerWeek() == 4) {
-            return generateFourDayBeginnerProgram(userinput);
-        } else if (userinput.getDaysPerWeek() == 5) {
-            return generateFiveDayBeginnerProgram(userinput);
+        switch (userinput.getDaysPerWeek()) {
+            case 1:
+                return null; //TODO handle error exception in frontend
+            case 2:
+                return generateTwoDayBeginnerProgram(userinput);
+            case 3:
+                return generateThreeDayBeginnerProgram(userinput);
+            case 4:
+                return generateFourDayBeginnerProgram(userinput);
+            case 5:
+                return generateFiveDayBeginnerProgram(userinput);
         }
         return null; //TODO handle error exception in frontend
     }
@@ -45,16 +44,40 @@ public class ProgramService {
         ProgramSession sessionOne = new ProgramSession(exerciseRepository.getAllBeginnerExercisesByDifficulty(Difficulty.HARD), 1);
         ProgramSession sessionTwo = new ProgramSession(exerciseRepository.getAllBeginnerExercisesByDifficulty(Difficulty.MEDIUM), 2);
 
-        //session one set time per session to user input
         if (userinput.getTimePerDay() == TimePerDay.FOURTY) {
             if (sessionOne.getSecondsPerSession() > TimePerDay.FOURTY.getSeconds()) {
                 sessionOne.updateRestTime(60);
+                sessionOne.deleteExerciseByBodypart(Bodypart.ABS);
             }
             if (sessionTwo.getSecondsPerSession() > TimePerDay.FOURTY.getSeconds()) {
                 sessionTwo.updateRestTime(60);
+                sessionTwo.deleteExerciseByBodypart(Bodypart.ABS);
             }
-        }
 
+        } else if (userinput.getTimePerDay() == TimePerDay.SIXTY) {
+            sessionOne.updateSetNumberByDifficulty(Difficulty.HARD, 3);
+            sessionTwo.updateSetNumberByDifficulty(Difficulty.MEDIUM,3);
+
+        } else if (userinput.getTimePerDay() == TimePerDay.EIGHTY) {
+            sessionOne.updateSetNumberByDifficultyAndBodypart(Difficulty.HARD, Bodypart.QUADS, 4);
+            sessionOne.updateSetNumberByDifficultyAndBodypart(Difficulty.HARD, Bodypart.CHEST, 4);
+            sessionOne.updateSetNumberByDifficultyAndBodypart(Difficulty.HARD, Bodypart.LATS, 4);
+            sessionOne.updateRestTime(120);
+            sessionTwo.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.GLUTES, 4);
+            sessionTwo.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.DELTS, 4);
+            sessionTwo.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.TRAPS, 4);
+            sessionTwo.updateRestTime(120);
+
+        } else if (userinput.getTimePerDay() == TimePerDay.UNLIMITED) {
+            sessionOne.updateSetNumberByDifficultyAndBodypart(Difficulty.HARD, Bodypart.QUADS, 4);
+            sessionOne.updateSetNumberByDifficultyAndBodypart(Difficulty.HARD, Bodypart.CHEST, 4);
+            sessionOne.updateSetNumberByDifficultyAndBodypart(Difficulty.HARD, Bodypart.LATS, 4);
+            sessionOne.updateRestTime(180);
+            sessionTwo.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.GLUTES, 4);
+            sessionTwo.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.DELTS, 4);
+            sessionTwo.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.TRAPS, 4);
+            sessionTwo.updateRestTime(180);
+        }
         return new Program(List.of(sessionOne, sessionTwo));
     }
     private Program generateThreeDayBeginnerProgram(Userinput userinput) {
@@ -62,17 +85,52 @@ public class ProgramService {
         ProgramSession sessionTwo = new ProgramSession(exerciseRepository.getAllBeginnerExercisesByDifficulty(Difficulty.MEDIUM), 2);
         ProgramSession sessionThree = new ProgramSession(exerciseRepository.getAllBeginnerExercisesByDifficulty(Difficulty.EASY), 3);
 
-        //session one set time per session to user input
         if (userinput.getTimePerDay() == TimePerDay.FOURTY) {
             if (sessionOne.getSecondsPerSession() > TimePerDay.FOURTY.getSeconds()) {
                 sessionOne.updateRestTime(60);
+                sessionOne.deleteExerciseByBodypart(Bodypart.ABS);
             }
             if (sessionTwo.getSecondsPerSession() > TimePerDay.FOURTY.getSeconds()) {
                 sessionTwo.updateRestTime(60);
+                sessionTwo.deleteExerciseByBodypart(Bodypart.ABS);
             }
             if (sessionThree.getSecondsPerSession() > TimePerDay.FOURTY.getSeconds()) {
                 sessionThree.updateRestTime(60);
+                sessionThree.deleteExerciseByBodypart(Bodypart.ABS);
             }
+
+        } else if (userinput.getTimePerDay() == TimePerDay.SIXTY) {
+            sessionOne.updateSetNumberByDifficulty(Difficulty.HARD, 3);
+            sessionTwo.updateSetNumberByDifficulty(Difficulty.MEDIUM,3);
+            sessionThree.updateSetNumberByDifficulty(Difficulty.EASY,3);
+
+        } else if (userinput.getTimePerDay() == TimePerDay.EIGHTY) {
+            sessionOne.updateSetNumberByDifficultyAndBodypart(Difficulty.HARD, Bodypart.QUADS, 4);
+            sessionOne.updateSetNumberByDifficultyAndBodypart(Difficulty.HARD, Bodypart.CHEST, 4);
+            sessionOne.updateSetNumberByDifficultyAndBodypart(Difficulty.HARD, Bodypart.LATS, 4);
+            sessionOne.updateRestTime(120);
+            sessionTwo.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.GLUTES, 4);
+            sessionTwo.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.DELTS, 4);
+            sessionTwo.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.TRAPS, 4);
+            sessionTwo.updateRestTime(120);
+            sessionThree.updateSetNumberByDifficultyAndBodypart(Difficulty.EASY, Bodypart.GLUTES, 4);
+            sessionThree.updateSetNumberByDifficultyAndBodypart(Difficulty.EASY, Bodypart.DELTS, 4);
+            sessionThree.updateSetNumberByDifficultyAndBodypart(Difficulty.EASY, Bodypart.TRAPS, 4);
+            sessionThree.updateRestTime(120);
+
+        } else if (userinput.getTimePerDay() == TimePerDay.UNLIMITED) {
+            sessionOne.updateSetNumberByDifficultyAndBodypart(Difficulty.HARD, Bodypart.QUADS, 4);
+            sessionOne.updateSetNumberByDifficultyAndBodypart(Difficulty.HARD, Bodypart.CHEST, 4);
+            sessionOne.updateSetNumberByDifficultyAndBodypart(Difficulty.HARD, Bodypart.LATS, 4);
+            sessionOne.updateRestTime(180);
+            sessionTwo.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.GLUTES, 4);
+            sessionTwo.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.DELTS, 4);
+            sessionTwo.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.TRAPS, 4);
+            sessionTwo.updateRestTime(180);
+            sessionThree.updateSetNumberByDifficultyAndBodypart(Difficulty.EASY, Bodypart.GLUTES, 4);
+            sessionThree.updateSetNumberByDifficultyAndBodypart(Difficulty.EASY, Bodypart.DELTS, 4);
+            sessionThree.updateSetNumberByDifficultyAndBodypart(Difficulty.EASY, Bodypart.TRAPS, 4);
+            sessionThree.updateRestTime(180);
         }
         return new Program(List.of(sessionOne, sessionTwo, sessionThree));
     }
@@ -83,20 +141,65 @@ public class ProgramService {
         ProgramSession sessionThree = new ProgramSession(exerciseRepository.getAllBeginnerExercisesByDifficulty(Difficulty.EASY), 3);
         ProgramSession sessionFour = new ProgramSession(exerciseRepository.getAllBeginnerExercisesByDifficulty(Difficulty.MEDIUM), 4);
 
-        //session one set time per session to user input
         if (userinput.getTimePerDay() == TimePerDay.FOURTY) {
             if (sessionOne.getSecondsPerSession() > TimePerDay.FOURTY.getSeconds()) {
                 sessionOne.updateRestTime(60);
+                sessionOne.deleteExerciseByBodypart(Bodypart.ABS);
             }
             if (sessionTwo.getSecondsPerSession() > TimePerDay.FOURTY.getSeconds()) {
                 sessionTwo.updateRestTime(60);
+                sessionTwo.deleteExerciseByBodypart(Bodypart.ABS);
             }
             if (sessionThree.getSecondsPerSession() > TimePerDay.FOURTY.getSeconds()) {
                 sessionThree.updateRestTime(60);
+                sessionThree.deleteExerciseByBodypart(Bodypart.ABS);
             }
             if (sessionFour.getSecondsPerSession() > TimePerDay.FOURTY.getSeconds()) {
                 sessionFour.updateRestTime(60);
+                sessionFour.deleteExerciseByBodypart(Bodypart.ABS);
             }
+
+        } else if (userinput.getTimePerDay() == TimePerDay.SIXTY) {
+            sessionOne.updateSetNumberByDifficulty(Difficulty.HARD, 3);
+            sessionTwo.updateSetNumberByDifficulty(Difficulty.MEDIUM,3);
+            sessionThree.updateSetNumberByDifficulty(Difficulty.EASY,3);
+            sessionFour.updateSetNumberByDifficulty(Difficulty.MEDIUM,3);
+
+        } else if (userinput.getTimePerDay() == TimePerDay.EIGHTY) {
+            sessionOne.updateSetNumberByDifficultyAndBodypart(Difficulty.HARD, Bodypart.QUADS, 4);
+            sessionOne.updateSetNumberByDifficultyAndBodypart(Difficulty.HARD, Bodypart.CHEST, 4);
+            sessionOne.updateSetNumberByDifficultyAndBodypart(Difficulty.HARD, Bodypart.LATS, 4);
+            sessionOne.updateRestTime(120);
+            sessionTwo.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.GLUTES, 4);
+            sessionTwo.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.DELTS, 4);
+            sessionTwo.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.TRAPS, 4);
+            sessionTwo.updateRestTime(120);
+            sessionThree.updateSetNumberByDifficultyAndBodypart(Difficulty.EASY, Bodypart.GLUTES, 4);
+            sessionThree.updateSetNumberByDifficultyAndBodypart(Difficulty.EASY, Bodypart.DELTS, 4);
+            sessionThree.updateSetNumberByDifficultyAndBodypart(Difficulty.EASY, Bodypart.TRAPS, 4);
+            sessionThree.updateRestTime(120);
+            sessionFour.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.GLUTES, 4);
+            sessionFour.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.DELTS, 4);
+            sessionFour.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.TRAPS, 4);
+            sessionFour.updateRestTime(120);
+
+        } else if (userinput.getTimePerDay() == TimePerDay.UNLIMITED) {
+            sessionOne.updateSetNumberByDifficultyAndBodypart(Difficulty.HARD, Bodypart.QUADS, 4);
+            sessionOne.updateSetNumberByDifficultyAndBodypart(Difficulty.HARD, Bodypart.CHEST, 4);
+            sessionOne.updateSetNumberByDifficultyAndBodypart(Difficulty.HARD, Bodypart.LATS, 4);
+            sessionOne.updateRestTime(180);
+            sessionTwo.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.GLUTES, 4);
+            sessionTwo.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.DELTS, 4);
+            sessionTwo.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.TRAPS, 4);
+            sessionTwo.updateRestTime(180);
+            sessionThree.updateSetNumberByDifficultyAndBodypart(Difficulty.EASY, Bodypart.GLUTES, 4);
+            sessionThree.updateSetNumberByDifficultyAndBodypart(Difficulty.EASY, Bodypart.DELTS, 4);
+            sessionThree.updateSetNumberByDifficultyAndBodypart(Difficulty.EASY, Bodypart.TRAPS, 4);
+            sessionThree.updateRestTime(180);
+            sessionFour.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.GLUTES, 4);
+            sessionFour.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.DELTS, 4);
+            sessionFour.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.TRAPS, 4);
+            sessionFour.updateRestTime(180);
         }
         return new Program(List.of(sessionOne, sessionTwo, sessionThree, sessionFour));
     }
@@ -108,24 +211,79 @@ public class ProgramService {
         ProgramSession sessionFour = new ProgramSession(exerciseRepository.getAllBeginnerExercisesByDifficulty(Difficulty.MEDIUM), 4);
         ProgramSession sessionFive = new ProgramSession(exerciseRepository.getAllBeginnerExercisesByDifficulty(Difficulty.EASY), 5);
 
-        //session one set time per session to user input
         if (userinput.getTimePerDay() == TimePerDay.FOURTY) {
             if (sessionOne.getSecondsPerSession() > TimePerDay.FOURTY.getSeconds()) {
                 sessionOne.updateRestTime(60);
+                sessionOne.deleteExerciseByBodypart(Bodypart.ABS);
             }
             if (sessionTwo.getSecondsPerSession() > TimePerDay.FOURTY.getSeconds()) {
                 sessionTwo.updateRestTime(60);
+                sessionTwo.deleteExerciseByBodypart(Bodypart.ABS);
             }
             if (sessionThree.getSecondsPerSession() > TimePerDay.FOURTY.getSeconds()) {
                 sessionThree.updateRestTime(60);
+                sessionThree.deleteExerciseByBodypart(Bodypart.ABS);
             }
             if (sessionFour.getSecondsPerSession() > TimePerDay.FOURTY.getSeconds()) {
                 sessionFour.updateRestTime(60);
+                sessionFour.deleteExerciseByBodypart(Bodypart.ABS);
             }
             if (sessionFive.getSecondsPerSession() > TimePerDay.FOURTY.getSeconds()) {
                 sessionFive.updateRestTime(60);
+                sessionFive.deleteExerciseByBodypart(Bodypart.ABS);
             }
+
+        } else if (userinput.getTimePerDay() == TimePerDay.SIXTY) {
+            sessionOne.updateSetNumberByDifficulty(Difficulty.HARD, 3);
+            sessionTwo.updateSetNumberByDifficulty(Difficulty.MEDIUM,3);
+            sessionThree.updateSetNumberByDifficulty(Difficulty.EASY,3);
+            sessionFour.updateSetNumberByDifficulty(Difficulty.MEDIUM,3);
+            sessionFive.updateSetNumberByDifficulty(Difficulty.EASY,3);
+
+        } else if (userinput.getTimePerDay() == TimePerDay.EIGHTY) {
+            sessionOne.updateSetNumberByDifficultyAndBodypart(Difficulty.HARD, Bodypart.QUADS, 4);
+            sessionOne.updateSetNumberByDifficultyAndBodypart(Difficulty.HARD, Bodypart.CHEST, 4);
+            sessionOne.updateSetNumberByDifficultyAndBodypart(Difficulty.HARD, Bodypart.LATS, 4);
+            sessionOne.updateRestTime(120);
+            sessionTwo.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.GLUTES, 4);
+            sessionTwo.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.DELTS, 4);
+            sessionTwo.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.TRAPS, 4);
+            sessionTwo.updateRestTime(120);
+            sessionThree.updateSetNumberByDifficultyAndBodypart(Difficulty.EASY, Bodypart.GLUTES, 4);
+            sessionThree.updateSetNumberByDifficultyAndBodypart(Difficulty.EASY, Bodypart.DELTS, 4);
+            sessionThree.updateSetNumberByDifficultyAndBodypart(Difficulty.EASY, Bodypart.TRAPS, 4);
+            sessionThree.updateRestTime(120);
+            sessionFour.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.GLUTES, 4);
+            sessionFour.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.DELTS, 4);
+            sessionFour.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.TRAPS, 4);
+            sessionFour.updateRestTime(120);
+            sessionFive.updateSetNumberByDifficultyAndBodypart(Difficulty.EASY, Bodypart.GLUTES, 4);
+            sessionFive.updateSetNumberByDifficultyAndBodypart(Difficulty.EASY, Bodypart.DELTS, 4);
+            sessionFive.updateSetNumberByDifficultyAndBodypart(Difficulty.EASY, Bodypart.TRAPS, 4);
+            sessionFive.updateRestTime(120);
+
+        } else if (userinput.getTimePerDay() == TimePerDay.UNLIMITED) {
+            sessionOne.updateSetNumberByDifficultyAndBodypart(Difficulty.HARD, Bodypart.QUADS, 4);
+            sessionOne.updateSetNumberByDifficultyAndBodypart(Difficulty.HARD, Bodypart.CHEST, 4);
+            sessionOne.updateSetNumberByDifficultyAndBodypart(Difficulty.HARD, Bodypart.LATS, 4);
+            sessionOne.updateRestTime(180);
+            sessionTwo.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.GLUTES, 4);
+            sessionTwo.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.DELTS, 4);
+            sessionTwo.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.TRAPS, 4);
+            sessionTwo.updateRestTime(180);
+            sessionThree.updateSetNumberByDifficultyAndBodypart(Difficulty.EASY, Bodypart.GLUTES, 4);
+            sessionThree.updateSetNumberByDifficultyAndBodypart(Difficulty.EASY, Bodypart.DELTS, 4);
+            sessionThree.updateSetNumberByDifficultyAndBodypart(Difficulty.EASY, Bodypart.TRAPS, 4);
+            sessionThree.updateRestTime(180);
+            sessionFour.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.GLUTES, 4);
+            sessionFour.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.DELTS, 4);
+            sessionFour.updateSetNumberByDifficultyAndBodypart(Difficulty.MEDIUM, Bodypart.TRAPS, 4);
+            sessionFour.updateRestTime(180);
+            sessionFive.updateSetNumberByDifficultyAndBodypart(Difficulty.EASY, Bodypart.GLUTES, 4);
+            sessionFive.updateSetNumberByDifficultyAndBodypart(Difficulty.EASY, Bodypart.DELTS, 4);
+            sessionFive.updateSetNumberByDifficultyAndBodypart(Difficulty.EASY, Bodypart.TRAPS, 4);
+            sessionFive.updateRestTime(180);
         }
-        return new Program(List.of(sessionOne, sessionTwo, sessionThree, sessionFour));
+        return new Program(List.of(sessionOne, sessionTwo, sessionThree, sessionFour, sessionFive));
     }
 }
