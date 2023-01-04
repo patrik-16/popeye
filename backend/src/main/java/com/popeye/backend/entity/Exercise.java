@@ -2,6 +2,7 @@ package com.popeye.backend.entity;
 
 import com.popeye.backend.constants.ProgramConstants;
 import com.popeye.backend.enums.Bodypart;
+import com.popeye.backend.enums.Difficulty;
 import com.popeye.backend.enums.Experience;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,13 +21,13 @@ public class Exercise {
     private String name;
     private List<Bodypart> bodypart;
     private Experience experience;
-    private Integer difficulty;
+    private Difficulty difficulty;
 
     // empty constructor needed later for firebase
     public Exercise() {
     }
 
-    public int getLenghtInSeconds() {
+    public int returnLengthInSeconds() {
         return this.sets * ProgramConstants.SECONDS_PER_SET + this.sets * this.rest;
     }
 }
