@@ -10,7 +10,9 @@
             <br>
           </div>
           <div class="text-lg-center">
-            <v-btn outlined @click="toForm">Start Your Journey</v-btn> <!-- Calls to form -->
+            <v-btn outlined @click="toForm">
+              Start Your Journey
+            </v-btn> <!-- Calls to form -->
           </div>
         </v-flex>
       </v-layout>
@@ -21,7 +23,7 @@
 
 <script>
 export default {
-  name: 'landingPage',
+  name: 'LandingPage',
 
   methods: {
     /**

@@ -57,6 +57,7 @@ export default {
     return {
       clipped: false,
       drawer: false,
+      fixed: false,
       items: [
         {
           icon: 'mdi-home-outline',

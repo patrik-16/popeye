@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: 'formPage',
+  name: 'FormPage',
   methods: {
     /**
      * Uses VueRouter to send the user back to index.vue
