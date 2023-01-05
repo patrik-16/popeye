@@ -57,7 +57,7 @@
       :absolute="!fixed"
       app
     >
-      <span>&copy; {{ new Date().getFullYear() }} Alvir Slavica, Lukenda Tina, Moser Christina, Mariel Patrik</span>
+      <span>&copy; {{ new Date().getFullYear() }} Popeye</span>
     </v-footer>
   </v-app>
 </template>
