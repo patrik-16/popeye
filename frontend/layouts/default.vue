@@ -30,10 +30,21 @@
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-spacer />
-      <v-toolbar-title>{{ title }}</v-toolbar-title>
+      <v-btn @click="toLanding">
+        <v-toolbar-title class="v-toolbar-title">
+          {{ title }}
+        </v-toolbar-title>
+        <img src="../assets/img/hantel.png"
+             alt="Barbell icon"
+             class="hantelImage"
+        />
+      </v-btn>
       <v-spacer />
-      <v-btn>
+      <v-btn @click="toLogin">
         Login
+      </v-btn>
+      <v-btn @click="toProfile">
+        Profile
       </v-btn>
     </v-app-bar>
     <v-main>
@@ -45,7 +56,7 @@
       :absolute="!fixed"
       app
     >
-      <span>&copy; {{ new Date().getFullYear() }}</span>
+      <span>&copy; {{ new Date().getFullYear() }} Alvir Slavica, Lukenda Tina, Moser Christina, Mariel Patrik</span>
     </v-footer>
   </v-app>
 </template>
@@ -83,6 +94,31 @@ export default {
       ],
       title: 'Popeye'
     }
+  },
+  methods: {
+    /**
+     * Uses VueRouter to send the user to the formPage.vue
+     */
+    toLanding () {
+      this.$router.push('/')
+    },
+    toProfile () {
+      this.$router.push('/profile')
+    },
+    toLogin () {
+      this.$router.push('/login')
+    }
   }
 }
 </script>
+
+<style scoped>
+.v-toolbar-title {
+  font-size: 2rem !important;
+  font-weight: lighter;
+}
+
+.hantelImage {
+  height: 2rem;
+}
+</style>
