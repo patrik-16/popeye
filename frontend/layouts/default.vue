@@ -34,10 +34,11 @@
         <v-toolbar-title class="v-toolbar-title">
           {{ title }}
         </v-toolbar-title>
-        <img src="../assets/img/hantel.png"
-             alt="Barbell icon"
-             class="hantelImage"
-        />
+        <img
+          src="../assets/img/hantel.png"
+          alt="Barbell icon"
+          class="hantelImage"
+        >
       </v-btn>
       <v-spacer />
       <v-btn @click="toLogin">
