@@ -2,6 +2,7 @@ package com.popeye.backend.entity;
 
 import com.popeye.backend.enums.Bodypart;
 import com.popeye.backend.enums.Difficulty;
+import com.popeye.backend.enums.Goal;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,10 +14,17 @@ public class ProgramSession {
 
     private List<Exercise> exerciseList;
     private int day;
+    private Goal goal;
 
     public ProgramSession(List<Exercise> exerciseList, int day) {
         this.exerciseList = exerciseList;
         this.day = day;
+    }
+
+    public ProgramSession(List<Exercise> exerciseList, int day, Goal goal) {
+        this.exerciseList = exerciseList;
+        this.day = day;
+        this.goal = goal;
     }
 
     public int getSecondsPerSession() {

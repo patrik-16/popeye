@@ -1,9 +1,7 @@
 package com.popeye.backend.services;
 
 import com.popeye.backend.entity.*;
-import com.popeye.backend.enums.Bodypart;
-import com.popeye.backend.enums.Difficulty;
-import com.popeye.backend.enums.TimePerDay;
+import com.popeye.backend.enums.*;
 import com.popeye.backend.repos.ExerciseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,9 +12,7 @@ import java.util.List;
 public class ProgramService {
     @Autowired
     ExerciseRepository exerciseRepository;
-
-    public Program createBeginnerProgram(Userinput userinput) {
-/*will be important for ordering by goal
+    /*will be important for ordering by goal
         for (int i = 0; i < beginnerExercises.size(); i++) {
             if (beginnerExercises.get(i).getBodypart().containsAll(userinput.getPriorities())) {
 
@@ -25,19 +21,43 @@ public class ProgramService {
                 beginnerExercises.add(0, foundEx);
             }
         }*/
-        switch (userinput.getDaysPerWeek()) {
-            case 1:
-                return null; //TODO handle error exception in frontend
-            case 2:
-                return generateTwoDayBeginnerProgram(userinput);
-            case 3:
-                return generateThreeDayBeginnerProgram(userinput);
-            case 4:
-                return generateFourDayBeginnerProgram(userinput);
-            case 5:
-                return generateFiveDayBeginnerProgram(userinput);
+
+    public Program createProgram(Userinput userinput) {
+        if (userinput.getExperience().equals(Experience.BEGINNER)) {
+            switch (userinput.getDaysPerWeek()) {
+                case 1:
+                    return null; //TODO handle error exception in frontend
+                case 2:
+                    return generateTwoDayBeginnerProgram(userinput);
+                case 3:
+                    return generateThreeDayBeginnerProgram(userinput);
+                case 4:
+                    return generateFourDayBeginnerProgram(userinput);
+                case 5:
+                    return generateFiveDayBeginnerProgram(userinput);
+            }
+        } else {
+            switch (userinput.getGoal()) {
+                case HYPERTROPHY -> generateTwoDayHypertrophyProgram(userinput); //TODO implement generic method
+                case STRENGTH -> generateStrengthProgram(userinput);
+                case CONDITIONING -> generateConditioningProgram(userinput);
+            }
         }
         return null; //TODO handle error exception in frontend
+    }
+
+    private Program generateTwoDayHypertrophyProgram(Userinput userinput) {
+        ProgramSession sessionOne = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.HARD, Goal.HYPERTROPHY), 1);
+        ProgramSession sessionTwo = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.HARD, Goal.HYPERTROPHY), 2);
+
+        return new Program(List.of(sessionOne, sessionTwo));
+
+    }
+
+    private void generateStrengthProgram(Userinput userinput) {
+    }
+
+    private void generateConditioningProgram(Userinput userinput) {
     }
 
     private Program generateTwoDayBeginnerProgram(Userinput userinput) {
@@ -56,7 +76,7 @@ public class ProgramService {
 
         } else if (userinput.getTimePerDay() == TimePerDay.SIXTY) {
             sessionOne.updateSetNumberByDifficulty(Difficulty.HARD, 3);
-            sessionTwo.updateSetNumberByDifficulty(Difficulty.MEDIUM,3);
+            sessionTwo.updateSetNumberByDifficulty(Difficulty.MEDIUM, 3);
 
         } else if (userinput.getTimePerDay() == TimePerDay.EIGHTY) {
             sessionOne.updateSetNumberByDifficultyAndBodypart(Difficulty.HARD, Bodypart.QUADS, 4);
@@ -80,6 +100,7 @@ public class ProgramService {
         }
         return new Program(List.of(sessionOne, sessionTwo));
     }
+
     private Program generateThreeDayBeginnerProgram(Userinput userinput) {
         ProgramSession sessionOne = new ProgramSession(exerciseRepository.getAllBeginnerExercisesByDifficulty(Difficulty.HARD), 1);
         ProgramSession sessionTwo = new ProgramSession(exerciseRepository.getAllBeginnerExercisesByDifficulty(Difficulty.MEDIUM), 2);
@@ -101,8 +122,8 @@ public class ProgramService {
 
         } else if (userinput.getTimePerDay() == TimePerDay.SIXTY) {
             sessionOne.updateSetNumberByDifficulty(Difficulty.HARD, 3);
-            sessionTwo.updateSetNumberByDifficulty(Difficulty.MEDIUM,3);
-            sessionThree.updateSetNumberByDifficulty(Difficulty.EASY,3);
+            sessionTwo.updateSetNumberByDifficulty(Difficulty.MEDIUM, 3);
+            sessionThree.updateSetNumberByDifficulty(Difficulty.EASY, 3);
 
         } else if (userinput.getTimePerDay() == TimePerDay.EIGHTY) {
             sessionOne.updateSetNumberByDifficultyAndBodypart(Difficulty.HARD, Bodypart.QUADS, 4);
@@ -161,9 +182,9 @@ public class ProgramService {
 
         } else if (userinput.getTimePerDay() == TimePerDay.SIXTY) {
             sessionOne.updateSetNumberByDifficulty(Difficulty.HARD, 3);
-            sessionTwo.updateSetNumberByDifficulty(Difficulty.MEDIUM,3);
-            sessionThree.updateSetNumberByDifficulty(Difficulty.EASY,3);
-            sessionFour.updateSetNumberByDifficulty(Difficulty.MEDIUM,3);
+            sessionTwo.updateSetNumberByDifficulty(Difficulty.MEDIUM, 3);
+            sessionThree.updateSetNumberByDifficulty(Difficulty.EASY, 3);
+            sessionFour.updateSetNumberByDifficulty(Difficulty.MEDIUM, 3);
 
         } else if (userinput.getTimePerDay() == TimePerDay.EIGHTY) {
             sessionOne.updateSetNumberByDifficultyAndBodypart(Difficulty.HARD, Bodypart.QUADS, 4);
@@ -235,10 +256,10 @@ public class ProgramService {
 
         } else if (userinput.getTimePerDay() == TimePerDay.SIXTY) {
             sessionOne.updateSetNumberByDifficulty(Difficulty.HARD, 3);
-            sessionTwo.updateSetNumberByDifficulty(Difficulty.MEDIUM,3);
-            sessionThree.updateSetNumberByDifficulty(Difficulty.EASY,3);
-            sessionFour.updateSetNumberByDifficulty(Difficulty.MEDIUM,3);
-            sessionFive.updateSetNumberByDifficulty(Difficulty.EASY,3);
+            sessionTwo.updateSetNumberByDifficulty(Difficulty.MEDIUM, 3);
+            sessionThree.updateSetNumberByDifficulty(Difficulty.EASY, 3);
+            sessionFour.updateSetNumberByDifficulty(Difficulty.MEDIUM, 3);
+            sessionFive.updateSetNumberByDifficulty(Difficulty.EASY, 3);
 
         } else if (userinput.getTimePerDay() == TimePerDay.EIGHTY) {
             sessionOne.updateSetNumberByDifficultyAndBodypart(Difficulty.HARD, Bodypart.QUADS, 4);
