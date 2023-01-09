@@ -91,6 +91,16 @@ export default {
           icon: 'mdi-account',
           title: 'Profile',
           to: '/profile'
+        },
+        {
+          icon: 'mdi-weight-lifter',
+          title: 'view your Program',
+          to: '/program'
+        },
+        {
+          icon: 'mdi-account-outline',
+          title: 'Logout',
+          to: '/'
         }
       ],
       title: 'Popeye'
@@ -108,6 +118,9 @@ export default {
     },
     toLogin () {
       this.$router.push('/login')
+    },
+    toProgram () {
+      this.$router.push('/program')
     }
   }
 }
