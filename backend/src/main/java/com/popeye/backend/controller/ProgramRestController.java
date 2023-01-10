@@ -2,7 +2,6 @@ package com.popeye.backend.controller;
 
 import com.popeye.backend.entity.Exercise;
 import com.popeye.backend.entity.Program;
-import com.popeye.backend.entity.ProgramSession;
 import com.popeye.backend.entity.Userinput;
 import com.popeye.backend.pdf.PDFcreator;
 import com.popeye.backend.repos.FirebaseRepository;
@@ -31,6 +30,7 @@ public class ProgramRestController {
         ProgramService programService;
 
         //Requestbody wie bei HTTP methoden
+        @CrossOrigin
         @PostMapping("/hypertrophyexercises")
         public void hypertrophyExercises(@RequestBody List<Exercise> hypertrophyExercises) {
             for (Exercise ex : hypertrophyExercises) {
@@ -38,6 +38,7 @@ public class ProgramRestController {
             }
         }
 
+        @CrossOrigin
         @PostMapping("/strengthexercises")
         public void strengthExercises(@RequestBody List<Exercise> strengthExercises) {
             for (Exercise ex : strengthExercises) {
@@ -45,6 +46,7 @@ public class ProgramRestController {
             }
         }
 
+        @CrossOrigin
         @PostMapping("/conditioningexercises")
         public void conditioningExercises(@RequestBody List<Exercise> conditioningExercises) {
             for (Exercise ex : conditioningExercises) {
@@ -52,6 +54,7 @@ public class ProgramRestController {
             }
         }
 
+        @CrossOrigin
         @PostMapping("/beginnerexercises")
         public void beginnerExercises(@RequestBody List<Exercise> beginnerExercises) {
             for (Exercise ex : beginnerExercises) {
@@ -59,9 +62,16 @@ public class ProgramRestController {
             }
         }
 
+        @CrossOrigin
         @PostMapping("/beginnerprogram")
     public Program getBeginnerProgram(@RequestBody Userinput userinput) {
-        return programService.createBeginnerProgram(userinput);
+        return programService.createProgram(userinput);
+    }
+
+    @CrossOrigin
+    @PostMapping("/advancedprogram")
+    public Program getAdvancedProgram(@RequestBody Userinput userinput) {
+        return programService.createProgram(userinput);
     }
 
 

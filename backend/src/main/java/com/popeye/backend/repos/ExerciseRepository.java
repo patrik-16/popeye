@@ -29,20 +29,38 @@ public class ExerciseRepository {
         return allBeginnerExercises;
     }
 
-    public List<Exercise> getAllBeginnerExercisesByDifficulty(Difficulty difficulty) {
-        return getExercisesByExperienceAndDifficulty(Experience.BEGINNER, difficulty);
-    }
-
-    public List<Exercise> getAllAdvancedExercisesByDifficulty(Difficulty difficulty) {
-        return getExercisesByExperienceAndDifficulty(Experience.ADVANCED, difficulty);
-    }
-
     private List<Exercise> getExercisesByExperienceAndDifficulty(Experience experience, Difficulty difficulty) {
         if (experience == Experience.BEGINNER) {
             return (List<Exercise>) firebaseRepository.getAllDocumentsByCollectionWithCondition("Beginnerexercises", Exercise.class, "difficulty", difficulty);
         } else {
-            //TODO implement for advanced experience
-            return Collections.emptyList();
+            return Collections.emptyList(); // TODO handle exception
         }
+    }
+
+    private List<Exercise> getExercisesByExperienceAndDifficultyAndGoal(Experience experience, Difficulty difficulty, Goal goal) {
+        if (experience == Experience.BEGINNER) { // not sure if that IF is needed, we handle that above
+            return (List<Exercise>) firebaseRepository.getAllDocumentsByCollectionWithCondition("Beginnerexercises", Exercise.class, "difficulty", difficulty);
+        } else if (experience == Experience.ADVANCED) {
+            switch (goal) {
+                case HYPERTROPHY -> {
+                    return (List<Exercise>) firebaseRepository.getAllDocumentsByCollectionWithCondition("Hypertrophyexercises", Exercise.class, "difficulty", difficulty);
+                }
+                case STRENGTH -> {
+                    return (List<Exercise>) firebaseRepository.getAllDocumentsByCollectionWithCondition("Strengthexercises", Exercise.class, "difficulty", difficulty);
+                }
+                case CONDITIONING -> {
+                    return (List<Exercise>) firebaseRepository.getAllDocumentsByCollectionWithCondition("Conditioningexercises", Exercise.class, "difficulty", difficulty);
+                }
+            }
+        }
+        return null; // TODO handle exception
+    }
+
+    public List<Exercise> getAllBeginnerExercisesByDifficulty(Difficulty difficulty) {
+        return getExercisesByExperienceAndDifficulty(Experience.BEGINNER, difficulty);
+    }
+
+    public List<Exercise> getAllAdvancedExercisesByDifficultyAndGoal(Difficulty difficulty, Goal goal) {
+        return getExercisesByExperienceAndDifficultyAndGoal(Experience.ADVANCED, difficulty, goal);
     }
 }
