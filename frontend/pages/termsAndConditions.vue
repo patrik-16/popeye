@@ -32,14 +32,15 @@
 </template>
 
 <script>
+
 export default {
   name: 'TermsAndConditions',
   methods: {
-    toLanding: function () {
-      this.$router.push('/landingPage')
+    toLanding () {
+      this.$router.push('/')
     },
     toOnePage () {
-      this.$router.push('/onePage')
+      this.$router.push('onePage')
     }
   }
 
