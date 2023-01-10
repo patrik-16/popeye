@@ -4,12 +4,19 @@ import com.popeye.backend.entity.Exercise;
 import com.popeye.backend.entity.Program;
 import com.popeye.backend.entity.ProgramSession;
 import com.popeye.backend.entity.Userinput;
+import com.popeye.backend.pdf.PDFcreator;
 import com.popeye.backend.repos.FirebaseRepository;
 import com.popeye.backend.services.ProgramService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.*;
+import java.net.URLConnection;
 import java.util.List;
 
 @RestController
@@ -56,4 +63,22 @@ public class ProgramRestController {
     public Program getBeginnerProgram(@RequestBody Userinput userinput) {
         return programService.createBeginnerProgram(userinput);
     }
+
+
+    @RequestMapping("/download/{fileName:.+}")
+    public void downloadPDFprogram(HttpServletRequest request, HttpServletResponse response, @PathVariable("currentPDFprogram.pdf") String fileName) throws IOException {
+        String path = "src/main/java/com/popeye/backend/" + fileName;
+        File file = new File(path);
+        if (file.exists()) {
+            String mimeType = URLConnection.guessContentTypeFromName(file.getName()); // for you it would be application/pdf
+            if (mimeType == null) mimeType = "application/octet-stream";
+            response.setContentType(mimeType);
+            response.setHeader("Content-Disposition", String.format("inline; filename=\"" + file.getName() + "\""));
+            response.setContentLength((int) file.length());
+            InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+            FileCopyUtils.copy(inputStream, response.getOutputStream());
+        }
+    }
+
+
 }
