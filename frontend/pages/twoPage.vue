@@ -3,6 +3,7 @@
     <div>
       <v-card-text class="pink">
         <h1>
+          Hey there, {{ firstname }}
         How long is your training experience?
         </h1>
       </v-card-text>
@@ -39,8 +40,14 @@
 </template>
 
 <script>
+import onePage from '@/pages/onePage'
 export default {
   name: 'TwoPage',
+  data () {
+    return {
+      firstname: onePage.data().firstname
+    }
+  },
   methods: {
     toLanding () {
       this.$router.push('/')

@@ -2,7 +2,7 @@
   <v-form v-model="valid">
     <v-container>
       <v-row
-        class="green rounded-pill text-no-wrap "
+        class=""
         justify="center"
       >
         <v-col
@@ -10,10 +10,14 @@
           cols="12"
           md="4"
         >
+          <v-app-bar-title>
+            <h1>
+              First, let's get to know you!
+            </h1>
+          </v-app-bar-title>
           <v-text-field
             v-model="firstname"
             :rules="nameRules"
-            :counter="10"
             label="First name"
             required
           />
@@ -32,25 +36,24 @@
           />
         </v-col>
       </v-row>
-      <v-row>
-        <v-calendar class="pa-4 secondary text-no-wrap rounded-pill pink"
-        >
-YYY</v-calendar>
-        fsfdhjdklsd
-        <v-app-bar
-          @click="toLanding"
-        >
-          sdfghjk
-        </v-app-bar>
-        <v-btn @click="toTwoPage"
-        >
-          Go To next page
-        </v-btn>
-        <v-avatar>
-          <h1>Yo</h1>
-          <textarea>Guten Tag</textarea>
-        </v-avatar>
-      </v-row>
+      <v-btn
+        color="blue"
+        x-large
+        elevation="3"
+        rounded
+        @click="toLanding"
+      >
+        Go Back
+      </v-btn>
+      <v-btn
+        color="yellow"
+        x-large
+        elevation="3"
+        rounded
+        @click="toTwoPage"
+      >
+        Go To next page
+      </v-btn>
     </v-container>
   </v-form>
 </template>
