@@ -4,7 +4,7 @@
       <v-card-text class="pink">
         <h1>
           Hey there, {{ firstname }}
-        How long is your training experience?
+          How long is your training experience?
         </h1>
       </v-card-text>
     </div>
@@ -15,7 +15,7 @@
         <v-card
           :elevation="hover ? 24 : 6"
           class="mx-auto pa-6"
-          @click="() => submit(0)"
+          @click="to"
         >
           Less than 1 year
         </v-card>
@@ -41,6 +41,7 @@
 
 <script>
 import onePage from '@/pages/onePage'
+
 export default {
   name: 'TwoPage',
   data () {
@@ -59,10 +60,7 @@ export default {
         this.$data.level = 'advanced'
       }
     }
-  },
-  data: () => ({
-    level: ''
-  })
+  }
 }
 </script>
 
