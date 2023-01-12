@@ -22,7 +22,7 @@
       </template>
     </v-hover>
 
-    <div class="my-6" />
+    <div class="my-7" />
 
     <!-- Using a dynamic class -->
     <v-hover>
