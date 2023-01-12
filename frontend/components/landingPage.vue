@@ -10,7 +10,7 @@
             <br>
           </div>
           <div class="text-lg-center">
-            <v-btn outlined @click="toForm">
+            <v-btn outlined @click="toTermsAndConditions">
               Start Your Journey
             </v-btn> <!-- Calls to form -->
           </div>
@@ -22,15 +22,16 @@
 </template>
 
 <script>
+
 export default {
   name: 'LandingPage',
 
   methods: {
     /**
-     * Uses VueRouter to send the user to the formPage.vue
+     * Uses VueRouter to send the user to the termsAndConditions.vue
      */
-    toForm () {
-      this.$router.push('/formPage')
+    toTermsAndConditions () {
+      this.$router.push('/termsAndConditions')
     }
   }
 }

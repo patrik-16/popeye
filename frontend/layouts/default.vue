@@ -108,7 +108,7 @@ export default {
   },
   methods: {
     /**
-     * Uses VueRouter to send the user to the formPage.vue
+     * Uses VueRouter to send the user to the termsAndConditions.vue
      */
     toLanding () {
       this.$router.push('/')
