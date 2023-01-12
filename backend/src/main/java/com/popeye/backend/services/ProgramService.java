@@ -64,12 +64,12 @@ public class ProgramService {
         ProgramSession sessionOne = new ProgramSession(exerciseRepository.getAllBeginnerExercisesByDifficulty(Difficulty.HARD), 1);
         ProgramSession sessionTwo = new ProgramSession(exerciseRepository.getAllBeginnerExercisesByDifficulty(Difficulty.MEDIUM), 2);
 
-        if (userinput.getTimePerDay() == TimePerDay.FOURTY) {
-            if (sessionOne.getSecondsPerSession() > TimePerDay.FOURTY.getSeconds()) {
+        if (userinput.getTimePerDay() == TimePerDay.FORTY) {
+            if (sessionOne.getSecondsPerSession() > TimePerDay.FORTY.getSeconds()) {
                 sessionOne.updateRestTime(60);
                 sessionOne.deleteExerciseByBodypart(Bodypart.ABS);
             }
-            if (sessionTwo.getSecondsPerSession() > TimePerDay.FOURTY.getSeconds()) {
+            if (sessionTwo.getSecondsPerSession() > TimePerDay.FORTY.getSeconds()) {
                 sessionTwo.updateRestTime(60);
                 sessionTwo.deleteExerciseByBodypart(Bodypart.ABS);
             }
@@ -106,16 +106,16 @@ public class ProgramService {
         ProgramSession sessionTwo = new ProgramSession(exerciseRepository.getAllBeginnerExercisesByDifficulty(Difficulty.MEDIUM), 2);
         ProgramSession sessionThree = new ProgramSession(exerciseRepository.getAllBeginnerExercisesByDifficulty(Difficulty.EASY), 3);
 
-        if (userinput.getTimePerDay() == TimePerDay.FOURTY) {
-            if (sessionOne.getSecondsPerSession() > TimePerDay.FOURTY.getSeconds()) {
+        if (userinput.getTimePerDay() == TimePerDay.FORTY) {
+            if (sessionOne.getSecondsPerSession() > TimePerDay.FORTY.getSeconds()) {
                 sessionOne.updateRestTime(60);
                 sessionOne.deleteExerciseByBodypart(Bodypart.ABS);
             }
-            if (sessionTwo.getSecondsPerSession() > TimePerDay.FOURTY.getSeconds()) {
+            if (sessionTwo.getSecondsPerSession() > TimePerDay.FORTY.getSeconds()) {
                 sessionTwo.updateRestTime(60);
                 sessionTwo.deleteExerciseByBodypart(Bodypart.ABS);
             }
-            if (sessionThree.getSecondsPerSession() > TimePerDay.FOURTY.getSeconds()) {
+            if (sessionThree.getSecondsPerSession() > TimePerDay.FORTY.getSeconds()) {
                 sessionThree.updateRestTime(60);
                 sessionThree.deleteExerciseByBodypart(Bodypart.ABS);
             }
@@ -162,20 +162,20 @@ public class ProgramService {
         ProgramSession sessionThree = new ProgramSession(exerciseRepository.getAllBeginnerExercisesByDifficulty(Difficulty.EASY), 3);
         ProgramSession sessionFour = new ProgramSession(exerciseRepository.getAllBeginnerExercisesByDifficulty(Difficulty.MEDIUM), 4);
 
-        if (userinput.getTimePerDay() == TimePerDay.FOURTY) {
-            if (sessionOne.getSecondsPerSession() > TimePerDay.FOURTY.getSeconds()) {
+        if (userinput.getTimePerDay() == TimePerDay.FORTY) {
+            if (sessionOne.getSecondsPerSession() > TimePerDay.FORTY.getSeconds()) {
                 sessionOne.updateRestTime(60);
                 sessionOne.deleteExerciseByBodypart(Bodypart.ABS);
             }
-            if (sessionTwo.getSecondsPerSession() > TimePerDay.FOURTY.getSeconds()) {
+            if (sessionTwo.getSecondsPerSession() > TimePerDay.FORTY.getSeconds()) {
                 sessionTwo.updateRestTime(60);
                 sessionTwo.deleteExerciseByBodypart(Bodypart.ABS);
             }
-            if (sessionThree.getSecondsPerSession() > TimePerDay.FOURTY.getSeconds()) {
+            if (sessionThree.getSecondsPerSession() > TimePerDay.FORTY.getSeconds()) {
                 sessionThree.updateRestTime(60);
                 sessionThree.deleteExerciseByBodypart(Bodypart.ABS);
             }
-            if (sessionFour.getSecondsPerSession() > TimePerDay.FOURTY.getSeconds()) {
+            if (sessionFour.getSecondsPerSession() > TimePerDay.FORTY.getSeconds()) {
                 sessionFour.updateRestTime(60);
                 sessionFour.deleteExerciseByBodypart(Bodypart.ABS);
             }
@@ -232,24 +232,24 @@ public class ProgramService {
         ProgramSession sessionFour = new ProgramSession(exerciseRepository.getAllBeginnerExercisesByDifficulty(Difficulty.MEDIUM), 4);
         ProgramSession sessionFive = new ProgramSession(exerciseRepository.getAllBeginnerExercisesByDifficulty(Difficulty.EASY), 5);
 
-        if (userinput.getTimePerDay() == TimePerDay.FOURTY) {
-            if (sessionOne.getSecondsPerSession() > TimePerDay.FOURTY.getSeconds()) {
+        if (userinput.getTimePerDay() == TimePerDay.FORTY) {
+            if (sessionOne.getSecondsPerSession() > TimePerDay.FORTY.getSeconds()) {
                 sessionOne.updateRestTime(60);
                 sessionOne.deleteExerciseByBodypart(Bodypart.ABS);
             }
-            if (sessionTwo.getSecondsPerSession() > TimePerDay.FOURTY.getSeconds()) {
+            if (sessionTwo.getSecondsPerSession() > TimePerDay.FORTY.getSeconds()) {
                 sessionTwo.updateRestTime(60);
                 sessionTwo.deleteExerciseByBodypart(Bodypart.ABS);
             }
-            if (sessionThree.getSecondsPerSession() > TimePerDay.FOURTY.getSeconds()) {
+            if (sessionThree.getSecondsPerSession() > TimePerDay.FORTY.getSeconds()) {
                 sessionThree.updateRestTime(60);
                 sessionThree.deleteExerciseByBodypart(Bodypart.ABS);
             }
-            if (sessionFour.getSecondsPerSession() > TimePerDay.FOURTY.getSeconds()) {
+            if (sessionFour.getSecondsPerSession() > TimePerDay.FORTY.getSeconds()) {
                 sessionFour.updateRestTime(60);
                 sessionFour.deleteExerciseByBodypart(Bodypart.ABS);
             }
-            if (sessionFive.getSecondsPerSession() > TimePerDay.FOURTY.getSeconds()) {
+            if (sessionFive.getSecondsPerSession() > TimePerDay.FORTY.getSeconds()) {
                 sessionFive.updateRestTime(60);
                 sessionFive.deleteExerciseByBodypart(Bodypart.ABS);
             }

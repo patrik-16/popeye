@@ -1,7 +1,7 @@
 package com.popeye.backend.enums;
 
 public enum TimePerDay {
-    FOURTY(2400),
+    FORTY(2400),
     SIXTY(3600),
     EIGHTY(4800),
     UNLIMITED(-1);

@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.List;
+import java.util.HashMap;
 
 @Getter
 @Setter
@@ -19,9 +19,11 @@ public class Exercise {
     private Integer rest;
     private Integer sets;
     private String name;
-    private List<Bodypart> bodypart;
+    //private List<Bodypart> bodypart; we do hashmaps now
+    private HashMap<Bodypart, Float> bodypartToEffectiveness;
     private Experience experience;
     private Difficulty difficulty;
+
 
     // empty constructor needed later for firebase
     public Exercise() {
