@@ -42,7 +42,7 @@ YYY</v-calendar>
         >
           sdfghjk
         </v-app-bar>
-        <v-btn @click="toTwoPage"
+        <v-btn @click="submit"
         >
           Go To next page
         </v-btn>
@@ -62,8 +62,8 @@ export default {
     toLanding () {
       this.$router.push('/')
     },
-    toTwoPage () {
-      this.$router.push('/twoPage')
+    submit () {
+      this.$emit('submit', this.$data)
     }
   },
   data: () => ({

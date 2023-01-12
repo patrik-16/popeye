@@ -102,6 +102,7 @@ export default {
           title: 'Logout',
           to: '/'
         }
+
       ],
       title: 'Popeye'
     }

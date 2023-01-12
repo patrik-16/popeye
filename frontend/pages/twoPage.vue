@@ -14,7 +14,7 @@
         <v-card
           :elevation="hover ? 24 : 6"
           class="mx-auto pa-6"
-          @click="toThreePage"
+          @click="() => submit(0)"
         >
           Less than 1 year
         </v-card>
@@ -29,7 +29,7 @@
         <div
           :class="`elevation-${hover ? 24 : 6}`"
           class="mx-auto pa-6 transition-swing"
-          @click="toThreePage"
+          @click="() => submit(1)"
         >
           More than 1 year
         </div>
@@ -45,10 +45,17 @@ export default {
     toLanding () {
       this.$router.push('/')
     },
-    toThreePage () {
-      this.$router.push('/threePage')
+    submit (answer) {
+      if (answer === 0) {
+        this.$data.level = 'beginner'
+      } else if (answer === 1) {
+        this.$data.level = 'advanced'
+      }
     }
-  }
+  },
+  data: () => ({
+    level: ''
+  })
 }
 </script>
 
