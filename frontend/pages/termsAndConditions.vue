@@ -1,33 +1,43 @@
 <template>
   <div class="text-center">
-    <v-sheet
-      class="px-7 pt-7 pb-4 mx-auto text-center d-inline-block"
-      color="blue-grey darken-3"
-      dark
+    <v-dialog
+      v-model="dialog"
+      width="500"
     >
-      <div class="grey--text text--lighten-1 text-body-2 mb-4">
-        Do you accept our terms and conditions?
-      </div>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          color="red lighten-2"
+          dark
+          v-bind="attrs"
+          v-on="on"
+        >
+          Click Me
+        </v-btn>
+      </template>
 
-      <v-btn
-        :disabled="loading"
-        class="ma-1"
-        color="grey"
-        plain
-        @click="toOnePage"
-      >
-        Yes
-      </v-btn>
+      <v-card>
+        <v-card-title class="text-h5 grey lighten-2">
+          Privacy Policy
+        </v-card-title>
 
-      <v-btn
-        class="ma-1"
-        color="error"
-        plain
-        @click="toLanding"
-      >
-        No
-      </v-btn>
-    </v-sheet>
+        <v-card-text>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </v-card-text>
+
+        <v-divider></v-divider>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="primary"
+            text
+            @click="toOnePage"
+          >
+            I accept
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -41,6 +51,11 @@ export default {
     },
     toOnePage () {
       this.$router.push('onePage')
+    },
+    data () {
+      return {
+        dialog: false
+      }
     }
   }
 

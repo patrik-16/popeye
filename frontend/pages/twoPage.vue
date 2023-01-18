@@ -3,7 +3,8 @@
     <div>
       <v-card-text class="pink">
         <h1>
-        How long is your training experience?
+          Hey there, {{ firstname }}
+          How long is your training experience?
         </h1>
       </v-card-text>
     </div>
@@ -14,14 +15,14 @@
         <v-card
           :elevation="hover ? 24 : 6"
           class="mx-auto pa-6"
-          @click="toThreePage"
+          @click="to"
         >
           Less than 1 year
         </v-card>
       </template>
     </v-hover>
 
-    <div class="my-6" />
+    <div class="my-7" />
 
     <!-- Using a dynamic class -->
     <v-hover>
@@ -29,7 +30,7 @@
         <div
           :class="`elevation-${hover ? 24 : 6}`"
           class="mx-auto pa-6 transition-swing"
-          @click="toThreePage"
+          @click="() => submit(1)"
         >
           More than 1 year
         </div>
@@ -39,14 +40,25 @@
 </template>
 
 <script>
+import onePage from '@/pages/onePage'
+
 export default {
   name: 'TwoPage',
+  data () {
+    return {
+      firstname: onePage.data().firstname
+    }
+  },
   methods: {
     toLanding () {
       this.$router.push('/')
     },
-    toThreePage () {
-      this.$router.push('/threePage')
+    submit (answer) {
+      if (answer === 0) {
+        this.$data.level = 'beginner'
+      } else if (answer === 1) {
+        this.$data.level = 'advanced'
+      }
     }
   }
 }
