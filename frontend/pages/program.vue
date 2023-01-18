@@ -31,7 +31,7 @@ export default {
         const blobUrl = window.URL.createObjectURL(newBlob)
         const link = document.createElement('a')
         link.href = blobUrl
-        link.setAttribute('download', 'Program')
+        link.setAttribute('download', 'Program.pdf')
         document.body.appendChild(link)
         link.click()
         link.parentNode.removeChild(link)
