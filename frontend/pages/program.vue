@@ -26,10 +26,8 @@ export default {
     async downloadPDF () {
       try {
         const response = await fetch('./pdf/generate')
-        const url = window.URL.createObjectURL(new Blob([response.data]))
-        const link = document.createElement('a')
-        link.href = url
-        link.setAttribute('downlaod', response.headers.get())
+        console.log(response)
+        this.pdf = response
       } catch (e) {
         console.log(e)
       }
