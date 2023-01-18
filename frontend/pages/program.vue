@@ -1,20 +1,20 @@
 <template>
   <v-app>
-    <h1>Program Page</h1>
     <div>
-      <a href="/assets/my.pdf">download pdf</a>
+      <h1>Page for the last question</h1>
+      <v-btn outlined @click="downloadPDF()">download pdf</v-btn>
     </div>
   </v-app>
 </template>
 
 <script>
+
 export default {
   name: 'Program',
-  data () {
-    return {
-      programPDF: ''
-    }
-  },
+
+  data: () => ({
+    pdf: ''
+  }),
 
   methods: {
     /**
@@ -23,29 +23,17 @@ export default {
     toForm () {
       this.$router.push('/program')
     },
-    async getData () {
+    async downloadPDF () {
       try {
-        return await axios.get({
-          url: '/download/currentPDFprogram.pdf',
-          method: 'GET',
-          responseType: 'blob'
-        }).then((response) => {
-          console.log(response)
-          const downloadUrl = window.URL.createObjectURL(new Blob([response.data]))
-          this.programPDF = downloadUrl
-          this.downloadFile()
-        })
-      } catch (error) {
-        console.log(error)
+        const response = await fetch('./pdf/generate')
+        const url = window.URL.createObjectURL(new Blob([response.data]))
+        const link = document.createElement('a')
+        link.href = url
+        link.setAttribute('downlaod', response.headers.get())
+      } catch (e) {
+        console.log(e)
       }
-    },
-    downloadFile () {
-      const link = document.createElement('a')
-      link.href = this.programPDF
-      link.setAttribute('download', 'YourProgram.pdf')
-      document.body.appendChild(link)
-      link.click()
-      link.remove()
+      console.log(this.pdf)
     }
   }
 }

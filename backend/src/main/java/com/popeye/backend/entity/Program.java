@@ -1,22 +1,15 @@
 package com.popeye.backend.entity;
 
-import com.popeye.backend.pdf.PDFcreator;
+import com.popeye.backend.services.PDFGeneratorService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 @Getter
 @Setter
-//@AllArgsConstructor
+@AllArgsConstructor
 public class Program {
     public List<ProgramSession> program;
-
-    public Program(List<ProgramSession> program) {
-        this.program = program;
-    }
-
-    PDFcreator currentPdf;
 }

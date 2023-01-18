@@ -1,14 +1,12 @@
-package com.popeye.backend.pdf;
+package com.popeye.backend.services;
 
-import com.popeye.backend.controller.ProgramRestController;
 import com.popeye.backend.entity.Exercise;
-import com.popeye.backend.entity.Program;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
 import com.lowagie.text.Font;
 import com.lowagie.text.FontFactory;
 import com.lowagie.text.PageSize;
@@ -21,58 +19,43 @@ import com.lowagie.text.pdf.PdfWriter;
 import com.popeye.backend.entity.ProgramSession;
 import com.popeye.backend.entity.Userinput;
 import com.popeye.backend.enums.Bodypart;
-import com.popeye.backend.repos.ExerciseRepository;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.StreamingHttpOutputMessage;
-
-import static ch.qos.logback.core.util.StatusPrinter.print;
-
-public class PDFcreator {
-    // https://springjava.com/spring-boot/export-data-into-pdf-file-in-spring-boot
-    // pdf creation -> use above link (export and Exceptions are needed) if I use the Data from the database
+import org.springframework.stereotype.Service;
 
 
-    public Document generatePDF(Userinput userinput, List<ProgramSession> programSessionList) throws FileNotFoundException {
-        // Creating the Object of Document
+//this class should be created into a bean - then the bean can be injected into the controller
+@Service
+public class PDFGeneratorService {
+    //the response we want to give back to the user
+    public void export(HttpServletResponse response) throws IOException {
+        //attach a document to the response
+        // Creating the Object of Document (a white doc)
         Document document = new Document(PageSize.A4);
-        // Getting instance of PdfWriter
-        PdfWriter.getInstance(document, new FileOutputStream("currentPDFprogram.pdf"));
-
-        /*
-        Do we want File encryption? NO must requirement therefor I guess NO
-        https://www.baeldung.com/java-pdf-creation
-        PdfReader pdfReader = new PdfReader("HelloWorld.pdf");
-PdfStamper pdfStamper
-  = new PdfStamper(pdfReader, new FileOutputStream("encryptedPdf.pdf"));
-
-pdfStamper.setEncryption(
-  "userpass".getBytes(),
-  ".getBytes(),
-  0,
-  PdfWriter.ENCRYPTION_AES_256
-);
-
-pdfStamper.close();
-        */
+        // Getting instance of PdfWriter - we want to write the document to this outputstream of the response
+        PdfWriter.getInstance(document, response.getOutputStream());
 
         // Opening the created document to change it
         document.open();
-        // Creating font
-        // Setting font style and size
-        Font fontTiltle = FontFactory.getFont(FontFactory.TIMES_ROMAN);
-        fontTiltle.setSize(20);
+        Font fontTitle = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+        fontTitle.setSize(18);
         // Creating paragraph
-        Paragraph paragraph1 = new Paragraph("Your Program", fontTiltle);
+        Paragraph paragraph1 = new Paragraph("Your Program:", fontTitle);
         // Aligning the paragraph in the document
         paragraph1.setAlignment(Paragraph.ALIGN_CENTER);
         // Adding the created paragraph in the document
         document.add(paragraph1);
         // Creating table for each day
+
+        /*
         for(int i = 0; i < userinput.getDaysPerWeek(); i++) {
-            fontTiltle.setSize(20);
+            Font fontTitle2 = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+            fontTitle2.setSize(13);
             // Creating paragraph
             String text = "Day " + i;
-            Paragraph paragraph2 = new Paragraph(text, fontTiltle);
+            Paragraph paragraph2 = new Paragraph(text, fontTitle2);
+            paragraph2.setAlignment(Paragraph.ALIGN_LEFT);
             document.add(paragraph2);
             //Creating a table of the 4 columns
             PdfPTable table = new PdfPTable(userinput.getDaysPerWeek());
@@ -133,10 +116,12 @@ pdfStamper.close();
                 // Adding the created table to the document
                 document.add(table);
             }
-        }
+
+         */
         // Closing the document
         document.close();
-
-        return document;
+        }
     }
-}
+    // https://springjava.com/spring-boot/export-data-into-pdf-file-in-spring-boot
+    // pdf creation -> use above link (export and Exceptions are needed) if I use the Data from the database
+
