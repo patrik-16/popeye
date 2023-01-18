@@ -1,11 +1,13 @@
 <template>
   <v-container class="pa-4 text-center">
-    <v-app-bar-title
-      class="title"
-    >
-      <h1>How much experience do you have in the gym?</h1>
-      <div><br></div>
-    </v-app-bar-title>
+    <v-row>
+      <v-card-text
+        class="title"
+      >
+        <h1>How much experience do you have in the gym?</h1>
+        <div><br></div>
+      </v-card-text>
+    </v-row>
     <v-row
       class="fill-height"
       align="center"

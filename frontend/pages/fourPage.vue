@@ -1,11 +1,15 @@
 <template>
   <v-container class="pa-4 text-center">
-    <v-app-bar-title
-      class="title"
-    >
-      <h1 class="pa-4">How many days per week can you workout?</h1>
-     <div><br></div>
-    </v-app-bar-title>
+    <v-row>
+      <v-card-text
+        class="title"
+      >
+        <h1 class="pa-4">
+          How many days per week can you workout?
+        </h1>
+        <div><br></div>
+      </v-card-text>
+    </v-row>
     <v-row
       class="fill-height"
       align="center"
@@ -23,8 +27,8 @@
             <v-card
               :elevation="hover ? 12 : 2"
               :class="{ 'on-hover': hover }"
-              @click="goTo"
               color="grey"
+              @click="goTo"
             >
               <v-card-title class="text-h4 white--text">
                 <v-row

@@ -1,36 +1,43 @@
 <template>
   <v-container class="pa-4 text-center">
-    <v-form
-      v-model="valid"
-      class="form"
-      form="required"
-    >
-      <v-app-bar-title
-        class="title"
+    <v-card>
+      <v-form
+        v-model="valid"
+        class="form"
+        form="required"
       >
-        <h2>What's your age?</h2>
-      </v-app-bar-title>
-      <v-card
-        elevation="2"
-      >
-        <v-text-field
-          class='pa-4 mt-10 text-center'
-          v-model="age"
-          label="Type in your age"
-          solo
-          dense
+        <v-app-bar-title
+          class="title"
         >
-          {{ age }}
-        </v-text-field>
-        <v-btn
-          v-show="ageValidation"
-          @click="toTwoPage"
+          <h2>What's your age?</h2>
+        </v-app-bar-title>
+        <v-card
+          elevation="2"
         >
-          Next
-        </v-btn>
+          <div>
+            <v-text-field
+              class="pa-4 mt-10 text-center"
+              v-model="age"
+              label="Type in your age"
+              solo
+              dense
+            >
+              {{ age }}
+            </v-text-field>
+          </div>
+          <div class="align-self-center mt-3">
+            <v-btn
+              v-show="ageValidation"
+              class="btn"
+              @click="toTwoPage"
+            >
+              Next
+            </v-btn>
+          </div>
 
-      </v-card>
-    </v-form>
+        </v-card>
+      </v-form>
+    </v-card>
   </v-container>
 </template>
 
@@ -56,6 +63,9 @@ export default {
 
 <style scoped>
 .form {
+}
+.btn {
+  margin-bottom: 5%;
 }
 
 </style>
