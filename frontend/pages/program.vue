@@ -25,13 +25,22 @@ export default {
     },
     async downloadPDF () {
       try {
-        const response = await fetch('./pdf/generate')
-        console.log(response)
-        this.pdf = response
+        const response = await fetch('http://localhost:8080/pdf/generate')
+        const blob = await response.blob()
+        const newBlob = new Blob([blob])
+        const blobUrl = window.URL.createObjectURL(newBlob)
+        const link = document.createElement('a')
+        link.href = blobUrl
+        link.setAttribute('download', 'Program')
+        document.body.appendChild(link)
+        link.click()
+        link.parentNode.removeChild(link)
+
+        // clean up Url
+        window.URL.revokeObjectURL(blobUrl)
       } catch (e) {
         console.log(e)
       }
-      console.log(this.pdf)
     }
   }
 }

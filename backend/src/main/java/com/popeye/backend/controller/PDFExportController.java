@@ -3,6 +3,7 @@ package com.popeye.backend.controller;
 import com.popeye.backend.services.PDFGeneratorService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.io.IOException;
@@ -21,6 +22,7 @@ public class PDFExportController {
         this.pdfGeneratorService = pdfGeneratorService;
     }
 
+    @CrossOrigin
     @GetMapping("/pdf/generate")
     public void generatePDF(HttpServletResponse httpServletResponse) throws IOException {
         //attach the pdf as response
