@@ -1,91 +1,61 @@
 <template>
-  <v-form v-model="valid">
-    <v-container>
-      <v-row
-        class=""
-        justify="center"
+  <v-container class="pa-4 text-center">
+    <v-form
+      v-model="valid"
+      class="form"
+      form="required"
+    >
+      <v-app-bar-title
+        class="title"
       >
-        <v-col
-          align-self="center"
-          cols="12"
-          md="4"
+        <h2>What's your age?</h2>
+      </v-app-bar-title>
+      <v-card
+        elevation="2"
+      >
+        <v-text-field
+          class='pa-4 mt-10 text-center'
+          v-model="age"
+          label="Type in your age"
+          solo
+          dense
         >
-          <v-app-bar-title>
-            <h1>
-              First, let's get to know you!
-            </h1>
-          </v-app-bar-title>
-          <v-text-field
-            v-model="firstname"
-            :rules="nameRules"
-            label="First name"
-            required
-          />
-          <v-text-field
-            v-model="lastname"
-            :rules="nameRules"
-            :counter="10"
-            label="Last name"
-            required
-          />
-          <v-text-field
-            v-model="email"
-            :rules="emailRules"
-            label="E-mail"
-            required
-          />
-        </v-col>
-      </v-row>
-      <v-btn
-        color="blue"
-        x-large
-        elevation="3"
-        rounded
-        @click="toLanding"
-      >
-        Go Back
-      </v-btn>
-      <v-btn
-        color="yellow"
-        x-large
-        elevation="3"
-        rounded
-        @click="toTwoPage"
-      >
-        Go To next page
-      </v-btn>
-    </v-container>
-  </v-form>
+          {{ age }}
+        </v-text-field>
+        <v-btn
+          v-show="ageValidation"
+          @click="toTwoPage"
+        >
+          Next
+        </v-btn>
+
+      </v-card>
+    </v-form>
+  </v-container>
 </template>
 
 <script>
 export default {
   name: 'OnePage',
+  data: () => ({
+    valid: false,
+    age: '',
+    ageValidation: true
+  }),
   methods: {
-    toLanding () {
-      this.$router.push('/')
+    checkAge () {
+      this.ageValidation = this.age >= 18 && this.age <= 50
     },
     toTwoPage () {
       this.$router.push('/twoPage')
     }
-  },
-  data: () => ({
-    valid: false,
-    firstname: '',
-    lastname: '',
-    nameRules: [
-      v => !!v || 'Name is required',
-      v => v.length <= 10 || 'Name must be less than 10 characters'
-    ],
-    email: '',
-    emailRules: [
-      v => !!v || 'E-mail is required',
-      v => /.+@.+/.test(v) || 'E-mail must be valid'
-    ]
-  })
+  }
+
 }
 </script>
 
 <style scoped>
+.form {
+}
 
 </style>

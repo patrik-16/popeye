@@ -1,19 +1,21 @@
 <template>
   <v-container class="pa-4 text-center">
-    <div class="my-6" />
-    <div>
-      <v-app-bar-title>
-        <h1> What is your goal?
-        </h1>
-      </v-app-bar-title>
-    </div>
-    <div class="my-6" />
+    <v-app-bar-title
+      class="title"
+    >
+      <h1>What do you want to focus on?</h1>
+      <div><br></div>
+      <h3 class="mt-1 "> Click on one, two or three areas (zB) </h3>
+      <div><br></div>
+    </v-app-bar-title>
     <v-row
       class="fill-height"
       align="center"
       justify="center"
     >
-      <template v-for="(item, i) in items">
+      <template
+        v-for="(item, i) in items"
+      >
         <v-col
           :key="i"
           cols="12"
@@ -29,23 +31,24 @@
                 :src="item.img"
                 height="225px"
               >
-                <v-card-title class="text-h6 white--text">
+                <v-card-title class="text-h4 white--text">
                   <v-row
                     class="fill-height flex-column"
                     justify="space-between"
                   >
-                    <p class="mt-4 subheading text-left">
+                    <p class="mt-10 subheading">
                       {{ item.title }}
                     </p>
 
                     <div>
-                      <p class="ma-0 text-body-1 font-weight-bold font-italic text-left">
+                      <p class="ma-0 text-body-1 font-weight-bold">
                         {{ item.text }}
                       </p>
-                      <p class="text-caption font-weight-medium font-italic text-left">
+                      <p class="text-caption font-weight-bold">
                         {{ item.subtext }}
                       </p>
                     </div>
+
                     <div class="align-self-center">
                       <v-btn
                         v-for="(icon, index) in icons"
@@ -76,32 +79,34 @@
 <script>
 
 export default {
-  name: 'ThreePage',
+  name: 'TwoPage',
   methods: {
     goTo () {
-      this.$router.push('/threePlusPage')
+      this.$router.push('/fourPage')
     }
   },
   data: () => ({
     icons: ['mdi-weight-lifter'],
     items: [
       {
-        title: 'Hypertrophy',
-        text: 'Build muscles',
-        subtext: '',
-        img: 'hypertrophy.jpg'
+        title: 'Legs',
+        img: '/legs.png'
       },
       {
-        title: 'Strength',
-        text: 'Get sronger',
-        subtext: '',
-        img: 'strength.webp'
+        title: 'Arms',
+        img: '/arms.jpg'
       },
       {
-        title: 'Conditioning',
-        text: 'Build your condition',
-        subtext: '',
-        img: 'cardio.webp'
+        title: 'Back',
+        img: '/back.jpg'
+      },
+      {
+        title: 'Chest',
+        img: '/chest.jpg'
+      },
+      {
+        title: 'Glutes',
+        img: '/glutes.webp'
       }
     ],
     transparent: 'rgba(255, 255, 255, 0)'
@@ -120,5 +125,8 @@ export default {
 
 .show-btns {
   color: rgba(255, 255, 255, 1) !important;
+}
+
+.title {
 }
 </style>

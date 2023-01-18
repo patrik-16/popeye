@@ -3,8 +3,8 @@
     <v-app-bar-title
       class="title"
     >
-      <h1 class="pa-4">How many days per week can you workout?</h1>
-     <div><br></div>
+      <h1 class="pa-4">How much time per day do you have?</h1>
+      <div><br></div>
     </v-app-bar-title>
     <v-row
       class="fill-height"
@@ -67,18 +67,16 @@ export default {
   name: 'TwoPage',
   methods: {
     goTo () {
-      this.$router.push('/fivePage')
+      this.$router.push('/')
     }
   },
   data: () => ({
     icons: ['mdi-weight-lifter'],
     items: [
-      { title: '1' },
-      { title: '2' },
-      { title: '3' },
-      { title: '4' },
-      { title: '5' },
-      { title: '6' }
+      { title: '40 min' },
+      { title: '60 min' },
+      { title: '1h 20 min' },
+      { title: 'it doesn\'t matter' }
     ],
     transparent: 'rgba(255, 255, 255, 0)'
   })

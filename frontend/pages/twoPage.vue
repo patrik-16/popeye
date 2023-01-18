@@ -1,69 +1,136 @@
 <template>
-  <div class="text--primary">
-    <div>
-      <v-card-text class="pink">
-        <h1>
-          Hey there, {{ firstname }}
-          How long is your training experience?
-        </h1>
-      </v-card-text>
-    </div>
-    <div class="my-6" />
-    <!-- Using the elevation prop -->
-    <v-hover>
-      <template #default="{ hover }">
-        <v-card
-          :elevation="hover ? 24 : 6"
-          class="mx-auto pa-6"
-          @click="to"
+  <v-container class="pa-4 text-center">
+    <v-app-bar-title
+      class="title"
+    >
+      <h1>How much experience do you have in the gym?</h1>
+      <div><br></div>
+    </v-app-bar-title>
+    <v-row
+      class="fill-height"
+      align="center"
+      justify="center"
+    >
+      <template
+        v-for="(item, i) in items"
+      >
+        <v-col
+          :key="i"
+          cols="12"
+          md="4"
         >
-          Less than 1 year
-        </v-card>
-      </template>
-    </v-hover>
+          <v-hover v-slot="{ hover }">
+            <v-card
+              :elevation="hover ? 12 : 2"
+              :class="{ 'on-hover': hover }"
+              @click="goTo(i)"
+            >
+              <v-img
+                :src="item.img"
+                height="225px"
+              >
+                <v-card-title class="text-h4 white--text">
+                  <v-row
+                    class="fill-height flex-column"
+                    justify="space-between"
+                  >
+                    <p class="mt-10 subheading">
+                      {{ item.title }}
+                    </p>
 
-    <div class="my-7" />
+                    <div>
+                      <p class="ma-0 text-body-1 font-weight-bold">
+                        {{ item.text }}
+                      </p>
+                      <p class="text-caption font-weight-bold">
+                        {{ item.subtext }}
+                      </p>
+                    </div>
 
-    <!-- Using a dynamic class -->
-    <v-hover>
-      <template #default="{ hover }">
-        <div
-          :class="`elevation-${hover ? 24 : 6}`"
-          class="mx-auto pa-6 transition-swing"
-          @click="() => submit(1)"
-        >
-          More than 1 year
-        </div>
+                    <div class="align-self-center">
+                      <v-btn
+                        v-for="(icon, index) in icons"
+                        :key="index"
+                        :class="{ 'show-btns': hover }"
+                        :color="transparent"
+                        icon
+                      >
+                        <v-icon
+                          :class="{ 'show-btns': hover }"
+                          :color="transparent"
+                        >
+                          {{ icon }}
+                        </v-icon>
+                      </v-btn>
+                    </div>
+                  </v-row>
+                </v-card-title>
+              </v-img>
+            </v-card>
+          </v-hover>
+        </v-col>
       </template>
-    </v-hover>
-  </div>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
-import onePage from '@/pages/onePage'
 
 export default {
   name: 'TwoPage',
-  data () {
-    return {
-      firstname: onePage.data().firstname
+  methods: {
+    goTo (i) {
+      if (i === 0) {
+        this.$router.push('/fourPage')
+      } else if (i === 1) {
+        this.$router.push('/threePage')
+      }
+    },
+    toNextPage () {
+      if (this.item.title === 'Beginner') {
+        this.$router.push('/threePage')
+      } else {
+        this.$router.push('/fourPage')
+      }
+    },
+    toThreePage () {
+      this.$router.push('/threePage')
     }
   },
-  methods: {
-    toLanding () {
-      this.$router.push('/')
-    },
-    submit (answer) {
-      if (answer === 0) {
-        this.$data.level = 'beginner'
-      } else if (answer === 1) {
-        this.$data.level = 'advanced'
+  data: () => ({
+    icons: ['mdi-weight-lifter'],
+    items: [
+      {
+        title: 'Beginner',
+        text: 'Less than one year of gym experience',
+        subtext: 'Learn the basics',
+        img: '/basic.jpg'
+      },
+      {
+        title: 'Advanced',
+        text: 'More than one year of gym experience',
+        subtext: 'Let\'s upgrade your workout plan!',
+        img: '/advanced.jpg'
       }
-    }
-  }
+    ],
+    transparent: 'rgba(255, 255, 255, 0)'
+  })
 }
 </script>
 
 <style scoped>
+.v-card {
+  transition: opacity .4s ease-in-out;
+}
 
+.v-card:not(.on-hover) {
+  opacity: 0.6;
+}
+
+.show-btns {
+  color: rgba(255, 255, 255, 1) !important;
+}
+
+.title {
+}
 </style>
