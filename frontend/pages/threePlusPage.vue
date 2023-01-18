@@ -1,13 +1,15 @@
 <template>
   <v-container class="pa-4 text-center">
-    <v-app-bar-title
-      class="title"
-    >
-      <h1>What do you want to focus on?</h1>
-      <div><br></div>
-      <h3 class="mt-1 "> Click on one, two or three areas (zB) </h3>
-      <div><br></div>
-    </v-app-bar-title>
+    <v-row>
+      <v-card-text
+        class="title"
+      >
+        <h1>What do you want to focus on?</h1>
+        <div><br></div>
+        <h3 class="mt-1 "> Click on one, two or three areas (zB) </h3>
+        <div><br></div>
+      </v-card-text>
+    </v-row>
     <v-row
       class="fill-height"
       align="center"
