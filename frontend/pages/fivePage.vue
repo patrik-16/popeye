@@ -67,7 +67,7 @@ export default {
   name: 'TwoPage',
   methods: {
     goTo () {
-      this.$router.push('/')
+      this.$router.push('/program')
     }
   },
   data: () => ({
