@@ -46,38 +46,69 @@ public class ProgramService {
     private Program generateAdvancedProgram(Userinput userinput) {
 
         HashMap<String, Integer> fullbody = new HashMap<String, Integer>();
-        fullbody.put("CHEST", 70);
-        fullbody.put("LATS", 70);
-        fullbody.put("TRAPS", 70);
-        fullbody.put("QUADS", 70);
-        fullbody.put("GLUTES", 70);
-        fullbody.put("HAMS", 70);
-        fullbody.put("CALVES", 70);
-        fullbody.put("ABS", 70);
+        fullbody.put("FRONTDELT", 100);
+        fullbody.put("CHEST", 100);
+        fullbody.put("LATS", 100);
+        fullbody.put("QUADS", 100);
+        fullbody.put("HAMS", 100);
+        fullbody.put("ABS", 100);
+        fullbody.put("CALVES", 100);
+        HashMap<String, Integer> fullbody2 = new HashMap<String, Integer>();
+        fullbody2.put("SIDEDELT", 100);
+        fullbody2.put("UPPERCHEST", 100);
+        fullbody2.put("TRAPS", 100);
+        fullbody2.put("QUADS", 100);
+        fullbody2.put("HAMS", 100);
+        fullbody2.put("BICEP", 100);
+        fullbody2.put("TRICEP", 100);
         HashMap<String, Integer> upper = new HashMap<String, Integer>();
-        upper.put("QUADS", 70);
-        upper.put("TRICEP", 70);
-        upper.put("CHEST", 70);
+        upper.put("FRONTDELT", 100);
+        upper.put("REARDELT", 100);
+        upper.put("UPPERCHEST", 100);
+        upper.put("LATS", 100);
+        upper.put("TRAPS", 100);
+        upper.put("BICEP", 100);
+        upper.put("TRICEP", 100);
         HashMap<String, Integer> lower = new HashMap<String, Integer>();
-        lower.put("QUADS", 70);
-        lower.put("TRICEP", 70);
-        lower.put("CHEST", 70);
+        lower.put("QUADS", 100);
+        lower.put("QUADS", 90);
+        lower.put("HAMS", 100);
+        lower.put("HAMS", 90);
+        lower.put("CALVES", 100);
+        lower.put("CALVES", 90);
+        lower.put("ABS", 100);
         HashMap<String, Integer> upper1 = new HashMap<String, Integer>();
-        upper1.put("QUADS", 70);
-        upper1.put("TRICEP", 70);
-        upper1.put("CHEST", 70);
+        upper1.put("SIDEDELT", 100);
+        upper1.put("REARDELT", 100);
+        upper1.put("UPPERCHEST", 100);
+        upper1.put("LATS", 90);
+        upper1.put("TRAPS", 90);
+        upper1.put("BICEP", 100);
+        upper1.put("TRICEP", 100);
         HashMap<String, Integer> lower1 = new HashMap<String, Integer>();
-        lower1.put("QUADS", 70);
-        lower1.put("TRICEP", 70);
-        lower1.put("CHEST", 70);
+        lower1.put("QUADS", 90);
+        lower1.put("QUADS", 80);
+        lower1.put("HAMS", 100);
+        lower1.put("HAMS", 90);
+        lower1.put("HAMS", 80);
+        lower1.put("CALVES", 100);
+        lower1.put("CALVES", 90);
         HashMap<String, Integer> upper2 = new HashMap<String, Integer>();
-        upper2.put("QUADS", 70);
-        upper2.put("TRICEP", 70);
-        upper2.put("CHEST", 70);
+        upper2.put("FRONTDELT", 90);
+        upper2.put("REARDELT", 90);
+        upper2.put("CHEST", 90);
+        upper2.put("LATS", 100);
+        upper2.put("TRAPS", 100);
+        upper2.put("BICEP", 80);
+        upper2.put("TRICEP", 80);
         HashMap<String, Integer> lower2 = new HashMap<String, Integer>();
-        lower2.put("QUADS", 70);
-        lower2.put("TRICEP", 70);
-        lower2.put("CHEST", 70);
+        lower2.put("QUADS", 100);
+        lower2.put("QUADS", 90);
+        lower2.put("QUADS", 80);
+        lower2.put("HAMS", 90);
+        lower2.put("HAMS", 80);
+        lower2.put("CALVES", 100);
+        lower2.put("CALVES", 90);
         HashMap<String, Integer> push1 = new HashMap<String, Integer>();
         push1.put("QUADS", 70);
         push1.put("TRICEP", 70);
@@ -105,13 +136,13 @@ public class ProgramService {
                 ProgramSession sessionTwo = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.MEDIUM, userinput.getGoal()), 2);
 
                 ProgramSession filteredSessionOne = sessionAdaptation(userinput, sessionOne, fullbody);
-                ProgramSession filteredSessionTwo = sessionAdaptation(userinput, sessionTwo, fullbody);
+                ProgramSession filteredSessionTwo = sessionAdaptation(userinput, sessionTwo, fullbody2);
                 Program program = new Program(List.of(filteredSessionOne, filteredSessionTwo));
 
                 return programAdaptation(userinput, program);
             }
             case 3 -> {
-                ProgramSession sessionOne = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.HARD, userinput.getGoal()), 1);
+                ProgramSession sessionOne = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.MEDIUM, userinput.getGoal()), 1);
                 ProgramSession sessionTwo = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.MEDIUM, userinput.getGoal()), 2);
                 ProgramSession sessionThree = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.HARD, userinput.getGoal()), 3);
 
@@ -124,9 +155,9 @@ public class ProgramService {
             }
             case 4 -> {
                 ProgramSession sessionOne = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.HARD, userinput.getGoal()), 1);
-                ProgramSession sessionTwo = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.MEDIUM, userinput.getGoal()), 2);
-                ProgramSession sessionThree = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.HARD, userinput.getGoal()), 3);
-                ProgramSession sessionFour = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.MEDIUM, userinput.getGoal()), 4);
+                ProgramSession sessionTwo = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.HARD, userinput.getGoal()), 2);
+                ProgramSession sessionThree = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.EASY, userinput.getGoal()), 3);
+                ProgramSession sessionFour = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.EASY, userinput.getGoal()), 4);
 
                 ProgramSession filteredSessionOne = sessionAdaptation(userinput, sessionOne, upper1);
                 ProgramSession filteredSessionTwo = sessionAdaptation(userinput, sessionTwo, lower1);
@@ -162,18 +193,17 @@ public class ProgramService {
         List<Exercise> filteredExercises = new ArrayList<>();
 
         filteringMap.forEach(
-            (key, value)
-                ->  {
+                (key, value)
+                        ->  {
                     for (int i = 0; i < programSession.getExerciseList().size(); i++) {
                         if (programSession.getExerciseList().get(i).getBodypartToEffectiveness().containsKey(key)) {
-                            String effectivness = programSession.getExerciseList().get(i).getBodypartToEffectiveness().get(key);
-                            if (Integer.parseInt(effectivness) >= value) {
+                            String effectiveness = programSession.getExerciseList().get(i).getBodypartToEffectiveness().get(key);
+                            if (Integer.valueOf(effectiveness) >= value) {
                                 filteredExercises.add(programSession.getExerciseList().get(i));
-
                             }
                         }
-                      }
-                    System.out.println(key + " " + value);
+                    }
+
                 }
         );
 
@@ -202,17 +232,17 @@ public class ProgramService {
 
             }
             int countTimePerSession = 0;
-                for (Exercise currentExercise : currentSession.getExerciseList()) {
-                    countTimePerSession += currentExercise.returnLengthInSeconds();
+            for (Exercise currentExercise : currentSession.getExerciseList()) {
+                countTimePerSession += currentExercise.returnLengthInSeconds();
 
-                    //check time:
-                    if(userinput.getTimePerDay().getSeconds() < countTimePerSession) {
+                //check time:
+                if(userinput.getTimePerDay().getSeconds() < countTimePerSession) {
 
-                    }
-
-
-                    System.out.println("Day: " + currentSession.getDay() + ": " + countTimePerSession);
                 }
+
+
+                System.out.println("Day: " + currentSession.getDay() + ": " + countTimePerSession);
+            }
         }
 
         Program adaptedProgram = currentProgram;
