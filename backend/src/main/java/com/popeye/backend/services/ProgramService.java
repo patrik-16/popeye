@@ -40,7 +40,7 @@ public class ProgramService {
 
     /***
      * Function that generates Sessions regarding daysPerWeek
-     * @param userinput
+     * @param: userinput
      * @return a program that is designed concerning Goal, Priorities, daysPerWeek and timePerDay
      */
     private Program generateAdvancedProgram(Userinput userinput) {
@@ -55,45 +55,45 @@ public class ProgramService {
         fullbody.put("CALVES", 70);
         fullbody.put("ABS", 70);
         HashMap<String, Integer> upper = new HashMap<String, Integer>();
-        fullbody.put("QUADS", 70);
-        fullbody.put("TRICEP", 70);
-        fullbody.put("CHEST", 70);
+        upper.put("QUADS", 70);
+        upper.put("TRICEP", 70);
+        upper.put("CHEST", 70);
         HashMap<String, Integer> lower = new HashMap<String, Integer>();
-        fullbody.put("QUADS", 70);
-        fullbody.put("TRICEP", 70);
-        fullbody.put("CHEST", 70);
+        lower.put("QUADS", 70);
+        lower.put("TRICEP", 70);
+        lower.put("CHEST", 70);
         HashMap<String, Integer> upper1 = new HashMap<String, Integer>();
-        fullbody.put("QUADS", 70);
-        fullbody.put("TRICEP", 70);
-        fullbody.put("CHEST", 70);
+        upper1.put("QUADS", 70);
+        upper1.put("TRICEP", 70);
+        upper1.put("CHEST", 70);
         HashMap<String, Integer> lower1 = new HashMap<String, Integer>();
-        fullbody.put("QUADS", 70);
-        fullbody.put("TRICEP", 70);
-        fullbody.put("CHEST", 70);
+        lower1.put("QUADS", 70);
+        lower1.put("TRICEP", 70);
+        lower1.put("CHEST", 70);
         HashMap<String, Integer> upper2 = new HashMap<String, Integer>();
-        fullbody.put("QUADS", 70);
-        fullbody.put("TRICEP", 70);
-        fullbody.put("CHEST", 70);
+        upper2.put("QUADS", 70);
+        upper2.put("TRICEP", 70);
+        upper2.put("CHEST", 70);
         HashMap<String, Integer> lower2 = new HashMap<String, Integer>();
-        fullbody.put("QUADS", 70);
-        fullbody.put("TRICEP", 70);
-        fullbody.put("CHEST", 70);
+        lower2.put("QUADS", 70);
+        lower2.put("TRICEP", 70);
+        lower2.put("CHEST", 70);
         HashMap<String, Integer> push1 = new HashMap<String, Integer>();
-        fullbody.put("QUADS", 70);
-        fullbody.put("TRICEP", 70);
-        fullbody.put("CHEST", 70);
+        push1.put("QUADS", 70);
+        push1.put("TRICEP", 70);
+        push1.put("CHEST", 70);
         HashMap<String, Integer> pull1 = new HashMap<String, Integer>();
-        fullbody.put("QUADS", 70);
-        fullbody.put("TRICEP", 70);
-        fullbody.put("CHEST", 70);
+        pull1.put("QUADS", 70);
+        pull1.put("TRICEP", 70);
+        pull1.put("CHEST", 70);
         HashMap<String, Integer> push2 = new HashMap<String, Integer>();
-        fullbody.put("QUADS", 70);
-        fullbody.put("TRICEP", 70);
-        fullbody.put("CHEST", 70);
+        push2.put("QUADS", 70);
+        push2.put("TRICEP", 70);
+        push2.put("CHEST", 70);
         HashMap<String, Integer> pull2 = new HashMap<String, Integer>();
-        fullbody.put("QUADS", 70);
-        fullbody.put("TRICEP", 70);
-        fullbody.put("CHEST", 70);
+        pull2.put("QUADS", 70);
+        pull2.put("TRICEP", 70);
+        pull2.put("CHEST", 70);
 
 
         switch (userinput.getDaysPerWeek()) {
@@ -167,7 +167,7 @@ public class ProgramService {
                     for (int i = 0; i < programSession.getExerciseList().size(); i++) {
                         if (programSession.getExerciseList().get(i).getBodypartToEffectiveness().containsKey(key)) {
                             String effectivness = programSession.getExerciseList().get(i).getBodypartToEffectiveness().get(key);
-                            if (Integer.valueOf(effectivness) >= Integer.valueOf(value)) {
+                            if (Integer.parseInt(effectivness) >= value) {
                                 filteredExercises.add(programSession.getExerciseList().get(i));
 
                             }
