@@ -2,7 +2,9 @@
   <v-app>
     <div>
       <h1>Page for the last question</h1>
-      <v-btn outlined @click="downloadPDF()">download pdf</v-btn>
+      <v-btn outlined @click="downloadPDF()">
+        download pdf
+      </v-btn>
     </div>
   </v-app>
 </template>
