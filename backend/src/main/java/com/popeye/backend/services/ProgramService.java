@@ -38,9 +38,9 @@ public class ProgramService {
             }
         } else {
             switch (userinput.getGoal()) {
-                case HYPERTROPHY -> generateTwoDayHypertrophyProgram(userinput); //TODO implement generic method
-                case STRENGTH -> generateStrengthProgram(userinput);
-                case CONDITIONING -> generateConditioningProgram(userinput);
+                case HYPERTROPHY -> { return generateTwoDayHypertrophyProgram(userinput); } //TODO implement generic method
+                case STRENGTH -> { generateStrengthProgram(userinput); } //TODO: Don't forget return
+                case CONDITIONING -> { generateConditioningProgram(userinput); } //TODO: Don't forget return
             }
         }
         return null; //TODO handle error exception in frontend
