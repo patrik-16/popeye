@@ -170,6 +170,7 @@ public class ProgramService {
             if (sessionOne.getSecondsPerSession() > TimePerDay.FORTY.getSeconds()) {
                 sessionOne.updateRestTime(60);
                 sessionOne.deleteExerciseByBodypart(Bodypart.ABS);
+                sessionOne.deleteExerciseByBodypart(Bodypart.ABS);
             }
             if (sessionTwo.getSecondsPerSession() > TimePerDay.FORTY.getSeconds()) {
                 sessionTwo.updateRestTime(60);

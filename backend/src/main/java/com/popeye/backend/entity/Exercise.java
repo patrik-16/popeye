@@ -20,7 +20,7 @@ public class Exercise {
     private Integer sets;
     private String name;
     //private List<Bodypart> bodypart; we do hashmaps now
-    private HashMap<Bodypart, Float> bodypartToEffectiveness;
+    private HashMap<String, String> bodypartToEffectiveness = new HashMap<>();
     private Experience experience;
     private Difficulty difficulty;
 
@@ -30,6 +30,7 @@ public class Exercise {
     }
 
     public int returnLengthInSeconds() {
+        //System.out.printf("%d %f %d %d", this.sets, ProgramConstants.SECONDS_PER_SET, this.sets, this.rest);
         return this.sets * ProgramConstants.SECONDS_PER_SET + this.sets * this.rest;
     }
 }
