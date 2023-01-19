@@ -21,7 +21,7 @@
         <v-col
           :key="i"
           cols="12"
-          md="4"
+          md="2"
         >
           <v-hover v-slot="{ hover }">
             <v-card
@@ -66,7 +66,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'TwoPage',
   methods: {
@@ -77,12 +76,10 @@ export default {
   data: () => ({
     icons: ['mdi-weight-lifter'],
     items: [
-      { title: '1' },
       { title: '2' },
       { title: '3' },
       { title: '4' },
-      { title: '5' },
-      { title: '6' }
+      { title: '5' }
     ],
     transparent: 'rgba(255, 255, 255, 0)'
   })
