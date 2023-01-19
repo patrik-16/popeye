@@ -5,8 +5,8 @@ import com.popeye.backend.enums.*;
 import com.popeye.backend.repos.ExerciseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+
 
 @Service
 public class ProgramService {
@@ -104,7 +104,29 @@ public class ProgramService {
      */
     private Program sessionAdaption(Userinput userinput, Program currentProgram) {
 
-        //for ProgramSession currentSession : Program<ProgramSession>
+        List<Exercise> remainingExercises;
+
+        //one ProgramSession per day
+        for (ProgramSession currentSession : currentProgram.getProgram()) {
+
+            for(int i = userinput.getPriorities().size(); i > 0; i--) {
+                Bodypart bodypart = userinput.getPriorities().get(i - 1);
+                //currentSession = currentSession.stream().
+
+            }
+            int countTimePerSession = 0;
+                for (Exercise currentExercise : currentSession.getExerciseList()) {
+                    countTimePerSession += currentExercise.returnLengthInSeconds();
+
+                    //check time:
+                    if(userinput.getTimePerDay().getSeconds() < countTimePerSession) {
+
+                    }
+
+
+                    System.out.println("Day: " + currentSession.getDay() + ": " + countTimePerSession);
+                }
+        }
 
         Program adaptedProgram = currentProgram;
 

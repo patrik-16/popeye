@@ -33,4 +33,5 @@ public class Exercise {
         //System.out.printf("%d %f %d %d", this.sets, ProgramConstants.SECONDS_PER_SET, this.sets, this.rest);
         return this.sets * ProgramConstants.SECONDS_PER_SET + this.sets * this.rest;
     }
+
 }
