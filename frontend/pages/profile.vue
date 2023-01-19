@@ -1,13 +1,10 @@
 <template>
-  <v-app>
-    <landingPage />
-  </v-app>
-
+  <h1>Profile Page</h1>
 </template>
 
 <script>
 export default {
-  name: 'Index'
+  name: 'Profile'
 }
 </script>
 
