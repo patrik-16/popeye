@@ -1,5 +1,7 @@
 package com.popeye.backend.services;
 
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
 import com.popeye.backend.entity.*;
 import com.popeye.backend.enums.*;
 import com.popeye.backend.repos.ExerciseRepository;
@@ -45,15 +47,16 @@ public class ProgramService {
      */
     private Program generateAdvancedProgram(Userinput userinput) {
 
-        HashMap<String, Integer> fullbody = new HashMap<String, Integer>();
-        fullbody.put("FRONTDELT", 100);
-        fullbody.put("CHEST", 100);
-        fullbody.put("LATS", 100);
-        fullbody.put("QUADS", 100);
-        fullbody.put("HAMS", 100);
-        fullbody.put("ABS", 100);
-        fullbody.put("CALVES", 100);
-        HashMap<String, Integer> fullbody2 = new HashMap<String, Integer>();
+        Multimap<String, Integer> fullbody1 = ArrayListMultimap.create();
+        fullbody1.put("FRONTDELT", 100);
+        fullbody1.put("CHEST", 100);
+        fullbody1.put("LATS", 100);
+        fullbody1.put("QUADS", 100);
+        fullbody1.put("HAMS", 100);
+        fullbody1.put("ABS", 100);
+        fullbody1.put("CALVES", 100);
+
+        Multimap<String, Integer> fullbody2 = ArrayListMultimap.create();
         fullbody2.put("SIDEDELT", 100);
         fullbody2.put("UPPERCHEST", 100);
         fullbody2.put("TRAPS", 100);
@@ -61,7 +64,8 @@ public class ProgramService {
         fullbody2.put("HAMS", 100);
         fullbody2.put("BICEP", 100);
         fullbody2.put("TRICEP", 100);
-        HashMap<String, Integer> upper = new HashMap<String, Integer>();
+
+        Multimap<String, Integer> upper = ArrayListMultimap.create();
         upper.put("FRONTDELT", 100);
         upper.put("REARDELT", 100);
         upper.put("UPPERCHEST", 100);
@@ -69,7 +73,8 @@ public class ProgramService {
         upper.put("TRAPS", 100);
         upper.put("BICEP", 100);
         upper.put("TRICEP", 100);
-        HashMap<String, Integer> lower = new HashMap<String, Integer>();
+
+        Multimap<String, Integer> lower = ArrayListMultimap.create();
         lower.put("QUADS", 100);
         lower.put("QUADS", 90);
         lower.put("HAMS", 100);
@@ -77,7 +82,8 @@ public class ProgramService {
         lower.put("CALVES", 100);
         lower.put("CALVES", 90);
         lower.put("ABS", 100);
-        HashMap<String, Integer> upper1 = new HashMap<String, Integer>();
+
+        Multimap<String, Integer> upper1 = ArrayListMultimap.create();
         upper1.put("SIDEDELT", 100);
         upper1.put("REARDELT", 100);
         upper1.put("UPPERCHEST", 100);
@@ -85,7 +91,8 @@ public class ProgramService {
         upper1.put("TRAPS", 90);
         upper1.put("BICEP", 100);
         upper1.put("TRICEP", 100);
-        HashMap<String, Integer> lower1 = new HashMap<String, Integer>();
+
+        Multimap<String, Integer> lower1 = ArrayListMultimap.create();
         lower1.put("QUADS", 90);
         lower1.put("QUADS", 80);
         lower1.put("HAMS", 100);
@@ -93,7 +100,8 @@ public class ProgramService {
         lower1.put("HAMS", 80);
         lower1.put("CALVES", 100);
         lower1.put("CALVES", 90);
-        HashMap<String, Integer> upper2 = new HashMap<String, Integer>();
+
+        Multimap<String, Integer> upper2 = ArrayListMultimap.create();
         upper2.put("FRONTDELT", 90);
         upper2.put("REARDELT", 90);
         upper2.put("CHEST", 90);
@@ -101,7 +109,8 @@ public class ProgramService {
         upper2.put("TRAPS", 100);
         upper2.put("BICEP", 80);
         upper2.put("TRICEP", 80);
-        HashMap<String, Integer> lower2 = new HashMap<String, Integer>();
+
+        Multimap<String, Integer> lower2 = ArrayListMultimap.create();
         lower2.put("QUADS", 100);
         lower2.put("QUADS", 90);
         lower2.put("QUADS", 80);
@@ -109,23 +118,51 @@ public class ProgramService {
         lower2.put("HAMS", 80);
         lower2.put("CALVES", 100);
         lower2.put("CALVES", 90);
-        HashMap<String, Integer> push1 = new HashMap<String, Integer>();
-        push1.put("QUADS", 70);
-        push1.put("TRICEP", 70);
-        push1.put("CHEST", 70);
-        HashMap<String, Integer> pull1 = new HashMap<String, Integer>();
-        pull1.put("QUADS", 70);
-        pull1.put("TRICEP", 70);
-        pull1.put("CHEST", 70);
-        HashMap<String, Integer> push2 = new HashMap<String, Integer>();
-        push2.put("QUADS", 70);
-        push2.put("TRICEP", 70);
-        push2.put("CHEST", 70);
-        HashMap<String, Integer> pull2 = new HashMap<String, Integer>();
-        pull2.put("QUADS", 70);
-        pull2.put("TRICEP", 70);
-        pull2.put("CHEST", 70);
 
+        Multimap<String, Integer> push1 = ArrayListMultimap.create();
+        push1.put("FRONTDELT", 100);
+        push1.put("CHEST", 100);
+        push1.put("CHEST", 90);
+        push1.put("SIDEDELT", 100);
+        push1.put("TRICEP", 100);
+        push1.put("UPPERCHEST", 100);
+        push1.put("ABS", 100);
+
+        Multimap<String, Integer> pull1 = ArrayListMultimap.create();
+        pull1.put("LATS", 100);
+        pull1.put("TRAPS", 100);
+        pull1.put("BICEP", 100);
+        pull1.put("BICEP", 90);
+        pull1.put("LATS", 90);
+        pull1.put("TRAPS", 90);
+        pull1.put("REARDELT", 90);
+
+        Multimap<String, Integer> legs = ArrayListMultimap.create();
+        legs.put("QUADS", 100);
+        legs.put("QUADS", 90);
+        legs.put("QUADS", 80);
+        legs.put("HAMS", 100);
+        legs.put("HAMS", 90);
+        legs.put("HAMS", 80);
+        legs.put("CALVES", 100);
+
+        Multimap<String, Integer> push2 = ArrayListMultimap.create();
+        push2.put("FRONTDELT", 80);
+        push2.put("CHEST", 80);
+        push2.put("SIDEDELT", 90);
+        push2.put("TRICEP", 90);
+        push2.put("UPPERCHEST", 100);
+        push2.put("UPPERCHEST", 90);
+        push2.put("ABS", 90);
+
+        Multimap<String, Integer> pull2 = ArrayListMultimap.create();
+        pull2.put("LATS", 100);
+        pull2.put("TRAPS", 100);
+        pull2.put("BICEP", 90);
+        pull2.put("BICEP", 80);
+        pull2.put("LATS", 80);
+        pull2.put("TRAPS", 80);
+        pull2.put("REARDELT", 90);
 
         switch (userinput.getDaysPerWeek()) {
             case 1 -> {
@@ -135,7 +172,7 @@ public class ProgramService {
                 ProgramSession sessionOne = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.HARD, userinput.getGoal()), 1);
                 ProgramSession sessionTwo = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.MEDIUM, userinput.getGoal()), 2);
 
-                ProgramSession filteredSessionOne = sessionAdaptation(userinput, sessionOne, fullbody);
+                ProgramSession filteredSessionOne = sessionAdaptation(userinput, sessionOne, fullbody1);
                 ProgramSession filteredSessionTwo = sessionAdaptation(userinput, sessionTwo, fullbody2);
                 Program program = new Program(List.of(filteredSessionOne, filteredSessionTwo));
 
@@ -148,7 +185,7 @@ public class ProgramService {
 
                 ProgramSession filteredSessionOne = sessionAdaptation(userinput, sessionOne, upper);
                 ProgramSession filteredSessionTwo = sessionAdaptation(userinput, sessionTwo, lower);
-                ProgramSession filteredSessionThree = sessionAdaptation(userinput, sessionThree, fullbody);
+                ProgramSession filteredSessionThree = sessionAdaptation(userinput, sessionThree, fullbody1);
                 Program program =  new Program(List.of(filteredSessionOne, filteredSessionTwo, filteredSessionThree));
 
                 return programAdaptation(userinput, program);
@@ -169,14 +206,14 @@ public class ProgramService {
             }
             case 5 -> {
                 ProgramSession sessionOne = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.HARD, userinput.getGoal()), 1);
-                ProgramSession sessionTwo = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.MEDIUM, userinput.getGoal()), 2);
+                ProgramSession sessionTwo = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.HARD, userinput.getGoal()), 2);
                 ProgramSession sessionThree = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.HARD, userinput.getGoal()), 3);
-                ProgramSession sessionFour = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.MEDIUM, userinput.getGoal()), 4);
-                ProgramSession sessionFive = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.HARD, userinput.getGoal()), 5);
+                ProgramSession sessionFour = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.EASY, userinput.getGoal()), 4);
+                ProgramSession sessionFive = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.EASY, userinput.getGoal()), 5);
 
                 ProgramSession filteredSessionOne = sessionAdaptation(userinput, sessionOne, push1);
-                ProgramSession filteredSessionTwo = sessionAdaptation(userinput, sessionTwo, push2);
-                ProgramSession filteredSessionThree = sessionAdaptation(userinput, sessionThree, push1);
+                ProgramSession filteredSessionTwo = sessionAdaptation(userinput, sessionTwo, pull1);
+                ProgramSession filteredSessionThree = sessionAdaptation(userinput, sessionThree, legs);
                 ProgramSession filteredSessionFour = sessionAdaptation(userinput, sessionFour, push2);
                 ProgramSession filteredSessionFive = sessionAdaptation(userinput, sessionFive, pull2);
 
@@ -188,7 +225,7 @@ public class ProgramService {
         return null; //TODO handle error exception in frontend
     }
 
-    private ProgramSession sessionAdaptation(Userinput userinput, ProgramSession programSession, HashMap<String, Integer> filteringMap) {
+    private ProgramSession sessionAdaptation(Userinput userinput, ProgramSession programSession, Multimap<String, Integer> filteringMap) {
 
         List<Exercise> filteredExercises = new ArrayList<>();
 
@@ -198,7 +235,7 @@ public class ProgramService {
                     for (int i = 0; i < programSession.getExerciseList().size(); i++) {
                         if (programSession.getExerciseList().get(i).getBodypartToEffectiveness().containsKey(key)) {
                             String effectiveness = programSession.getExerciseList().get(i).getBodypartToEffectiveness().get(key);
-                            if (Integer.valueOf(effectiveness) >= value) {
+                            if (Integer.valueOf(effectiveness).equals(value)) {
                                 filteredExercises.add(programSession.getExerciseList().get(i));
                             }
                         }
