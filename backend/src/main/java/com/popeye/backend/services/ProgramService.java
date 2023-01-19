@@ -36,22 +36,23 @@ public class ProgramService {
                 case 5:
                     return generateFiveDayBeginnerProgram(userinput);
             }
-        } else {
-            switch (userinput.getGoal()) {
+        } else if (userinput.getGoal().equals(Goal.HYPERTROPHY)) {
+            return generateTwoDayHypertrophyProgram(userinput);
+
+            /*switch (userinput.getGoal()) {
                 case HYPERTROPHY -> { return generateTwoDayHypertrophyProgram(userinput); } //TODO implement generic method
                 case STRENGTH -> { generateStrengthProgram(userinput); } //TODO: Don't forget return
                 case CONDITIONING -> { generateConditioningProgram(userinput); } //TODO: Don't forget return
-            }
+            }*/
         }
         return null; //TODO handle error exception in frontend
     }
 
-    private Program generateTwoDayHypertrophyProgram(Userinput userinput) {
+    private Program generateTwoDayHypertrophyProgram(Userinput userinput) { //TODO generate two different fullbody days
         ProgramSession sessionOne = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.HARD, Goal.HYPERTROPHY), 1);
         ProgramSession sessionTwo = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.HARD, Goal.HYPERTROPHY), 2);
 
         return new Program(List.of(sessionOne, sessionTwo));
-
     }
 
     private void generateStrengthProgram(Userinput userinput) {
@@ -109,6 +110,7 @@ public class ProgramService {
         if (userinput.getTimePerDay() == TimePerDay.FORTY) {
             if (sessionOne.getSecondsPerSession() > TimePerDay.FORTY.getSeconds()) {
                 sessionOne.updateRestTime(60);
+                sessionOne.deleteExerciseByBodypart(Bodypart.ABS);
                 sessionOne.deleteExerciseByBodypart(Bodypart.ABS);
             }
             if (sessionTwo.getSecondsPerSession() > TimePerDay.FORTY.getSeconds()) {

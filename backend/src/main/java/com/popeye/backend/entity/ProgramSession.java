@@ -50,18 +50,18 @@ public class ProgramSession {
     public void updateSetNumberByDifficultyAndBodypart(Difficulty difficulty, Bodypart bodypart, int newSetNumber) {
         for (int i = 0; i < this.exerciseList.size(); i++) {
             if (this.exerciseList.get(i).getDifficulty() == difficulty) {
-                //if (this.exerciseList.get(i).getBodypart().contains(bodypart)) {
-                //    this.exerciseList.get(i).setSets(newSetNumber);
-                //}
+                if (this.exerciseList.get(i).getBodypartToEffectiveness().containsKey(bodypart.toString())) {
+                    this.exerciseList.get(i).setSets(newSetNumber);
+                }
             }
         }
     }
 
     public void deleteExerciseByBodypart(Bodypart bodypart) {
         for (int i = 0; i < this.exerciseList.size(); i++) {
-            //if (this.exerciseList.get(i).getBodypart().contains(bodypart)) {
-            //    this.exerciseList.removeIf(exercise -> exercise.getBodypart().contains(bodypart));
-            //}
+            if (this.exerciseList.get(i).getBodypartToEffectiveness().containsKey(bodypart.toString())) {
+                this.exerciseList.removeIf(exercise -> exercise.getBodypartToEffectiveness().containsKey(bodypart.toString()));
+            }
         }
     }
 }

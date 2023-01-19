@@ -72,10 +72,10 @@ public class ProgramRestController {
     @PostMapping("/test")
     public Exercise testEx() {
         Exercise m = new Exercise();
-        HashMap<Bodypart, Float> s = new HashMap<>();
-        s.put(Bodypart.LEGS, 0.8f);
-        s.put(Bodypart.LATS, 0.6f);
-        s.put(Bodypart.CHEST, 0.5f);
+        HashMap<String, String> s = new HashMap<>();
+        s.put("LEGS", "8");
+        s.put("LATS", "6");
+        s.put("CHEST", "0.5");
         m.setBodypartToEffectiveness(s);
         return m;
     }
