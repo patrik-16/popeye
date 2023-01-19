@@ -37,22 +37,82 @@ public class ProgramService {
                     return generateFiveDayBeginnerProgram(userinput);
             }
         } else {
-            switch (userinput.getGoal()) {
-                case HYPERTROPHY -> { return generateTwoDayHypertrophyProgram(userinput); } //TODO implement generic method
-                case STRENGTH -> { generateStrengthProgram(userinput); } //TODO: Don't forget return
-                case CONDITIONING -> { generateConditioningProgram(userinput); } //TODO: Don't forget return
+            return generateAdvancedProgram(userinput);
+        }
+        return null; //TODO handle error exception in frontend
+    }
+
+
+    /***
+     * Function that generates Sessions regarding daysPerWeek
+     * @param userinput
+     * @return a program that is designed concerning Goal, Priorities, daysPerWeek and timePerDay
+     */
+    private Program generateAdvancedProgram(Userinput userinput) {
+
+        switch (userinput.getDaysPerWeek()) {
+            case 1 -> {
+                return null; //TODO handle error exception in frontend
+            }
+            case 2 -> {
+                ProgramSession sessionOne = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.HARD, userinput.getGoal()), 1);
+                ProgramSession sessionTwo = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.MEDIUM, userinput.getGoal()), 2);
+
+                Program program = new Program(List.of(sessionOne, sessionTwo));
+
+                return sessionAdaption(userinput, program);
+            }
+            case 3 -> {
+                ProgramSession sessionOne = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.HARD, userinput.getGoal()), 1);
+                ProgramSession sessionTwo = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.MEDIUM, userinput.getGoal()), 2);
+                ProgramSession sessionThree = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.HARD, userinput.getGoal()), 3);
+
+                Program program =  new Program(List.of(sessionOne, sessionTwo, sessionThree));
+
+                return sessionAdaption(userinput, program);
+            }
+            case 4 -> {
+                ProgramSession sessionOne = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.HARD, userinput.getGoal()), 1);
+                ProgramSession sessionTwo = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.MEDIUM, userinput.getGoal()), 2);
+                ProgramSession sessionThree = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.HARD, userinput.getGoal()), 3);
+                ProgramSession sessionFour = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.MEDIUM, userinput.getGoal()), 4);
+
+                Program program = new Program(List.of(sessionOne, sessionTwo, sessionThree, sessionFour));
+                return sessionAdaption(userinput, program);
+            }
+            case 5 -> {
+                ProgramSession sessionOne = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.HARD, userinput.getGoal()), 1);
+                ProgramSession sessionTwo = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.MEDIUM, userinput.getGoal()), 2);
+                ProgramSession sessionThree = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.HARD, userinput.getGoal()), 3);
+                ProgramSession sessionFour = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.MEDIUM, userinput.getGoal()), 4);
+                ProgramSession sessionFive = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.HARD, userinput.getGoal()), 5);
+
+                Program program = new Program(List.of(sessionOne, sessionTwo, sessionThree, sessionFour, sessionFive));
+
+                return sessionAdaption(userinput, program);
             }
         }
         return null; //TODO handle error exception in frontend
     }
 
-    private Program generateTwoDayHypertrophyProgram(Userinput userinput) {
-        ProgramSession sessionOne = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.HARD, Goal.HYPERTROPHY), 1);
-        ProgramSession sessionTwo = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.HARD, Goal.HYPERTROPHY), 2);
+    /***
+     * This function does the actual fitting of one programSession -> adaptes time and rest ?? or reduces the amount
+     * of Exercises ??? how can we implement this -> intensiveness and extra Gewichtung
+     * @param userinput
+     * @param currentProgram
+     * @return the adapted Program
+     */
+    private Program sessionAdaption(Userinput userinput, Program currentProgram) {
 
-        return new Program(List.of(sessionOne, sessionTwo));
+        //for ProgramSession currentSession : Program<ProgramSession>
+
+        Program adaptedProgram = currentProgram;
+
+        return adaptedProgram;
 
     }
+
+
 
     private void generateStrengthProgram(Userinput userinput) {
     }
