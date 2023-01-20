@@ -165,7 +165,6 @@ public class ProgramService {
         fullbodyStrength2.put("UPPERCHEST", 100);
         fullbodyStrength2.put("TRAPS", 90);
         fullbodyStrength2.put("TRICEP", 90);
-
         Multimap<String, Integer> fullbodyStrength3 = ArrayListMultimap.create();
         fullbodyStrength3.put("QUADS", 100);
         fullbodyStrength3.put("CHEST", 100);
@@ -193,6 +192,114 @@ public class ProgramService {
         strengthLower2.put("HAMS", 100);
         strengthLower2.put("HAMS", 90);
 
+        Multimap<String, Integer> conditioningFullbody1 = ArrayListMultimap.create();
+        conditioningFullbody1.put("FRONTDELT", 90);
+        conditioningFullbody1.put("CHEST", 90);
+        conditioningFullbody1.put("LATS", 90);
+        conditioningFullbody1.put("QUADS", 90);
+        conditioningFullbody1.put("HAMS", 90);
+        conditioningFullbody1.put("ABS", 90);
+        conditioningFullbody1.put("CALVES", 90);
+        Multimap<String, Integer> conditioningFullbody2 = ArrayListMultimap.create();
+        conditioningFullbody2.put("SIDEDELT", 90);
+        conditioningFullbody2.put("UPPERCHEST", 90);
+        conditioningFullbody2.put("TRAPS", 90);
+        conditioningFullbody2.put("QUADS", 90);
+        conditioningFullbody2.put("HAMS", 90);
+        conditioningFullbody2.put("BICEP", 90);
+        conditioningFullbody2.put("TRICEP", 90);
+
+        Multimap<String, Integer> conditioningUpper = ArrayListMultimap.create();
+        conditioningUpper.put("FRONTDELT", 90);
+        conditioningUpper.put("REARDELT", 100);
+        conditioningUpper.put("UPPERCHEST", 90);
+        conditioningUpper.put("LATS", 90);
+        conditioningUpper.put("TRAPS", 90);
+        conditioningUpper.put("BICEP", 90);
+        conditioningUpper.put("TRICEP", 90);
+        Multimap<String, Integer> conditioningLower = ArrayListMultimap.create();
+        conditioningLower.put("QUADS", 90);
+        conditioningLower.put("QUADS", 80);
+        conditioningLower.put("HAMS", 90);
+        conditioningLower.put("HAMS", 80);
+        conditioningLower.put("CALVES", 100);
+        conditioningLower.put("CALVES", 90);
+        conditioningLower.put("ABS", 100);
+
+        Multimap<String, Integer> conditioningUpper1 = ArrayListMultimap.create();
+        conditioningUpper1.put("SIDEDELT", 90);
+        conditioningUpper1.put("REARDELT", 100);
+        conditioningUpper1.put("UPPERCHEST", 90);
+        conditioningUpper1.put("LATS", 90);
+        conditioningUpper1.put("TRAPS", 90);
+        conditioningUpper1.put("BICEP", 90);
+        conditioningUpper1.put("TRICEP", 90);
+        Multimap<String, Integer> conditioningLower1 = ArrayListMultimap.create();
+        conditioningLower1.put("QUADS", 90);
+        conditioningLower1.put("QUADS", 80);
+        conditioningLower1.put("HAMS", 90);
+        conditioningLower1.put("HAMS", 80);
+        conditioningLower1.put("CALVES", 100);
+        conditioningLower1.put("CALVES", 90);
+        conditioningLower1.put("ABS", 90);
+        Multimap<String, Integer> conditioningUpper2 = ArrayListMultimap.create();
+        conditioningUpper2.put("FRONTDELT", 80);
+        conditioningUpper2.put("REARDELT", 90);
+        conditioningUpper2.put("CHEST", 90);
+        conditioningUpper2.put("LATS", 80);
+        conditioningUpper2.put("TRAPS", 80);
+        conditioningUpper2.put("BICEP", 80);
+        conditioningUpper2.put("TRICEP", 80);
+        Multimap<String, Integer> conditioningLower2 = ArrayListMultimap.create();
+        conditioningLower2.put("QUADS", 90);
+        conditioningLower2.put("QUADS", 80);;
+        conditioningLower2.put("HAMS", 90);
+        conditioningLower2.put("HAMS", 80);
+        conditioningLower2.put("CALVES", 100);
+        conditioningLower2.put("CALVES", 90);
+        conditioningLower2.put("ABS", 90);
+
+        Multimap<String, Integer> conditioningPush1 = ArrayListMultimap.create();
+        conditioningPush1.put("FRONTDELT", 90);
+        conditioningPush1.put("CHEST", 90);
+        conditioningPush1.put("CHEST", 80);
+        conditioningPush1.put("SIDEDELT", 100);
+        conditioningPush1.put("TRICEP", 90);
+        conditioningPush1.put("UPPERCHEST", 90);
+        conditioningPush1.put("ABS", 90);
+        Multimap<String, Integer> conditioningPull1 = ArrayListMultimap.create();
+        conditioningPull1.put("LATS", 90);
+        conditioningPull1.put("TRAPS", 90);
+        conditioningPull1.put("BICEP", 90);
+        conditioningPull1.put("BICEP", 80);
+        conditioningPull1.put("LATS", 80);
+        conditioningPull1.put("TRAPS", 80);
+        conditioningPull1.put("REARDELT", 90);
+        Multimap<String, Integer> conditioningLegs = ArrayListMultimap.create();
+        conditioningLegs.put("QUADS", 90);
+        conditioningLegs.put("QUADS", 80);
+        conditioningLegs.put("HAMS", 90);
+        conditioningLegs.put("HAMS", 80);
+        conditioningLegs.put("CALVES", 100);
+        conditioningLegs.put("CALVES", 90);
+        conditioningLegs.put("ABS", 100);
+        Multimap<String, Integer> conditioningPush2 = ArrayListMultimap.create();
+        conditioningPush2.put("FRONTDELT", 80);
+        conditioningPush2.put("CHEST", 80);
+        conditioningPush2.put("SIDEDELT", 90);
+        conditioningPush2.put("TRICEP", 80);
+        conditioningPush2.put("UPPERCHEST", 100);
+        conditioningPush2.put("UPPERCHEST", 90);
+        conditioningPush2.put("ABS", 90);
+        Multimap<String, Integer> conditioningPull2 = ArrayListMultimap.create();
+        conditioningPull2.put("LATS", 90);
+        conditioningPull2.put("TRAPS", 90);
+        conditioningPull2.put("BICEP", 90);
+        conditioningPull2.put("BICEP", 80);
+        conditioningPull2.put("LATS", 80);
+        conditioningPull2.put("TRAPS", 80);
+        conditioningPull2.put("REARDELT", 90);
+
         switch (userinput.getDaysPerWeek()) {
             case 1 -> {
                 return null; //TODO handle error exception in frontend
@@ -205,6 +312,10 @@ public class ProgramService {
                     return new Program(List.of(sessionOne.sessionAdaptation(userinput, fullbodyStrength1), sessionTwo.sessionAdaptation(userinput, fullbodyStrength2)));
                 }
 
+                if (userinput.getGoal().equals(Goal.CONDITIONING)) {
+                    return new Program(List.of(sessionOne.sessionAdaptation(userinput, conditioningFullbody1), sessionTwo.sessionAdaptation(userinput, conditioningFullbody2)));
+                }
+
                 return new Program(List.of(sessionOne.sessionAdaptation(userinput, fullbody1), sessionTwo.sessionAdaptation(userinput, fullbody2)));
             }
             case 3 -> {
@@ -214,6 +325,10 @@ public class ProgramService {
 
                 if (userinput.getGoal().equals(Goal.STRENGTH)) {
                     return new Program(List.of(sessionOne.sessionAdaptation(userinput, fullbodyStrength1), sessionTwo.sessionAdaptation(userinput, fullbodyStrength2), sessionThree.sessionAdaptation(userinput, fullbodyStrength3)));
+                }
+
+                if (userinput.getGoal().equals(Goal.CONDITIONING)) {
+                    return new Program(List.of(sessionOne.sessionAdaptation(userinput, conditioningUpper), sessionTwo.sessionAdaptation(userinput, conditioningLower), sessionThree.sessionAdaptation(userinput, conditioningFullbody1)));
                 }
 
                 return new Program(List.of(sessionOne.sessionAdaptation(userinput, upper), sessionTwo.sessionAdaptation(userinput, lower), sessionThree.sessionAdaptation(userinput, fullbody1)));
@@ -228,6 +343,12 @@ public class ProgramService {
                     return new Program(List.of(sessionOne.sessionAdaptation(userinput, strengthUpper1), sessionTwo.sessionAdaptation(userinput, strengthLower1), sessionThree.sessionAdaptation(userinput, strengthUpper2),
                             sessionFour.sessionAdaptation(userinput, strengthLower2)));
                 }
+
+                if (userinput.getGoal().equals(Goal.CONDITIONING)) {
+                    return new Program(List.of(sessionOne.sessionAdaptation(userinput, conditioningUpper1), sessionTwo.sessionAdaptation(userinput, conditioningLower1), sessionThree.sessionAdaptation(userinput, conditioningUpper2),
+                            sessionFour.sessionAdaptation(userinput, conditioningLower2)));
+                }
+
                 return new Program(List.of(sessionOne.sessionAdaptation(userinput, upper1), sessionTwo.sessionAdaptation(userinput, lower1), sessionThree.sessionAdaptation(userinput, upper2),
                         sessionFour.sessionAdaptation(userinput, lower2)));
             }
@@ -241,6 +362,11 @@ public class ProgramService {
                 if (userinput.getGoal().equals(Goal.STRENGTH)) {
                     return new Program(List.of(sessionOne.sessionAdaptation(userinput, fullbodyStrength1), sessionTwo.sessionAdaptation(userinput, fullbodyStrength2), sessionThree.sessionAdaptation(userinput, fullbodyStrength3),
                             sessionFour.sessionAdaptation(userinput, strengthUpper2), sessionFive.sessionAdaptation(userinput, strengthLower2)));
+                }
+
+                if (userinput.getGoal().equals(Goal.CONDITIONING)) {
+                    return new Program(List.of(sessionOne.sessionAdaptation(userinput, conditioningPush1), sessionTwo.sessionAdaptation(userinput, conditioningPull1), sessionThree.sessionAdaptation(userinput, conditioningLegs),
+                            sessionFour.sessionAdaptation(userinput, conditioningPush2), sessionFive.sessionAdaptation(userinput, conditioningPull2)));
                 }
 
                 return new Program(List.of(sessionOne.sessionAdaptation(userinput, push1), sessionTwo.sessionAdaptation(userinput, pull1), sessionThree.sessionAdaptation(userinput, legs),
