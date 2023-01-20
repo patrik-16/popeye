@@ -33,6 +33,7 @@
               <v-card-title class="text-h4 white--text">
                 <v-row
                   class="fill-height flex-column"
+                  v-model="daysPerWeek"
                   justify="space-between"
                 >
                   <p class="mt-10 subheading">
@@ -51,7 +52,7 @@
                         :class="{ 'show-btns': hover }"
                         :color="transparent"
                       >
-                        {{ icon }}
+                        {{ item.icon }}
                       </v-icon>
                     </v-btn>
                   </div>
@@ -61,6 +62,15 @@
           </v-hover>
         </v-col>
       </template>
+    </v-row>
+    <v-row
+      class="fill-height"
+      align="center"
+      justify="center"
+    >
+      <div>
+        <br>
+      </div>
     </v-row>
   </v-container>
 </template>
@@ -74,6 +84,7 @@ export default {
     }
   },
   data: () => ({
+    daysPerWeek: 'x',
     icons: ['mdi-weight-lifter'],
     items: [
       { title: '2' },

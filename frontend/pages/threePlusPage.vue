@@ -119,9 +119,6 @@ export default {
 </script>
 
 <style scoped>
-.nope {
-  background: url("static/gymBackgroundLight.jpg") fixed no-repeat;
-}
 
 .v-card {
   transition: opacity .4s ease-in-out;

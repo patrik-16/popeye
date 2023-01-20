@@ -77,6 +77,9 @@
             @click="goTo">
             Get your program now!
           </v-card-title>
+          <v-card-subtitle>
+            You have chosen {{ daysPerWeek }} days
+          </v-card-subtitle>
         </v-card>
       </v-hover>
     </v-row>
@@ -84,6 +87,7 @@
 </template>
 
 <script>
+import fourPage from '@/pages/fourPage'
 
 export default {
   name: 'TwoPage',
@@ -93,6 +97,7 @@ export default {
     }
   },
   data: () => ({
+    daysPerWeek: fourPage.data().daysPerWeek,
     icons: ['mdi-weight-lifter'],
     items: [
       { title: '40 min' },
