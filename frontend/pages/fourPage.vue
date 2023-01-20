@@ -21,7 +21,7 @@
         <v-col
           :key="i"
           cols="12"
-          md="4"
+          md="2"
         >
           <v-hover v-slot="{ hover }">
             <v-card
@@ -33,6 +33,7 @@
               <v-card-title class="text-h4 white--text">
                 <v-row
                   class="fill-height flex-column"
+                  v-model="daysPerWeek"
                   justify="space-between"
                 >
                   <p class="mt-10 subheading">
@@ -51,7 +52,7 @@
                         :class="{ 'show-btns': hover }"
                         :color="transparent"
                       >
-                        {{ icon }}
+                        {{ item.icon }}
                       </v-icon>
                     </v-btn>
                   </div>
@@ -62,11 +63,19 @@
         </v-col>
       </template>
     </v-row>
+    <v-row
+      class="fill-height"
+      align="center"
+      justify="center"
+    >
+      <div>
+        <br>
+      </div>
+    </v-row>
   </v-container>
 </template>
 
 <script>
-
 export default {
   name: 'TwoPage',
   methods: {
@@ -75,14 +84,13 @@ export default {
     }
   },
   data: () => ({
+    daysPerWeek: 'x',
     icons: ['mdi-weight-lifter'],
     items: [
-      { title: '1' },
       { title: '2' },
       { title: '3' },
       { title: '4' },
-      { title: '5' },
-      { title: '6' }
+      { title: '5' }
     ],
     transparent: 'rgba(255, 255, 255, 0)'
   })

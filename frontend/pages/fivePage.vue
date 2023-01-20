@@ -19,13 +19,12 @@
         <v-col
           :key="i"
           cols="12"
-          md="4"
+          md="2"
         >
           <v-hover v-slot="{ hover }">
             <v-card
               :elevation="hover ? 12 : 2"
               :class="{ 'on-hover': hover }"
-              @click="goTo"
               color="grey"
             >
               <v-card-title class="text-h4 white--text">
@@ -60,10 +59,35 @@
         </v-col>
       </template>
     </v-row>
+    <v-row>
+      <div> <br> </div>
+    </v-row>
+    <v-row
+      class="fill-height mt-10"
+      align="center"
+      justify="center"
+    >
+      <v-hover>
+        <v-card
+          :elevation="hover ? 12 : 4"
+          :class="{ 'on-hover': hover }"
+          color="outlined"
+          >
+          <v-card-title
+            @click="goTo">
+            Get your program now!
+          </v-card-title>
+          <v-card-subtitle>
+            You have chosen {{ daysPerWeek }} days
+          </v-card-subtitle>
+        </v-card>
+      </v-hover>
+    </v-row>
   </v-container>
 </template>
 
 <script>
+import fourPage from '@/pages/fourPage'
 
 export default {
   name: 'TwoPage',
@@ -73,12 +97,13 @@ export default {
     }
   },
   data: () => ({
+    daysPerWeek: fourPage.data().daysPerWeek,
     icons: ['mdi-weight-lifter'],
     items: [
       { title: '40 min' },
       { title: '60 min' },
       { title: '1h 20 min' },
-      { title: 'it doesn\'t matter' }
+      { title: 'no matter' }
     ],
     transparent: 'rgba(255, 255, 255, 0)'
   })

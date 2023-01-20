@@ -1,43 +1,43 @@
 <template>
   <v-container class="pa-4 text-center">
-    <v-card>
-      <v-form
-        v-model="valid"
-        class="form"
-        form="required"
-      >
-        <v-app-bar-title
-          class="title"
-        >
-          <h2>What's your age?</h2>
-        </v-app-bar-title>
+    <v-row>
+      <v-card-text>
+        <h2>What's your age?</h2>
+
         <v-card
           elevation="2"
         >
-          <div>
-            <v-text-field
-              class="pa-4 mt-10 text-center"
-              v-model="age"
-              label="Type in your age"
-              solo
-              dense
-            >
-              {{ age }}
-            </v-text-field>
-          </div>
-          <div class="align-self-center mt-3">
-            <v-btn
-              v-show="ageValidation"
-              class="btn"
-              @click="toTwoPage"
-            >
-              Next
-            </v-btn>
-          </div>
-
+          <form
+            class="form"
+            @submit.prevent="checkAge"
+          >
+            <div>
+              <v-text-field
+                v-model="age"
+                class="pa-4 mt-10 text-center"
+                :rules="rules"
+                hide-details="auto"
+                label="Type in your age"
+                solo
+                dense
+              >
+                {{ age }}
+              </v-text-field>
+            </div>
+            <div class="align-self-center mt-3">
+              <v-btn
+                type="submit"
+                :disabled="false"
+                class="btn btn-info"
+                @click="toTwoPage"
+              >
+                Next
+              </v-btn>
+            </div>
+          </form>
         </v-card>
-      </v-form>
-    </v-card>
+      </v-card-text>
+    </v-row>
   </v-container>
 </template>
 
@@ -45,13 +45,15 @@
 export default {
   name: 'OnePage',
   data: () => ({
+    rules: [
+      value => (value <= 50 && value >= 18) || 'You must be between 18 and 50 years old!'
+    ],
     valid: false,
-    age: '',
-    ageValidation: true
+    age: ''
   }),
   methods: {
     checkAge () {
-      this.ageValidation = this.age >= 18 && this.age <= 50
+      this.age = this.age >= 18 && this.age <= 50
     },
     toTwoPage () {
       this.$router.push('/twoPage')
@@ -64,6 +66,7 @@ export default {
 <style scoped>
 .form {
 }
+
 .btn {
   margin-bottom: 5%;
 }
