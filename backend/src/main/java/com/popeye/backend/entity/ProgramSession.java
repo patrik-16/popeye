@@ -94,6 +94,19 @@ public class ProgramSession {
         this.exerciseList.removeAll(exerciseList);
         this.exerciseList = filteredList;
 
+        //modify reps and sets
+        if (userinput.getGoal().equals(Goal.STRENGTH)) {
+            for(Exercise e : exerciseList) {
+                switch (e.getDifficulty()) {
+                    case EASY -> {modifyRepsSets(e, 3, 8);}
+                    case MEDIUM -> {modifyRepsSets(e, 4, 6);}
+                    case HARD -> {modifyRepsSets(e, 6, 4);}
+                }
+            }
+        }
+        //elseif (userinput.getGoal().equals(Goal.STRENGTH)) {
+
+
         this.timeAdaptation(userinput);
 
         //TODO: delete this printing thing - just for me to check if its working
@@ -129,6 +142,11 @@ public class ProgramSession {
             secondsExercises += SECONDS_PER_SET * e.getSets();
         }
         // e.g. 6 exercises: 5 rests
-        return ((timePerDay.getSeconds() - secondsExercises) / this.exerciseList.size() - 1) / 3;
+        return ((timePerDay.getSeconds() - secondsExercises) / this.exerciseList.size()) / 3;
+    }
+
+    private void modifyRepsSets(Exercise currentExercise, int sets, int reps) {
+        currentExercise.setSets(sets);
+        currentExercise.setReps(reps);
     }
 }
