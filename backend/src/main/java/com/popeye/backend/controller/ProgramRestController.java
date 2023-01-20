@@ -3,7 +3,6 @@ package com.popeye.backend.controller;
 import com.popeye.backend.entity.Exercise;
 import com.popeye.backend.entity.Program;
 import com.popeye.backend.entity.Userinput;
-import com.popeye.backend.enums.Bodypart;
 import com.popeye.backend.repos.FirebaseRepository;
 import com.popeye.backend.services.ProgramService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,16 +57,11 @@ public class ProgramRestController {
     }
 
     @CrossOrigin
-    @PostMapping("/beginnerprogram")
-    public Program getBeginnerProgram(@RequestBody Userinput userinput) {
+    @PostMapping("/generateprogram")
+    public Program getProgram(@RequestBody Userinput userinput) {
         return programService.createProgram(userinput);
     }
 
-    @CrossOrigin
-    @PostMapping("/advancedprogram")
-    public Program getAdvancedProgram(@RequestBody Userinput userinput) {
-        return programService.createProgram(userinput);
-    }
 
     @PostMapping("/test")
     public Exercise testEx() {
