@@ -62,7 +62,11 @@
 
 export default {
   name: 'LandingPage',
-
+  data () {
+    return {
+      dialog: ''
+    }
+  },
   methods: {
     /**
      * Uses VueRouter to send the user to the termsAndConditions.vue
