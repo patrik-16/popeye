@@ -95,7 +95,7 @@ public class ProgramSession {
         this.exerciseList.removeAll(exerciseList);
         this.exerciseList = filteredList;
 
-        handlePriority(allExercises, userinput.getPriorities());
+        handlePriority(allExercises, userinput.getPriorities(), userinput.getGoal());
         int setsForTimeAdaption = 0;
         if(userinput.getGoal().equals(Goal.HYPERTROPHY)) {
             setsForTimeAdaption = 3;
@@ -139,8 +139,6 @@ public class ProgramSession {
         }
 
         this.timeAdaptation(userinput, setsForTimeAdaption);
-
-        //TODO: if rest time < 60 : delete one exercise, calc rest time again and check rest again
 
         //TODO: delete this printing thing - just for me to check if its working
         /*for (Exercise currentExercise : this.exerciseList) {
@@ -186,18 +184,39 @@ public class ProgramSession {
         currentExercise.setIntensiveness(intensiveness);
     }
 
-    private void handlePriority(List<Exercise> allExercises, List<Bodypart> priorities) {
+    private void handlePriority(List<Exercise> allExercises, List<Bodypart> priorities, Goal goal) {
+        List<Exercise> prioExerciseList = new ArrayList<>();
 
         //if priority exist put exercise on first position and look for one other priority exercise and put it on the second position; afterwards delete last element of exercise
         //if priority doesn't exist: look for two exercises with this priority and add them on first and second position - delete the last 2 exercises
+        //if goal is Strength one prio exercise is required - else 2 exercises with prio are required
+        int countPrioExercises = 0;
         for(Bodypart priority : priorities) {
             Boolean bodypartExists = false;
             for(Exercise e: this.exerciseList) {
                 if(e.getBodypartToEffectiveness().containsKey(priority)) {
-                    //move exercise to first position
-                    bodypartExists = true;
+                    if(!exerciseExistsInSession(e)) {
+                        prioExerciseList.add(e);
+                    } else {
+                        bodypartExists = true;
+                    }
                 }
             }
+            if (bodypartExists) {
+                //check if another exercise with this prio exists
+                //for()
+            }
         }
+    }
+
+    private Boolean exerciseExistsInSession(Exercise exercise) {
+
+        for(Exercise e : this.exerciseList) {
+            if(e.equals(exercise)){
+                return true;
+            }
+        }
+        //exercise not found
+        return false;
     }
 }
