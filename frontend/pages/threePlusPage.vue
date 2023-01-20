@@ -1,5 +1,5 @@
 <template>
-  <v-app class="app" >
+  <v-app class="app">
     <v-container class="pa-4 text-center">
       <v-row>
         <v-card-text
@@ -28,7 +28,7 @@
               <v-card
                 :elevation="hover ? 12 : 2"
                 :class="{ 'on-hover': hover }"
-                @click="goTo"
+                @click="collectVariable(item.title)"
               >
                 <v-img
                   :src="item.img"
@@ -42,15 +42,6 @@
                       <p class="mt-10 subheading">
                         {{ item.title }}
                       </p>
-
-                      <div>
-                        <p class="ma-0 text-body-1 font-weight-bold">
-                          {{ item.text }}
-                        </p>
-                        <p class="text-caption font-weight-bold">
-                          {{ item.subtext }}
-                        </p>
-                      </div>
 
                       <div class="align-self-center">
                         <v-btn
@@ -76,6 +67,13 @@
           </v-col>
         </template>
       </v-row>
+      <v-row>
+        <v-card class="anzeige">
+          <v-card-title>
+            You have chosen {{ variables.varOne }}
+          </v-card-title>
+        </v-card>
+      </v-row>
     </v-container>
   </v-app>
 </template>
@@ -87,10 +85,19 @@ export default {
   methods: {
     goTo () {
       this.$router.push('/fourPage')
+    },
+    collectVariable (title) {
+      this.variables.varOne = title
     }
   },
   data: () => ({
     icons: ['mdi-weight-lifter'],
+    variables: [
+      {
+        varOne: '',
+        varTwo: ''
+      }
+    ],
     items: [
       {
         title: 'Legs',
@@ -130,6 +137,10 @@ export default {
 
 .show-btns {
   color: rgba(255, 255, 255, 1) !important;
+}
+
+.anzeige {
+  margin: 50px;
 }
 
 .title {
