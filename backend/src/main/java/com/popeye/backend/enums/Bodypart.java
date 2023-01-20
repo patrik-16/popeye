@@ -19,4 +19,9 @@ public enum Bodypart {
     DELTS,
     LEGS,
     BACK;
+
+    Bodypart() {
+
+    }
+
 }
