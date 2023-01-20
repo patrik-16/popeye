@@ -41,7 +41,7 @@ public class ProgramService {
 
 
     /***
-     * Function that generates Sessions regarding daysPerWeek
+     * Function that generates Sessions regarding daysPerWeek and fullbody, lower, upper...
      * @param: userinput
      * @return a program that is designed concerning Goal, Priorities, daysPerWeek and timePerDay
      */
@@ -172,23 +172,14 @@ public class ProgramService {
                 ProgramSession sessionOne = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.HARD, userinput.getGoal()), 1);
                 ProgramSession sessionTwo = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.MEDIUM, userinput.getGoal()), 2);
 
-                ProgramSession filteredSessionOne = sessionAdaptation(userinput, sessionOne, fullbody1);
-                ProgramSession filteredSessionTwo = sessionAdaptation(userinput, sessionTwo, fullbody2);
-                Program program = new Program(List.of(filteredSessionOne, filteredSessionTwo));
-
-                return programAdaptation(userinput, program);
+                return new Program(List.of(sessionOne.sessionAdaptation(userinput, fullbody1), sessionTwo.sessionAdaptation(userinput, fullbody2)));
             }
             case 3 -> {
                 ProgramSession sessionOne = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.MEDIUM, userinput.getGoal()), 1);
                 ProgramSession sessionTwo = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.MEDIUM, userinput.getGoal()), 2);
                 ProgramSession sessionThree = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.HARD, userinput.getGoal()), 3);
 
-                ProgramSession filteredSessionOne = sessionAdaptation(userinput, sessionOne, upper);
-                ProgramSession filteredSessionTwo = sessionAdaptation(userinput, sessionTwo, lower);
-                ProgramSession filteredSessionThree = sessionAdaptation(userinput, sessionThree, fullbody1);
-                Program program =  new Program(List.of(filteredSessionOne, filteredSessionTwo, filteredSessionThree));
-
-                return programAdaptation(userinput, program);
+                return new Program(List.of(sessionOne.sessionAdaptation(userinput, upper), sessionTwo.sessionAdaptation(userinput, lower), sessionThree.sessionAdaptation(userinput, fullbody1)));
             }
             case 4 -> {
                 ProgramSession sessionOne = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.HARD, userinput.getGoal()), 1);
@@ -196,13 +187,10 @@ public class ProgramService {
                 ProgramSession sessionThree = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.EASY, userinput.getGoal()), 3);
                 ProgramSession sessionFour = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.EASY, userinput.getGoal()), 4);
 
-                ProgramSession filteredSessionOne = sessionAdaptation(userinput, sessionOne, upper1);
-                ProgramSession filteredSessionTwo = sessionAdaptation(userinput, sessionTwo, lower1);
-                ProgramSession filteredSessionThree = sessionAdaptation(userinput, sessionThree, upper2);
-                ProgramSession filteredSessionFour = sessionAdaptation(userinput, sessionFour, lower2);
-                Program program =  new Program(List.of(filteredSessionOne, filteredSessionTwo, filteredSessionThree, filteredSessionFour));
 
-                return programAdaptation(userinput, program);
+
+                return new Program(List.of(sessionOne.sessionAdaptation(userinput, upper1), sessionTwo.sessionAdaptation(userinput, lower1), sessionThree.sessionAdaptation(userinput, upper2),
+                        sessionFour.sessionAdaptation(userinput, lower2)));
             }
             case 5 -> {
                 ProgramSession sessionOne = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.HARD, userinput.getGoal()), 1);
@@ -211,84 +199,12 @@ public class ProgramService {
                 ProgramSession sessionFour = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.EASY, userinput.getGoal()), 4);
                 ProgramSession sessionFive = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.EASY, userinput.getGoal()), 5);
 
-                ProgramSession filteredSessionOne = sessionAdaptation(userinput, sessionOne, push1);
-                ProgramSession filteredSessionTwo = sessionAdaptation(userinput, sessionTwo, pull1);
-                ProgramSession filteredSessionThree = sessionAdaptation(userinput, sessionThree, legs);
-                ProgramSession filteredSessionFour = sessionAdaptation(userinput, sessionFour, push2);
-                ProgramSession filteredSessionFive = sessionAdaptation(userinput, sessionFive, pull2);
-
-                Program program =  new Program(List.of(filteredSessionOne, filteredSessionTwo, filteredSessionThree, filteredSessionFour, filteredSessionFive));
-
-                return programAdaptation(userinput, program);
+                return new Program(List.of(sessionOne.sessionAdaptation(userinput, push1), sessionTwo.sessionAdaptation(userinput, pull1), sessionThree.sessionAdaptation(userinput, legs),
+                        sessionFour.sessionAdaptation(userinput, push2), sessionFive.sessionAdaptation(userinput, pull2)));
             }
         }
         return null; //TODO handle error exception in frontend
     }
-
-    private ProgramSession sessionAdaptation(Userinput userinput, ProgramSession programSession, Multimap<String, Integer> filteringMap) {
-
-        List<Exercise> filteredExercises = new ArrayList<>();
-
-        filteringMap.forEach(
-                (key, value)
-                        ->  {
-                    for (int i = 0; i < programSession.getExerciseList().size(); i++) {
-                        if (programSession.getExerciseList().get(i).getBodypartToEffectiveness().containsKey(key)) {
-                            String effectiveness = programSession.getExerciseList().get(i).getBodypartToEffectiveness().get(key);
-                            if (Integer.valueOf(effectiveness).equals(value)) {
-                                filteredExercises.add(programSession.getExerciseList().get(i));
-                            }
-                        }
-                    }
-
-                }
-        );
-
-        return new ProgramSession(filteredExercises, programSession.getDay());
-    }
-
-
-    /***
-     * This function does the actual fitting of one programSession -> adaptes time and rest ?? or reduces the amount
-     * of Exercises ??? how can we implement this -> intensiveness and extra Gewichtung
-     * @param userinput
-     * @param currentProgram
-     * @return the adapted Program
-     */
-    private Program programAdaptation(Userinput userinput, Program currentProgram) {
-
-        List<Exercise> remainingExercises;
-        //String priority = userinput.
-
-        //one ProgramSession per day
-        for (ProgramSession currentSession : currentProgram.getProgram()) {
-
-            for(int i = userinput.getPriorities().size(); i > 0; i--) {
-                Bodypart bodypart = userinput.getPriorities().get(i - 1);
-                //currentSession = currentSession.stream().
-
-            }
-            int countTimePerSession = 0;
-            for (Exercise currentExercise : currentSession.getExerciseList()) {
-                countTimePerSession += currentExercise.returnLengthInSeconds();
-
-                //check time:
-                if(userinput.getTimePerDay().getSeconds() < countTimePerSession) {
-
-                }
-
-
-                System.out.println("Day: " + currentSession.getDay() + ": " + countTimePerSession);
-            }
-        }
-
-        Program adaptedProgram = currentProgram;
-
-        return adaptedProgram;
-
-    }
-
-
 
     private void generateStrengthProgram(Userinput userinput) {
     }
