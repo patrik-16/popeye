@@ -7,6 +7,7 @@ import com.popeye.backend.enums.Goal;
 import com.popeye.backend.enums.TimePerDay;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.http.StreamingHttpOutputMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +35,8 @@ public class ProgramSession {
 
     public int getSecondsPerSession() {
         return this.exerciseList.stream()
-            .mapToInt(exercise -> exercise.returnLengthInSeconds())
-            .sum();
+                .mapToInt(exercise -> exercise.returnLengthInSeconds())
+                .sum();
     }
 
     public void updateRestTime(int restTime) {
@@ -72,8 +73,8 @@ public class ProgramSession {
 
     public ProgramSession sessionAdaptation(Userinput userinput, Multimap<String, Integer> filteringMap) {
 
-        //TODO: saved all exercises of session created in ProgramService, if we need more exercises later for priority
-        //List<Exercise> filteredList = new ArrayList<>(this.exerciseList);
+        //saved all exercises of session created in ProgramService, if we need more exercises later for priority
+        List<Exercise> allExercises = new ArrayList<>(this.exerciseList);
         List<Exercise> filteredList = new ArrayList<>();
 
         filteringMap.forEach(
@@ -94,20 +95,31 @@ public class ProgramSession {
         this.exerciseList.removeAll(exerciseList);
         this.exerciseList = filteredList;
 
+        handlePriority(allExercises, userinput.getPriorities());
+
         //modify reps and sets
         if (userinput.getGoal().equals(Goal.STRENGTH)) {
             for(Exercise e : exerciseList) {
                 switch (e.getDifficulty()) {
-                    case EASY -> {modifyRepsSets(e, 3, 8);}
-                    case MEDIUM -> {modifyRepsSets(e, 4, 6);}
-                    case HARD -> {modifyRepsSets(e, 6, 4);}
+                    case EASY -> {modifyRepsSets(e, 3, 8, 1.0F);}
+                    case MEDIUM -> {modifyRepsSets(e, 4, 6, 1.0F);}
+                    case HARD -> {modifyRepsSets(e, 6, 4, 1.0F);}
+                }
+            }
+        } else if (userinput.getGoal().equals(Goal.CONDITIONING)) {
+            for(Exercise e : exerciseList) {
+                switch (e.getDifficulty()) {
+                    //TODO: enter values
+                    case EASY -> {modifyRepsSets(e, 2, 15, 3.0F);}
+                    case MEDIUM -> {modifyRepsSets(e, 3, 12, 3.0F);}
+                    case HARD -> {modifyRepsSets(e, 3, 10, 3.0F);}
                 }
             }
         }
-        //elseif (userinput.getGoal().equals(Goal.STRENGTH)) {
-
 
         this.timeAdaptation(userinput);
+
+        //TODO: if rest time < 60 : delete one exercise, calc rest time again and check rest again
 
         //TODO: delete this printing thing - just for me to check if its working
         for (Exercise currentExercise : this.exerciseList) {
@@ -145,8 +157,24 @@ public class ProgramSession {
         return ((timePerDay.getSeconds() - secondsExercises) / this.exerciseList.size()) / 3;
     }
 
-    private void modifyRepsSets(Exercise currentExercise, int sets, int reps) {
+    private void modifyRepsSets(Exercise currentExercise, int sets, int reps, Float intensiveness) {
         currentExercise.setSets(sets);
         currentExercise.setReps(reps);
+        currentExercise.setIntensiveness(intensiveness);
+    }
+
+    private void handlePriority(List<Exercise> allExercises, List<Bodypart> priorities) {
+
+        //if priority exist put exercise on first position and look for one other priority exercise and put it on the second position; afterwards delete last element of exercise
+        //if priority doesn't exist: look for two exercises with this priority and add them on first and second position - delete the last 2 exercises
+        for(Bodypart priority : priorities) {
+            Boolean bodypartExists = false;
+            for(Exercise e: this.exerciseList) {
+                if(e.getBodypartToEffectiveness().containsKey(priority)) {
+                    //move exercise to first position
+                    bodypartExists = true;
+                }
+            }
+        }
     }
 }
