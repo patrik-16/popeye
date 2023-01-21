@@ -1,14 +1,14 @@
 <template>
-  <v-container class="pa-4 text-center">
-    <div class="my-6" />
+  <v-container class="pa-lg-15 text-center">
+    <div class="my-6"/>
     <div>
-      <v-app-bar-title>
-        <h1>
+      <v-app-bar-title class="text-sm-subtitle-1 pa-lg-10">
+        <h2>
           What is your goal?
-        </h1>
+        </h2>
       </v-app-bar-title>
     </div>
-    <div class="my-6" />
+    <div class="my-6"/>
     <v-row
       class="fill-height"
       align="center"
@@ -28,43 +28,45 @@
             >
               <v-img
                 :src="item.img"
-                height="225px"
+                height="15rem"
               >
-                <v-card-title class="text-h6 white--text">
-                  <v-row
-                    class="fill-height flex-column"
-                    justify="space-between"
-                  >
-                    <p class="mt-4 subheading text-left">
-                      {{ item.title }}
-                    </p>
+                <div class="pillar">
+                  <v-card-title class="text-h6 white--text">
+                    <v-row
+                      class="fill-height flex-column"
+                      justify="space-between"
+                    >
+                      <p class="mt-14 subheading text-center">
+                        {{ item.title }}
+                      </p>
 
-                    <div>
-                      <p class="ma-0 text-body-1 font-weight-bold font-italic text-left">
-                        {{ item.text }}
-                      </p>
-                      <p class="text-caption font-weight-medium font-italic text-left">
-                        {{ item.subtext }}
-                      </p>
-                    </div>
-                    <div class="align-self-center">
-                      <v-btn
-                        v-for="(icon, index) in icons"
-                        :key="index"
-                        :class="{ 'show-btns': hover }"
-                        :color="transparent"
-                        icon
-                      >
-                        <v-icon
+                      <div>
+                        <p class="ma-0 text-body-1 font-weight-bold font-italic text-center">
+                          {{ item.text }}
+                        </p>
+                        <p class="text-caption font-weight-medium font-italic text-center">
+                          {{ item.subtext }}
+                        </p>
+                      </div>
+                      <div class="align-self-center">
+                        <v-btn
+                          v-for="(icon, index) in icons"
+                          :key="index"
                           :class="{ 'show-btns': hover }"
                           :color="transparent"
+                          icon
                         >
-                          {{ icon }}
-                        </v-icon>
-                      </v-btn>
-                    </div>
-                  </v-row>
-                </v-card-title>
+                          <v-icon
+                            :class="{ 'show-btns': hover }"
+                            :color="transparent"
+                          >
+                            {{ icon }}
+                          </v-icon>
+                        </v-btn>
+                      </div>
+                    </v-row>
+                  </v-card-title>
+                </div>
               </v-img>
             </v-card>
           </v-hover>
@@ -72,6 +74,7 @@
       </template>
     </v-row>
   </v-container>
+
 </template>
 
 <script>
@@ -129,5 +132,10 @@ export default {
 
 .show-btns {
   color: rgba(255, 255, 255, 1) !important;
+}
+
+.pillar {
+  background: rgba(0, 0, 0, 0.6);
+  height: 15rem;
 }
 </style>

@@ -131,6 +131,34 @@ export default {
     pageFiveSubmit (data) {
       this.$data.formDataObject.timePerDay = FivePage.data().timePerDay
       this.$data.currentPage = 'five'
+    },
+    async postFetch (url, input) {
+      const getRouting = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(input)
+      }
+      const response = await fetch(url, getRouting)
+      const data = await response.json()
+      console.log(data)
+      this.exxer = data
+      return data
+    },
+
+    getBackendData () {
+      const input = {
+        age: 20,
+        experience: 'ADVANCED',
+        priorities: [
+          'QUADS'
+        ],
+        daysPerWeek: 2,
+        timePerDay: 'FORTY',
+        goal: 'STRENGTH'
+      }
+      this.postFetch('http://localhost:8080/api/advancedprogram', input)
     }
   }
 }
