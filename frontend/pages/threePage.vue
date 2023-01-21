@@ -1,6 +1,6 @@
 <template>
   <v-container class="pa-lg-15 text-center">
-    <div class="my-6"/>
+    <div class="my-6" />
     <div>
       <v-app-bar-title class="text-sm-subtitle-1 pa-lg-10">
         <h2>
@@ -8,7 +8,7 @@
         </h2>
       </v-app-bar-title>
     </div>
-    <div class="my-6"/>
+    <div class="my-6" />
     <v-row
       class="fill-height"
       align="center"
@@ -74,7 +74,6 @@
       </template>
     </v-row>
   </v-container>
-
 </template>
 
 <script>
