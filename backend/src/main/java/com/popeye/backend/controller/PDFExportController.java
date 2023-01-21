@@ -1,10 +1,15 @@
 package com.popeye.backend.controller;
 
+import com.popeye.backend.entity.Program;
+import com.popeye.backend.entity.Userinput;
 import com.popeye.backend.services.PDFGeneratorService;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -23,8 +28,8 @@ public class PDFExportController {
     }
 
     @CrossOrigin
-    @GetMapping("/pdf/generate")
-    public void generatePDF(HttpServletResponse httpServletResponse) throws IOException {
+    @PostMapping("/pdf/generate")
+    public void generatePDF(@RequestBody Userinput userinput, HttpServletResponse httpServletResponse) throws IOException {
         //attach the pdf as response
 
         httpServletResponse.setContentType("application/pdf");
@@ -37,6 +42,6 @@ public class PDFExportController {
         String headerValue = "attachment; filename=pdf_" + currentDateTime + ".pdf";
         httpServletResponse.setHeader(headerKey, headerValue);
 
-        this.pdfGeneratorService.export(httpServletResponse);
+        this.pdfGeneratorService.export(userinput, httpServletResponse);
     }
 }
