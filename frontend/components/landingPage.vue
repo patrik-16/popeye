@@ -4,7 +4,7 @@
       <v-layout align-center justify-center>
         <v-flex>
           <div class="text-lg-center">
-              <h1>Popeye <br> </h1>
+            <p>Popeye </p>
             <p>Your personalized workout plan</p>
             <p>Are you ready? Let's get started! </p>
             <br>
