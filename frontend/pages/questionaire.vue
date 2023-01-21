@@ -26,27 +26,27 @@ export default {
       this.$router.push('/')
     },
     pageOneSubmit (data) {
-      this.$data.formDataObject.age = data.age
+      this.$data.formDataObject.age = OnePage.data().age
       this.$data.currentPage = 'one'
     },
     pageTwoSubmit (data) {
-      this.$data.formDataObject.experience = data.experience
+      this.$data.formDataObject.experience = TwoPage.data().experience
       this.$data.currentPage = 'two'
     },
     pageThreeSubmit (data) {
-      this.$data.formDataObject.goal = data.goal
+      this.$data.formDataObject.goal = ThreePage.data().goal
       this.$data.currentPage = 'three'
     },
     pageThreePlusSubmit (data) {
-      this.$data.formDataObject.priorities = data.priorities
+      this.$data.formDataObject.priorities = ThreePlusPage.data().priorities
       this.$data.currentPage = 'threeplus'
     },
     pageFourSubmit (data) {
-      this.$data.formDataObject.daysPerWeek = data.daysPerWeek
+      this.$data.formDataObject.daysPerWeek = FourPage.data().daysPerWeek
       this.$data.currentPage = 'four'
     },
     pageFiveSubmit (data) {
-      this.$data.formDataObject.timePerDay = data.timePerDay
+      this.$data.formDataObject.timePerDay = FivePage.data().timePerDay
       this.$data.currentPage = 'five'
     }
   },
@@ -57,7 +57,7 @@ export default {
       experience: '',
       goal: '',
       priorities: '',
-      daysPerWeek: 'x',
+      daysPerWeek: '',
       timePerDay: ''
     }
   })
