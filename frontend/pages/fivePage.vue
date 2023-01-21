@@ -99,6 +99,7 @@ export default {
   data: () => ({
     daysPerWeek: fourPage.data().daysPerWeek,
     icons: ['mdi-weight-lifter'],
+    hover: '',
     items: [
       { title: '40 min' },
       { title: '60 min' },
