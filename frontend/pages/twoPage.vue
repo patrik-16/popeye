@@ -1,5 +1,5 @@
 <template>
-  <v-div class="pa-lg-15">
+  <div class="pa-lg-15">
     <v-container class="pa-lg-15 text-center">
       <v-row>
         <v-card-text
@@ -32,7 +32,7 @@
                   :src="item.img"
                   height="15rem"
                 >
-                  <div class="pillar" >
+                  <div class="pillar">
                     <v-card-title class="text-h4 white--text">
                       <v-row
                         class="fill-height flex-column"
@@ -77,7 +77,7 @@
         </template>
       </v-row>
     </v-container>
-  </v-div>
+  </div>
 </template>
 
 <script>
