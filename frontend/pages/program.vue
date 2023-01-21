@@ -40,12 +40,13 @@
     </v-card-text>
     <!--Slavica Part-->
     <div>
-      <one-page v-if="currentPage === 'one'" @submit="pageOneSubmit"/>
-      <two-page v-if="currentPage === 'two'" @submit="pageTwoSubmit"/>
-      <three-page v-if="currentPage === 'three'" @submit="pageThreeSubmit"/>
-      <three-plus-page v-if="currentPage === 'threeplus'" @submit="pageThreePlusSubmit"/>
-      <four-page v-if="currentPage === 'four'" @submit="pageFourSubmit"/>
-      <five-page v-if="currentPage === 'five'" @goTo="pageFiveSubmit"/>
+      <p>age: {{ formDataObject.age }} experience: {{ formDataObject.experience }} gaol:{{ formDataObject.goal }} prio:{{ formDataObject.priorities }} dayspW: {{ formDataObject.daysPerWeek }} timepD:{{ formDataObject.timePerDay }}</p>
+      <one-page v-if="currentPage === 'one'" @submit="pageOneSubmit" />
+      <two-page v-if="currentPage === 'two'" @submit="pageTwoSubmit" />
+      <three-page v-if="currentPage === 'three'" @submit="pageThreeSubmit" />
+      <three-plus-page v-if="currentPage === 'threeplus'" @submit="pageThreePlusSubmit" />
+      <four-page v-if="currentPage === 'four'" @submit="pageFourSubmit" />
+      <five-page v-if="currentPage === 'five'" @goTo="pageFiveSubmit" />
     </div>
   </v-card>
 </template>

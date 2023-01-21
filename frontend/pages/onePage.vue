@@ -20,6 +20,7 @@
                 label="Type in your age"
                 solo
                 dense
+                required
               >
                 {{ age }}
               </v-text-field>

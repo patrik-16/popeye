@@ -4,7 +4,9 @@
       <v-card-text
         class="title"
       >
-        <h1 class="pa-4">How much time per day do you have?</h1>
+        <h1 class="pa-4">
+          How much time per day do you have?
+        </h1>
         <div><br></div>
       </v-card-text>
     </v-row>

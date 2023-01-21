@@ -3,7 +3,8 @@
     <div class="my-6" />
     <div>
       <v-app-bar-title>
-        <h1> What is your goal?
+        <h1>
+          What is your goal?
         </h1>
       </v-app-bar-title>
     </div>
@@ -77,18 +78,6 @@
 
 export default {
   name: 'ThreePage',
-  methods: {
-    submit (i) {
-      this.$router.push('/threePlusPage')
-      if (i === 0) {
-        this.$data.goal = 'Hypertrophy'
-      } else if (i === 1) {
-        this.$data.goal = 'Strength'
-      } else if (i === 2) {
-        this.$data.goal = 'Conditioning'
-      }
-    }
-  },
   data: () => ({
     goal: 'x',
     icons: ['mdi-weight-lifter'],
@@ -113,7 +102,19 @@ export default {
       }
     ],
     transparent: 'rgba(255, 255, 255, 0)'
-  })
+  }),
+  methods: {
+    submit (i) {
+      this.$router.push('/threePlusPage')
+      if (i === 0) {
+        this.$data.goal = 'Hypertrophy'
+      } else if (i === 1) {
+        this.$data.goal = 'Strength'
+      } else if (i === 2) {
+        this.$data.goal = 'Conditioning'
+      }
+    }
+  }
 }
 </script>
 

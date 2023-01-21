@@ -30,7 +30,7 @@
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-spacer />
-      <v-btn @click="toLanding">
+      <v-btn id="no-background-hover" depressed @click="toLanding">
         <v-toolbar-title class="v-toolbar-title">
           {{ title }}
         </v-toolbar-title>
@@ -41,11 +41,8 @@
         >
       </v-btn>
       <v-spacer />
-      <v-btn @click="toLogin">
-        Login
-      </v-btn>
-      <v-btn @click="toProfile">
-        Profile
+      <v-btn id="no-background-hover" depressed @click="toForm">
+        Start your Journey
       </v-btn>
     </v-app-bar>
     <v-main>
@@ -79,7 +76,7 @@ export default {
         {
           icon: 'mdi-arrow-right',
           title: 'Start your Journey',
-          to: '/formPage'
+          to: '/onePage'
         },
         {
           icon: 'mdi-account-outline',
@@ -120,8 +117,8 @@ export default {
     toLogin () {
       this.$router.push('/login')
     },
-    toProgram () {
-      this.$router.push('/program')
+    toForm () {
+      this.$router.push('/onePage')
     }
   }
 }
@@ -136,4 +133,9 @@ export default {
 .hantelImage {
   height: 2rem;
 }
+
+#no-background-hover::before {
+  background-color: transparent !important
+}
+
 </style>
