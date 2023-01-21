@@ -1,34 +1,109 @@
 <template>
   <v-app>
-    <v-card>
-      <v-card-title>Test Index</v-card-title>
-      <v-alert>Check out Vuetify!</v-alert>
-      <v-card-text>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</v-card-text>
-    </v-card>
+    <v-container class="background" fill-height>
+      <v-layout align-center justify-center>
+        <div class="align-center justify-space-around pillar rounded-lg">
+          <v-flex>
+            <div class="text-lg-center">
+              <br>
+              <br>
+              <h2>Popeye </h2> <br>
+              <p>Your personalized workout plan</p>
+              <p>Are you ready? Let's get started! </p>
+              <br>
+            </div>
+            <div class="text-lg-center">
+              <v-dialog
+                v-model="dialog"
+                width="500"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    depressed
+                    outlined
+                    x-large
+                    v-bind="attrs"
+                    v-on="on"
+                    color="indigo darken-2"
+                  >
+                    Start Your Journey
+                  </v-btn> <!-- Calls to form -->
+                </template>
+                <v-card>
+                  <v-card-title class="text-h5 grey lighten-2">
+                    Terms and Conditions
+                  </v-card-title>
 
-    <v-spacer />
-    <v-btn outlined @click="toForm"> Get Your Programm (or... Start Your Journey Now! </v-btn> <!-- Calls to form -->
-    <v-spacer />
+                  <v-card-text class="tac">
+                    Our terms and conditions include health status (defined by the
+                    WHO, https://www.who.int/about/governance/constitution),
+                    regional GPDR and Age (between 16 and 50). <br>
+                    By accepting our terms and conditions, you confirm, that you are
+                    in a healthy condition and will only use the program under healthy (defined by the WHO)
+                    circumstances.
+                  </v-card-text>
 
+                  <v-divider></v-divider>
+
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      color="primary"
+                      text
+                      @click="toOnePage"
+                    >
+                      I accept
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </div>
+          </v-flex>
+        </div>
+      </v-layout>
+    </v-container>
   </v-app>
 
 </template>
 
 <script>
-export default {
-  name: 'landingPage',
 
+export default {
+  name: 'LandingPage',
+  data () {
+    return {
+      dialog: ''
+    }
+  },
   methods: {
     /**
-     * Uses VueRouter to send the user to the formPage.vue
+     * Uses VueRouter to send the user to the termsAndConditions.vue
      */
-    toForm () {
-      this.$router.push('/formPage')
+    toOnePage () {
+      this.$router.push('/onePage')
     }
   }
 }
 </script>
 
 <style scoped>
+
+.background {
+  min-width: 100%;
+  min-height: 100vh;
+  background: url("static/gymBackground.jpg") no-repeat top center fixed;
+  background-size: cover;
+  margin-top: -12px;
+}
+.tac {
+  margin-top: 3%;
+}
+
+.pillar {
+  width: 30vw;
+  height: 30vh;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
 
 </style>

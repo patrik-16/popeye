@@ -51,6 +51,14 @@
 			<version>9.1.1</version>
 		</dependency>
 
+		<!-- for pdf creation -->
+		<!-- https://mvnrepository.com/artifact/com.github.librepdf/openpdf -->
+		<dependency>
+			<groupId>com.github.librepdf</groupId>
+			<artifactId>openpdf</artifactId>
+			<version>1.3.30</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
