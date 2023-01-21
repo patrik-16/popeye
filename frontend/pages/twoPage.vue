@@ -25,7 +25,7 @@
             <v-card
               :elevation="hover ? 12 : 2"
               :class="{ 'on-hover': hover }"
-              @click="goTo(i)"
+              @click="submit(i)"
             >
               <v-img
                 :src="item.img"
@@ -81,11 +81,13 @@
 export default {
   name: 'TwoPage',
   methods: {
-    goTo (i) {
+    submit (i) {
       if (i === 0) {
         this.$router.push('/fourPage')
+        this.data.experience = 'Beginner'
       } else if (i === 1) {
         this.$router.push('/threePage')
+        this.data.experience = 'Advanced'
       }
     },
     toNextPage () {
@@ -100,6 +102,7 @@ export default {
     }
   },
   data: () => ({
+    experience: '',
     icons: ['mdi-weight-lifter'],
     items: [
       {

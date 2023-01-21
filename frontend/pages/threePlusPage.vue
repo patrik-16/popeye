@@ -28,7 +28,7 @@
               <v-card
                 :elevation="hover ? 12 : 2"
                 :class="{ 'on-hover': hover }"
-                @click="collectVariable(item.title)"
+                @click="submit(i)"
               >
                 <v-img
                   :src="item.img"
@@ -70,7 +70,7 @@
       <v-row>
         <v-card class="anzeige">
           <v-card-title>
-            You have chosen {{ variables.varOne }}
+            You have chosen {{ priorities }}
           </v-card-title>
         </v-card>
       </v-row>
@@ -81,42 +81,45 @@
 <script>
 
 export default {
-  name: 'TwoPage',
+  name: 'ThreePlusPage',
   methods: {
-    goTo () {
+    submit (i) {
       this.$router.push('/fourPage')
-    },
-    collectVariable (title) {
-      this.variables.varOne = title
+      if (i === 0) {
+        this.$data.priorities = 'Quad'
+      } else if (i === 1) {
+        this.$data.priorities = 'Chest'
+      } else if (i === 2) {
+        this.$data.priorities = 'Bicep'
+      } else if (i === 3) {
+        this.$data.priorities = 'Frontdelt'
+      } else if (i === 4) {
+        this.$data.priorities = 'Lats'
+      }
     }
   },
   data: () => ({
+    priorities: '',
     icons: ['mdi-weight-lifter'],
-    variables: [
-      {
-        varOne: '',
-        varTwo: ''
-      }
-    ],
     items: [
       {
-        title: 'Legs',
+        title: 'Quad',
         img: '/legs.png'
       },
       {
-        title: 'Arms',
+        title: 'Chest',
         img: '/arms.jpg'
       },
       {
-        title: 'Back',
+        title: 'Bicep',
         img: '/back.jpg'
       },
       {
-        title: 'Chest',
+        title: 'Frontdelt',
         img: '/chest.jpg'
       },
       {
-        title: 'Glutes',
+        title: 'Lats',
         img: '/glutes.webp'
       }
     ],

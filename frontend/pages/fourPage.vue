@@ -28,7 +28,7 @@
               :elevation="hover ? 12 : 2"
               :class="{ 'on-hover': hover }"
               color="grey"
-              @click="goTo"
+              @click="submit(i)"
             >
               <v-card-title class="text-h4 white--text">
                 <v-row
@@ -77,10 +77,19 @@
 
 <script>
 export default {
-  name: 'TwoPage',
+  name: 'FourPage',
   methods: {
-    goTo () {
-      this.$router.push('/fivePage')
+    submit (i) {
+      this.$router.push('/fivepage')
+      if (i === 0) {
+        this.$data.daysPerWeek = '2'
+      } else if (i === 1) {
+        this.$data.daysPerWeek = '3'
+      } else if (i === 2) {
+        this.$data.daysPerWeek = '4'
+      } else if (i === 3) {
+        this.$data.daysPerWeek = '5'
+      }
     }
   },
   data: () => ({

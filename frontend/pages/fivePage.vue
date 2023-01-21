@@ -26,6 +26,7 @@
               :elevation="hover ? 12 : 2"
               :class="{ 'on-hover': hover }"
               color="grey"
+              @click="submit(i)"
             >
               <v-card-title class="text-h4 white--text">
                 <v-row
@@ -87,17 +88,29 @@
 </template>
 
 <script>
-import fourPage from '@/pages/fourPage'
+import questionaire from './questionaire'
 
 export default {
-  name: 'TwoPage',
+  name: 'FivePage',
   methods: {
+    submit (i) {
+      if (i === 0) {
+        this.$data.timesPerDay = '2'
+      } else if (i === 1) {
+        this.$data.timesPerDay = '3'
+      } else if (i === 2) {
+        this.$data.timesPerDay = '4'
+      } else if (i === 3) {
+        this.$data.timesPerDay = '5'
+      }
+    },
     goTo () {
       this.$router.push('/program')
     }
   },
   data: () => ({
-    daysPerWeek: fourPage.data().daysPerWeek,
+    timesPerDay: '',
+    daysPerWeek: questionaire.data().formDataObject.daysPerWeek,
     icons: ['mdi-weight-lifter'],
     items: [
       { title: '40 min' },

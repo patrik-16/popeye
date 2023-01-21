@@ -23,7 +23,7 @@
             <v-card
               :elevation="hover ? 12 : 2"
               :class="{ 'on-hover': hover }"
-              @click="goTo"
+              @click="submit(i)"
             >
               <v-img
                 :src="item.img"
@@ -78,11 +78,19 @@
 export default {
   name: 'ThreePage',
   methods: {
-    goTo () {
+    submit (i) {
       this.$router.push('/threePlusPage')
+      if (i === 0) {
+        this.$data.goal = 'Hypertrophy'
+      } else if (i === 1) {
+        this.$data.goal = 'Strength'
+      } else if (i === 2) {
+        this.$data.goal = 'Conditioning'
+      }
     }
   },
   data: () => ({
+    goal: 'x',
     icons: ['mdi-weight-lifter'],
     items: [
       {
@@ -93,7 +101,7 @@ export default {
       },
       {
         title: 'Strength',
-        text: 'Get sronger',
+        text: 'Get stronger',
         subtext: '',
         img: 'strength.webp'
       },
