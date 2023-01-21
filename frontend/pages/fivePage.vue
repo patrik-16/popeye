@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import questionaire from './questionaire'
+import program from '@/pages/program.vue'
 
 export default {
   name: 'FivePage',
@@ -110,7 +110,7 @@ export default {
   },
   data: () => ({
     timesPerDay: '',
-    daysPerWeek: questionaire.data().formDataObject.daysPerWeek,
+    daysPerWeek: program.data().formDataObject.daysPerWeek,
     icons: ['mdi-weight-lifter'],
     hover: '',
     items: [
