@@ -112,6 +112,7 @@ export default {
     timesPerDay: '',
     daysPerWeek: questionaire.data().formDataObject.daysPerWeek,
     icons: ['mdi-weight-lifter'],
+    hover: '',
     items: [
       { title: '40 min' },
       { title: '60 min' },

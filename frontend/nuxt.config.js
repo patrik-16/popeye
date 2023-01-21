@@ -55,7 +55,7 @@ export default {
       lang: 'en'
     },
     icon: {
-      source: '~/static/favicon.ico',
+      source: '/favicon.ico',
       fileName: 'favicon.ico'
     }
   },
