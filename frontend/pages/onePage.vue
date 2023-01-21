@@ -9,7 +9,7 @@
         >
           <form
             class="form"
-            @submit.prevent="checkAge"
+            @submit.prevent="submit"
           >
             <div>
               <v-text-field
@@ -52,7 +52,8 @@ export default {
     age: ''
   }),
   methods: {
-    checkAge () {
+    submit () {
+      this.$emit('submit', this.$data)
       this.age = this.age >= 18 && this.age <= 50
     },
     toTwoPage () {
