@@ -13,11 +13,13 @@ Must Criteria
    set a goal.
 
 Should Criteria
+
 6. The system SHOULD provide the user with the ability to accept or decline the terms and conditions
 7. As soon as the program has been calculated, the system SHOULD provide the user with the ability to modify changeable user parameter values.
 8. If the user edits the changeable user parameter values, the system SHOULD adjust in real-time to the parameter changes.
 
 Could Criteria
+
 9. The system COULD provide the user with a login function.
 10. The system COULD be able to save the users program on a database.
 11. The system COULD provide the user with the ability to download the program.
