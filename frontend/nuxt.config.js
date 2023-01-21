@@ -3,8 +3,8 @@ import colors from 'vuetify/es5/util/colors'
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - popeye',
-    title: 'popeye',
+    titleTemplate: 'Popeye',
+    title: 'Popeye',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -12,7 +12,7 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/png', href: '/favicon.ico' }
     ]
   },
 
@@ -53,6 +53,10 @@ export default {
   pwa: {
     manifest: {
       lang: 'en'
+    },
+    icon: {
+      source: '~/static/favicon.ico',
+      fileName: 'favicon.ico'
     }
   },
 
@@ -60,7 +64,7 @@ export default {
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+      dark: false,
       themes: {
         dark: {
           primary: colors.blue.darken2,
