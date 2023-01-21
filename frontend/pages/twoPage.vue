@@ -112,7 +112,7 @@ export default {
         img: '/basic.jpg'
       },
       {
-        title: 'Advanced',
+        title: 'Intermediate',
         text: 'More than one year of gym experience',
         subtext: 'Let\'s upgrade your workout plan!',
         img: '/advanced.jpg'
