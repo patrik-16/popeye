@@ -4,9 +4,9 @@
       <v-layout align-center justify-center>
         <v-flex>
           <div class="text-lg-center">
-            <p>text</p>
-            <p>some more text</p>
-            <p>if you click start your journey the </p>
+              <h1>Popeye <br> </h1>
+            <p>Your personalized workout plan</p>
+            <p>Are you ready? Let's get started! </p>
             <br>
           </div>
           <div class="text-lg-center">
@@ -25,15 +25,15 @@
               </template>
               <v-card>
                 <v-card-title class="text-h5 grey lighten-2">
-                  Privacy Policy
+                  Terms and Conditions
                 </v-card-title>
 
-                <v-card-text>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                  dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                  officia deserunt mollit anim id est laborum.
+                <v-card-text class="tac">
+                  Our terms and conditions include health status (defined by the
+                  WHO, https://www.who.int/about/governance/constitution),
+                  regional GPDR and Age (between 16 and 50). <br>
+                  By accepting our terms and conditions, you confirm, that you are
+                  in a healthy condition and will only use the program under healthy (defined by the WHO) circumstances.
                 </v-card-text>
 
                 <v-divider></v-divider>
@@ -86,6 +86,9 @@ export default {
   background: url("static/gymBackground.jpg") no-repeat top center fixed;
   background-size: cover;
   margin-top: -12px;
+}
+.tac {
+  margin-top: 3%;
 }
 
 </style>

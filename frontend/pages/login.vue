@@ -14,7 +14,8 @@
                       label="Username"
                       id="username"
                       type="username"
-                      required>
+                      required
+                    >
                     </v-text-field>
                   </v-flex>
                 </v-layout>
@@ -26,9 +27,10 @@
                       label="Password"
                       id="password"
                       type="password"
-                      required>
+                      required
+                    >
                     </v-text-field>
-                </v-flex>
+                  </v-flex>
                 </v-layout>
                 <v-layout row>
                   <v-flex xs12>
@@ -69,9 +71,10 @@ export default {
 </script>
 <style scoped>
 .card {
-  padding: 3rem 2rem 3rem ;
+  padding: 3rem 2rem 3rem;
   border-radius: 10px;
 }
+
 .form {
   padding: 2rem 0;
 }
@@ -86,6 +89,7 @@ export default {
   margin-bottom: 10px;
   background-color: -moz-buttondefault;
 }
+
 #username {
   font-weight: unset;
   font-size: x-large;

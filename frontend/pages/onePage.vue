@@ -46,7 +46,7 @@ export default {
   name: 'OnePage',
   data: () => ({
     rules: [
-      value => (value <= 50 && value >= 18) || 'You must be between 18 and 50 years old!'
+      value => (value <= 50 && value >= 16) || 'You must be between 18 and 50 years old!'
     ],
     valid: false,
     age: ''
@@ -54,7 +54,7 @@ export default {
   methods: {
     submit () {
       this.$emit('submit', this.$data)
-      this.age = this.age >= 18 && this.age <= 50
+      this.age = this.age >= 16 && this.age <= 50
     },
     toTwoPage () {
       this.$router.push('/twoPage')

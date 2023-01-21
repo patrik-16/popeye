@@ -5,9 +5,9 @@
         <v-card-text
           class="title"
         >
-          <h1>What do you want to focus on?</h1>
+          <h1>What is your goal? </h1>
           <div><br></div>
-          <h3 class="mt-1 ">Click on one, two or three areas (zB)</h3>
+          <h3 class="mt-1 text-h4">Click on one bodypart you want to focus on</h3>
           <div><br></div>
         </v-card-text>
       </v-row>
@@ -67,13 +67,6 @@
           </v-col>
         </template>
       </v-row>
-      <v-row>
-        <v-card class="anzeige">
-          <v-card-title>
-            You have chosen {{ priorities }}
-          </v-card-title>
-        </v-card>
-      </v-row>
     </v-container>
   </v-app>
 </template>
@@ -108,15 +101,15 @@ export default {
       },
       {
         title: 'Chest',
-        img: '/arms.jpg'
+        img: '/chest.jpg'
       },
       {
         title: 'Bicep',
-        img: '/back.jpg'
+        img: '/arms.jpg'
       },
       {
         title: 'Frontdelt',
-        img: '/chest.jpg'
+        img: '/frontdelt1.webp.crdownload'
       },
       {
         title: 'Lats',
@@ -140,12 +133,5 @@ export default {
 
 .show-btns {
   color: rgba(255, 255, 255, 1) !important;
-}
-
-.anzeige {
-  margin: 50px;
-}
-
-.title {
 }
 </style>

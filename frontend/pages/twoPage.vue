@@ -2,9 +2,9 @@
   <v-container class="pa-4 text-center">
     <v-row>
       <v-card-text
-        class="title"
+        class="text-h4"
       >
-        <h1>How much experience do you have in the gym?</h1>
+        <h2>How much experience do you have in the gym?</h2>
         <div><br></div>
       </v-card-text>
     </v-row>
@@ -136,6 +136,4 @@ export default {
   color: rgba(255, 255, 255, 1) !important;
 }
 
-.title {
-}
 </style>
