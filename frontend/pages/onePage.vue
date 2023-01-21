@@ -7,20 +7,24 @@
         <v-card
           elevation="2"
         >
-          <form
+          <v-form
+            ref="form"
+            v-model="valid"
             class="form"
+            lazy-validation
             @submit.prevent="submit"
           >
             <div>
               <v-text-field
-                v-model="age"
+                v-model.number="age"
                 class="pa-4 mt-10 text-center"
-                :rules="rules"
+                :rules="inputRules"
                 hide-details="auto"
                 label="Type in your age"
-                solo
                 dense
                 required
+                min="16"
+                max="50"
               >
                 {{ age }}
               </v-text-field>
@@ -28,14 +32,14 @@
             <div class="align-self-center mt-3">
               <v-btn
                 type="submit"
-                :disabled="false"
+                :disabled="!valid"
                 class="btn btn-info"
                 @click="toTwoPage"
               >
                 Next
               </v-btn>
             </div>
-          </form>
+          </v-form>
         </v-card>
       </v-card-text>
     </v-row>
@@ -46,11 +50,12 @@
 export default {
   name: 'OnePage',
   data: () => ({
-    rules: [
-      value => (value <= 50 && value >= 16) || 'You must be between 18 and 50 years old!'
-    ],
-    valid: false,
-    age: ''
+    valid: true,
+    age: '',
+    inputRules: [
+      value => !!value || 'Age is required',
+      value => (value <= 50 && value >= 16) || 'You must be between 16 and 50 years old!'
+    ]
   }),
   methods: {
     submit () {
