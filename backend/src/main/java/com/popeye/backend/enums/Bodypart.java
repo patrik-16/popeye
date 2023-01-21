@@ -20,8 +20,9 @@ public enum Bodypart {
     GLUTES,
     CALVES,
 
-    ABS;
+    ABS,
 
+    NONE;
 
     Bodypart() {
 

@@ -1,20 +1,14 @@
 package com.popeye.backend.services;
 
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Multimap;
 import com.popeye.backend.entity.*;
 import com.popeye.backend.enums.*;
 import com.popeye.backend.repos.ExerciseRepository;
-import com.popeye.backend.utils.MapsForAdvancedPrograms;
 import com.popeye.backend.utils.MapsForConditioningPrograms;
 import com.popeye.backend.utils.MapsForHypertrophyPrograms;
 import com.popeye.backend.utils.MapsForStrengthPrograms;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.StreamingHttpOutputMessage;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 
