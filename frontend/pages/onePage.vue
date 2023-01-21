@@ -1,10 +1,13 @@
 <template>
-  <v-container class="pa-4 text-center">
+  <v-container class="pa-lg-15 text-center">
     <v-row>
-      <v-card-text>
-        <h2>What's your age?</h2>
+      <v-card class="mx-auto my-12" width="40rem">
+        <v-spacer />
+        <v-card-title class="justify-center">
+          What's your age?
+        </v-card-title>
 
-        <v-card
+        <v-card-text
           elevation="2"
         >
           <v-form
@@ -29,19 +32,21 @@
                 {{ age }}
               </v-text-field>
             </div>
-            <div class="align-self-center mt-3">
-              <v-btn
-                type="submit"
-                :disabled="!valid"
-                class="btn btn-info"
-                @click="toTwoPage"
-              >
-                Next
-              </v-btn>
-            </div>
+            <v-btn
+              type="submit"
+              :disabled="!valid"
+              class="btn btn-info"
+              depressed
+              outlined
+              x-large
+              color="indigo darken-2"
+              @click="toTwoPage"
+            >
+              Next
+            </v-btn>
           </v-form>
-        </v-card>
-      </v-card-text>
+        </v-card-text>
+      </v-card>
     </v-row>
   </v-container>
 </template>
@@ -60,7 +65,6 @@ export default {
   methods: {
     submit () {
       this.$emit('submit', this.$data)
-      this.age = this.age >= 16 && this.age <= 50
     },
     toTwoPage () {
       this.$router.push('/twoPage')
@@ -71,11 +75,10 @@ export default {
 </script>
 
 <style scoped>
-.form {
-}
 
 .btn {
-  margin-bottom: 5%;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 </style>
