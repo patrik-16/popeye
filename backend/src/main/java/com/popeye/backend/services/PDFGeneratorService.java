@@ -31,7 +31,7 @@ public class PDFGeneratorService {
         Program program = programService.createProgram(userinput);
         //attach a document to the response
         // Creating the Object of Document (a white doc)
-        Document document = new Document(PageSize.A4);
+        Document document = new Document(PageSize.A4.rotate());
         // Getting instance of PdfWriter - we want to write the document to this outputstream of the response
         PdfWriter.getInstance(document, response.getOutputStream());
 
