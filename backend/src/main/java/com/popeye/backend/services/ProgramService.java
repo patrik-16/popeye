@@ -27,7 +27,7 @@ public class ProgramService {
         if (userinput.getExperience().equals(Experience.BEGINNER)) {
             switch (userinput.getDaysPerWeek()) {
                 case 1:
-                    return null; //TODO handle error exception in frontend
+                    return null;
                 case 2:
                     return generateTwoDayBeginnerProgram(userinput);
                 case 3:
@@ -40,7 +40,7 @@ public class ProgramService {
         } else {
             return generateAdvancedProgram(userinput);
         }
-        return null; //TODO handle error exception in frontend
+        return null;
     }
 
 
@@ -54,7 +54,7 @@ public class ProgramService {
         switch (userinput.getDaysPerWeek()) {
             case 1 -> {
                 //will not happen, because user can only decide between 2 and 5
-                return null; //TODO handle error exception in frontend
+                return null;
             }
             case 2 -> {
                 ProgramSession sessionOne = new ProgramSession(exerciseRepository.getAllAdvancedExercisesByDifficultyAndGoal(Difficulty.HARD, userinput.getGoal()), 1);
@@ -125,7 +125,7 @@ public class ProgramService {
                         sessionFour.sessionAdaptation(userinput, mapsForHypertrophyPrograms.push2), sessionFive.sessionAdaptation(userinput, mapsForHypertrophyPrograms.pull2)));
             }
         }
-        return null; //TODO handle error exception in frontend
+        return null;
     }
 
     private Program generateTwoDayBeginnerProgram(Userinput userinput) {

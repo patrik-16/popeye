@@ -32,7 +32,7 @@ public class ExerciseRepository {
         if (experience == Experience.BEGINNER) {
             return (List<Exercise>) firebaseRepository.getAllDocumentsByCollectionWithCondition("Beginnerexercises", Exercise.class, "difficulty", difficulty);
         } else {
-            return Collections.emptyList(); // TODO handle exception
+            return Collections.emptyList();
         }
     }
 
@@ -52,7 +52,7 @@ public class ExerciseRepository {
                 }
             }
         }
-        return null; // TODO handle exception
+        return null;
     }
 
     public List<Exercise> getAllBeginnerExercisesByDifficulty(Difficulty difficulty) {
