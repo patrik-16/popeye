@@ -118,9 +118,9 @@ public class PDFGeneratorService {
                 // Adding the created table to the document
                 document.add(table);
             }
-            // Closing the document
-            document.close();
         }
+        // Closing the document
+        document.close();
     }
 }
 // https://springjava.com/spring-boot/export-data-into-pdf-file-in-spring-boot
