@@ -1,15 +1,10 @@
 <template>
-  <v-container class="pa-4 text-center">
-    <v-row>
-      <v-card-text
-        class="title"
-      >
-        <h1 class="pa-4">
-          How much time per day do you have?
-        </h1>
-        <div><br></div>
-      </v-card-text>
-    </v-row>
+  <v-container class="upperContainer pa-4 text-center">
+    <v-app-bar-title class="text-sm-subtitle-1">
+      <h2>How much time per day do you have?</h2>
+      <div><br></div>
+      <br>
+    </v-app-bar-title>
     <v-row
       class="fill-height"
       align="center"
@@ -27,7 +22,7 @@
             <v-card
               :elevation="hover ? 12 : 2"
               :class="{ 'on-hover': hover }"
-              color="grey"
+              color="black"
               @click="submit(i)"
             >
               <v-card-title class="text-h4 white--text">
@@ -63,7 +58,7 @@
       </template>
     </v-row>
     <v-row>
-      <div> <br> </div>
+      <div><br></div>
     </v-row>
     <v-row
       class="fill-height mt-10"
@@ -75,9 +70,10 @@
           :elevation="hover ? 12 : 4"
           :class="{ 'on-hover': hover }"
           color="outlined"
-          >
+        >
           <v-card-title
-            @click="goTo">
+            @click="goTo"
+          >
             Get your program now!
           </v-card-title>
           <v-card-subtitle>
@@ -141,5 +137,9 @@ export default {
 }
 
 .title {
+}
+
+.upperContainer {
+  margin-top: 6rem;
 }
 </style>

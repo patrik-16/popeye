@@ -1,5 +1,5 @@
 <template>
-  <v-container class="pa-lg-15 text-center">
+  <v-container class="upperContainer pa-4 text-center">
     <div class="my-6" />
     <div>
       <v-app-bar-title class="text-sm-subtitle-1 pa-lg-10">
@@ -137,5 +137,9 @@ export default {
 .pillar {
   background: rgba(0, 0, 0, 0.6);
   height: 15rem;
+}
+
+.upperContainer {
+  margin-top: 2rem;
 }
 </style>

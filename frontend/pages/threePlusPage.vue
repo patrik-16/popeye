@@ -1,16 +1,12 @@
 <template>
   <v-app class="app">
-    <v-container class="pa-4 text-center">
-      <v-row>
-        <v-card-text
-          class="title"
-        >
-          <h1>What is your goal? </h1>
-          <div><br></div>
-          <h3 class="mt-1 text-h4">Click on one bodypart you want to focus on</h3>
-          <div><br></div>
-        </v-card-text>
-      </v-row>
+    <v-container class="upperContainer pa-4 text-center">
+      <v-app-bar-title class="text-sm-subtitle-1">
+        <h2>What is your goal? </h2>
+        <br>
+        <h3>Click on one bodypart you want to focus on</h3>
+        <div><br></div>
+      </v-app-bar-title>
       <v-row
         class="fill-height"
         align="center"
@@ -141,5 +137,9 @@ export default {
 .pillar {
   background: rgba(0, 0, 0, 0.6);
   height: 15rem;
+}
+
+.upperContainer {
+ margin-top: 6rem;
 }
 </style>

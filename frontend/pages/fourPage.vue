@@ -1,15 +1,12 @@
 <template>
-  <v-container class="pa-4 text-center">
-    <v-row>
-      <v-card-text
-        class="title"
-      >
-        <h1 class="pa-4">
-          How many days per week can you workout?
-        </h1>
-        <div><br></div>
-      </v-card-text>
-    </v-row>
+  <v-container class="upperContainer pa-4 text-center">
+    <v-app-bar-title class="text-sm-subtitle-1">
+      <h2>
+        How many days per week can you workout?
+      </h2>
+      <br>
+      <br>
+    </v-app-bar-title>
     <v-row
       class="fill-height"
       align="center"
@@ -121,5 +118,9 @@ export default {
 }
 
 .title {
+}
+
+.upperContainer {
+  margin-top: 6rem;
 }
 </style>

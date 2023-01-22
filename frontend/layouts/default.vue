@@ -29,7 +29,6 @@
       app
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-spacer />
       <v-btn id="no-background-hover" depressed @click="toLanding">
         <v-toolbar-title class="v-toolbar-title">
           {{ title }}
