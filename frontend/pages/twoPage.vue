@@ -20,7 +20,7 @@
           <v-col
             :key="i"
             cols="12"
-            md="4"
+            md="6"
           >
             <v-hover v-slot="{ hover }">
               <v-card
