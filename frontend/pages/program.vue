@@ -4,10 +4,10 @@
       flat
       color="transparent"
     >
-      <v-card-title align="center">
-        <h1 class="distance">
+      <v-card-title align="center" class="justify-center">
+        <h2 class="distance">
           Your Program
-        </h1>
+        </h2>
       </v-card-title>
       <v-btn
         class="distance"
@@ -19,13 +19,6 @@
         Calculate Program
       </v-btn>
       <v-card>
-        <v-card-title
-          align="center"
-          justify="center"
-          class="upperContainer"
-        >
-          <h3> Your Program </h3>
-        </v-card-title>
         <!--<dayProgram :programJSON="programJSON"></dayProgram>-->
         <div>
           <v-row
