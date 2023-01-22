@@ -95,10 +95,17 @@ export default {
   mounted () {
     this.$data.formDataObject.age = localStorage.getItem('age')
     this.$data.formDataObject.experience = localStorage.getItem('experience')
-    this.$data.formDataObject.goal = localStorage.getItem('goal')
-    this.$data.formDataObject.priorities = localStorage.getItem('priorities')
-    this.$data.formDataObject.daysPerWeek = localStorage.getItem('daysPerWeek')
-    this.$data.formDataObject.timePerDay = localStorage.getItem('timePerDay')
+    if (this.$data.formDataObject.experience === 'Beginner') {
+      this.$data.formDataObject.goal = ''
+      this.$data.formDataObject.priorities = ''
+      this.$data.formDataObject.daysPerWeek = localStorage.getItem('daysPerWeek')
+      this.$data.formDataObject.timePerDay = localStorage.getItem('timePerDay')
+    } else if (this.$data.formDataObject.experience === 'Advanced') {
+      this.$data.formDataObject.goal = localStorage.getItem('goal')
+      this.$data.formDataObject.priorities = localStorage.getItem('priorities')
+      this.$data.formDataObject.daysPerWeek = localStorage.getItem('daysPerWeek')
+      this.$data.formDataObject.timePerDay = localStorage.getItem('timePerDay')
+    }
   },
   methods: {
     /**
@@ -151,27 +158,27 @@ export default {
 
     getBackendData () {
       const input = {
-        age: 20,
-        experience: 'ADVANCED',
+        age: this.$data.formDataObject.age,
+        experience: this.$data.formDataObject.experience,
         priorities: [
-          'QUADS'
+          this.$data.formDataObject.priorities
         ],
-        daysPerWeek: 2,
-        timePerDay: 'FORTY',
-        goal: 'STRENGTH'
+        daysPerWeek: this.$data.formDataObject.daysPerWeek,
+        timePerDay: this.$data.formDataObject.timePerDay,
+        goal: this.$data.formDataObject.goal
       }
       this.programJSON = this.postFetch('http://localhost:8080/api/generateprogram', input)
     },
     getPDFData () {
       const input = {
-        age: 20,
-        experience: 'ADVANCED',
+        age: this.$data.formDataObject.age,
+        experience: this.$data.formDataObject.experience,
         priorities: [
-          'QUADS'
+          this.$data.formDataObject.priorities
         ],
-        daysPerWeek: 2,
-        timePerDay: 'FORTY',
-        goal: 'STRENGTH'
+        daysPerWeek: this.$data.formDataObject.daysPerWeek,
+        timePerDay: this.$data.formDataObject.timePerDay,
+        goal: this.$data.formDataObject.goal
       }
       this.programJSON = this.downloadPDF('http://localhost:8080/pdf/generate', input)
     },
