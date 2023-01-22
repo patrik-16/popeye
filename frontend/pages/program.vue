@@ -11,19 +11,28 @@
     </v-btn>
     <v-card>
       <v-card-title>Your Program</v-card-title>
-<!--      <Suspense>
-        <template #default>
-          for
-          <day />
-        </template>
-      </Suspense>
-      <template #fallback>
-        Loading your Program
-      </template>
-      <component :is="day" />-->
+      <!--<dayProgram :programJSON="programJSON"></dayProgram>-->
+      <div>
+        <div v-for="day in programJSON" :key="day.day">
+          <h3>Day {{ day.day }}</h3>
+          <div v-for="exercise in day.dayProgram" :key="exercise.name">
+            <p>{{ exercise.name }}</p>
+            <p>Sets: {{ exercise.sets }}</p>
+            <p>Reps: {{ exercise.reps }}</p>
+            <p>Rest: {{ exercise.rest }} seconds</p>
+            <p>Intensiveness: {{ exercise.intensiveness }}</p>
+            <p>Experience: {{ exercise.experience }}</p>
+            <p>Difficulty: {{ exercise.difficulty }}</p>
+            <p>Body part to effectiveness: {{ exercise.bodypartToEffectiveness }}</p>
+          </div>
+        </div>
+      </div>
     </v-card>
     <v-btn outlined @click="getPDFData()">
       download pdf
+    </v-btn>
+    <v-btn outlined @click="showLog()">
+      showLog
     </v-btn>
     <v-subheader>Min and max default slider</v-subheader>
 
@@ -45,7 +54,7 @@
                 single-line
                 type="number"
                 style="width: 60px"
-              ></v-text-field>
+              />
             </template>
           </v-slider>
         </v-col>
@@ -191,6 +200,9 @@ export default {
         goal: 'STRENGTH'
       }
       this.programJSON = this.downloadPDF('http://localhost:8080/pdf/generate', input)
+    },
+    showLog () {
+      console.log(this.programJSON)
     }
   }
 }
