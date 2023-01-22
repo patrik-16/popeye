@@ -1,33 +1,28 @@
 <template>
-  <v-container class="pa-4 text-center">
+  <v-container class="upperContainer pa-4 text-center">
     <v-card
       flat
       color="transparent"
     >
-      <v-card-title align="center">
-        <h1 class="distance">
+      <v-card-title align="center" class="justify-center">
+        <h2 class="distance">
           Your Program
-        </h1>
+        </h2>
       </v-card-title>
       <v-btn
         class="distance"
         outlined
+        depressed
+        color="indigo darken-2"
         @click="getBackendData()"
       >
         Calculate Program
       </v-btn>
       <v-card>
-        <v-card-title
-          align="center"
-          justify="center"
-        >
-          <h3> Your Program </h3>
-        </v-card-title>
         <!--<dayProgram :programJSON="programJSON"></dayProgram>-->
         <div>
           <v-row
             class="fill-height"
-            align="center"
             justify="center"
           >
             <template>
@@ -42,15 +37,16 @@
                 >
                   <v-card-title
                     align="left"
-                  >Day {{ day.day }}</v-card-title>
+                  >Day {{ day.day }}
+                  </v-card-title>
                   <v-card-text
                     align="left"
                     v-for="exercise in day.exerciseList"
                     :key="exercise.name">
                     <h4>Exercise: {{ exercise.name }}</h4>
-                    <li v-for="bodypart in exercise.bodypartToEffectiveness" :key="bodypart.name">
-                      Bodypart: {{ bodypart }}
-                    </li>
+                    <p v-for="(value, name) in exercise.bodypartToEffectiveness" :key="name">
+                      Bodypart: {{ name }}
+                    </p>
                     <p>Sets: {{ exercise.sets }}</p>
                     <p>Reps: {{ exercise.reps }}</p>
                     <p>Rest: {{ exercise.rest }} seconds</p>
@@ -62,38 +58,33 @@
           </v-row>
         </div>
       </v-card>
-      <v-btn
-        outlined
-        class="distance"
-        @click="getPDFData()"
-      >
-        download pdf
-      </v-btn>
-      <v-subheader>Do you want to adjust the amount of days? </v-subheader>
+      <div class="upperContainer">
+        <v-btn
+          outlined
+          depressed
+          color="indigo darken-2"
+          class="distance"
+          @click="getPDFData()"
+        >
+          download pdf
+        </v-btn>
+      </div>
+      <v-subheader>Do you want to adjust the amount of days?</v-subheader>
 
       <v-card-text>
         <v-row>
           <v-col class="pr-4">
-            <v-range-slider
-              :tick-labels="range"
-              class="align-center"
-              :value="[0, 1]"
-              :max="5"
-              :min="2"
-              hide-details
+            <v-slider
+              v-model="value"
+              :tick-labels="tickLabels"
+              min="2"
+              max="5"
+              steps="1"
               ticks="always"
               tick-size="4"
             >
-              <template #append>
-                <v-text-field
-                  class="mt-0 pt-0"
-                  hide-details
-                  single-line
-                  type="number"
-                  style="width: 60px"
-                />
-              </template>
-            </v-range-slider>
+              Pick another amount of days
+            </v-slider>
           </v-col>
         </v-row>
       </v-card-text>
@@ -114,6 +105,11 @@ export default {
       currentPage: '',
       range: [
         '2', '3', '4', '5'
+      ],
+      value: 0,
+      dayNumer: 0,
+      tickLabels: [
+        2, 3, 4, 5
       ],
       formDataObject: {
         age: '',
@@ -176,6 +172,9 @@ export default {
         console.log(e)
       }
     },
+    changeDays () {
+      this.$data.formDataObject.daysPerWeek = this.$data.value
+    },
     toLanding () {
       this.$router.push('/')
     },
@@ -232,5 +231,9 @@ export default {
 <style scoped>
 .distance {
   margin: 2rem;
+}
+
+.upperContainer {
+  margin-top: 2rem;
 }
 </style>
