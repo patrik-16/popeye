@@ -65,22 +65,17 @@
       align="center"
       justify="center"
     >
-      <v-hover>
-        <v-card
-          :elevation="hover ? 12 : 4"
-          :class="{ 'on-hover': hover }"
-          color="outlined"
+      <v-container class="pa-8">
+        <v-btn
+          color="indigo darken-2"
+          depressed
+          outlined
+          x-large
+          @click="goTo"
         >
-          <v-card-title
-            @click="goTo"
-          >
-            Get your program now!
-          </v-card-title>
-          <v-card-subtitle>
-            You have chosen {{ daysPerWeek }} days
-          </v-card-subtitle>
-        </v-card>
-      </v-hover>
+          Get your program now!
+        </v-btn>
+      </v-container>
     </v-row>
   </v-container>
 </template>

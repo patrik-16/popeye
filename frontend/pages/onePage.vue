@@ -68,7 +68,9 @@ export default {
     },
     toTwoPage () {
       localStorage.setItem('age', this.$data.age)
-      this.$router.push('/twoPage')
+      if (this.$refs.form.validate()) {
+        this.$router.replace('/twoPage')
+      }
     }
   }
 

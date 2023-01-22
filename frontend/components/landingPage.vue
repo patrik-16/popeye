@@ -48,14 +48,14 @@
                   <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn
-                      color="primary"
+                      color="indigo darken-2"
                       text
                       @click="toOnePage"
                     >
                       I accept
                     </v-btn>
                     <v-btn
-                      color="primary"
+                      color="blue-grey darken-2"
                       text
                       @click="toLandingPage"
                     >
