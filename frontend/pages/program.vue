@@ -46,6 +46,9 @@
                     v-for="exercise in day.exerciseList"
                     :key="exercise.name">
                     <h4>Exercise: {{ exercise.name }}</h4>
+                    <p v-for="(value, name) in exercise.bodypartToEffectiveness" :key="name">
+                      Bodypart: {{ name }}
+                    </p>
                     <p>Sets: {{ exercise.sets }}</p>
                     <p>Reps: {{ exercise.reps }}</p>
                     <p>Rest: {{ exercise.rest }} seconds</p>
