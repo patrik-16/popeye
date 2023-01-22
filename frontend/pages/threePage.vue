@@ -31,7 +31,7 @@
                 height="15rem"
               >
                 <div class="pillar">
-                  <v-card-title class="text-h6 white--text">
+                  <v-card-title class="text-h5 white--text">
                     <v-row
                       class="fill-height flex-column"
                       justify="space-between"

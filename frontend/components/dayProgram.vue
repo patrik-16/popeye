@@ -2,7 +2,7 @@
   <div>
     <div v-for="day in programJSON" :key="day.day">
       <h3>Day {{ day.day }}</h3>
-      <div v-for="exercise in day.dayProgram" :key="exercise.name">
+      <div v-for="exercise in day.programJSON" :key="exercise.name">
         <p>{{ exercise.name }}</p>
         <p>Sets: {{ exercise.sets }}</p>
         <p>Reps: {{ exercise.reps }}</p>
