@@ -50,16 +50,16 @@
                     <v-btn
                       color="indigo darken-2"
                       text
-                      @click="toOnePage"
+                      @click="toLandingPage"
                     >
-                      I accept
+                      Decline
                     </v-btn>
                     <v-btn
                       color="blue-grey darken-2"
                       text
-                      @click="toLandingPage"
+                      @click="toOnePage"
                     >
-                      I decline
+                      Accept
                     </v-btn>
                   </v-card-actions>
                 </v-card>

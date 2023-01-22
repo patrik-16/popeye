@@ -1,70 +1,102 @@
 <template>
-  <v-card
-    flat
-    color="transparent"
-  >
-    <v-card-title>
-      <h1> Your Program </h1>
-    </v-card-title>
-    <v-btn outlined @click="getBackendData()">
-      Calculate Program
-    </v-btn>
-    <v-card>
-      <v-card-title>Your Program</v-card-title>
-      <!--<dayProgram :programJSON="programJSON"></dayProgram>-->
-      <div>
-        <div v-for="day in programJSON" :key="day.day">
-          <h3>Day {{ day.day }}</h3>
-          <div v-for="exercise in day.exerciseList" :key="exercise.name">
-            <p>{{ exercise.name }}</p>
-            <p>Sets: {{ exercise.sets }}</p>
-            <p>Reps: {{ exercise.reps }}</p>
-            <p>Rest: {{ exercise.rest }} seconds</p>
-            <p>Intensiveness: {{ exercise.intensiveness }}</p>
-            <p>Experience: {{ exercise.experience }}</p>
-            <p>Difficulty: {{ exercise.difficulty }}</p>
-            <p>Body part to effectiveness: {{ exercise.bodypartToEffectiveness }}</p>
-          </div>
-        </div>
-      </div>
-    </v-card>
-    <v-btn outlined @click="getPDFData()">
-      download pdf
-    </v-btn>
-    <v-btn outlined @click="showLog()">
-      showLog
-    </v-btn>
-    <v-subheader>Min and max default slider</v-subheader>
-
-    <v-card-text>
-      <v-row>
-        <v-col class="pr-4">
-          <v-slider
-            v-model="slider"
-            class="align-center"
-            :max="max"
-            :min="min"
-            hide-details
+  <v-container class="pa-4 text-center">
+    <v-card
+      flat
+      color="transparent"
+    >
+      <v-card-title align="center">
+        <h1 class="distance">
+          Your Program
+        </h1>
+      </v-card-title>
+      <v-btn
+        class="distance"
+        outlined
+        @click="getBackendData()"
+      >
+        Calculate Program
+      </v-btn>
+      <v-card>
+        <v-card-title
+          align="center"
+          justify="center"
+        >
+          <h3> Your Program </h3>
+        </v-card-title>
+        <!--<dayProgram :programJSON="programJSON"></dayProgram>-->
+        <div>
+          <v-row
+            class="fill-height"
+            align="center"
+            justify="center"
           >
-            <template v-slot:append>
-              <v-text-field
-                v-model="slider"
-                class="mt-0 pt-0"
-                hide-details
-                single-line
-                type="number"
-                style="width: 60px"
-              />
+            <template>
+              <v-col
+                v-for="day in programJSON"
+                :key="day.day"
+                cols="14"
+                md="2"
+              >
+                <v-card
+                  color="blue-grey lighten-4"
+                >
+                  <v-card-title
+                    align="left"
+                  >Day {{ day.day }}</v-card-title>
+                  <v-card-text
+                    align="left"
+                    v-for="exercise in day.exerciseList"
+                    :key="exercise.name">
+                    <h4>Exercise: {{ exercise.name }}</h4>
+                    <p>Bodypart: {{ exercise.bodypartToEffectiveness }} </p>
+                    <p>Sets: {{ exercise.sets }}</p>
+                    <p>Reps: {{ exercise.reps }}</p>
+                    <p>Rest: {{ exercise.rest }} seconds</p>
+                    <p>Intensiveness: {{ exercise.intensiveness }}</p>
+                  </v-card-text>
+                </v-card>
+              </v-col>
             </template>
-          </v-slider>
-        </v-col>
-      </v-row>
-    </v-card-text>
-    <!--Slavica Part-->
-    <div>
-      <p>age: {{ formDataObject.age }} experience: {{ formDataObject.experience }} goal:{{ formDataObject.goal }} prio:{{ formDataObject.priorities }} dayspW: {{ formDataObject.daysPerWeek }} timepD:{{ formDataObject.timePerDay }}</p>
-    </div>
-  </v-card>
+          </v-row>
+        </div>
+      </v-card>
+      <v-btn
+        outlined
+        class="distance"
+        @click="getPDFData()"
+      >
+        download pdf
+      </v-btn>
+      <v-subheader>Do you want to adjust the amount of days? </v-subheader>
+
+      <v-card-text>
+        <v-row>
+          <v-col class="pr-4">
+            <v-range-slider
+              :tick-labels="range"
+              class="align-center"
+              :value="[0, 1]"
+              :max="5"
+              :min="2"
+              hide-details
+              ticks="always"
+              tick-size="4"
+            >
+              <template #append>
+                <v-text-field
+                  class="mt-0 pt-0"
+                  hide-details
+                  single-line
+                  type="number"
+                  style="width: 60px"
+                />
+              </template>
+            </v-range-slider>
+          </v-col>
+        </v-row>
+      </v-card-text>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
@@ -76,9 +108,11 @@ export default {
       max: 90,
       slider: 40,
       pdf: '',
-      programJSON: [
-      ],
+      programJSON: [],
       currentPage: '',
+      range: [
+        '2', '3', '4', '5'
+      ],
       formDataObject: {
         age: '',
         experience: '',
@@ -194,5 +228,7 @@ export default {
 </script>
 
 <style scoped>
-
+.distance {
+  margin: 2rem;
+}
 </style>

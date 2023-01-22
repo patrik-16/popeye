@@ -1,7 +1,7 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="desserts"
+    :items="items"
     item-key="name"
     sort-by="name"
     group-by="category"
