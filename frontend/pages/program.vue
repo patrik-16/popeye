@@ -6,10 +6,23 @@
     <v-card-title>
       <h1> Your Program </h1>
     </v-card-title>
+    <v-btn outlined @click="getBackendData()">
+      Calculate Program
+    </v-btn>
     <v-card>
-      program
+      <v-card-title>Your Program</v-card-title>
+<!--      <Suspense>
+        <template #default>
+          for
+          <day />
+        </template>
+      </Suspense>
+      <template #fallback>
+        Loading your Program
+      </template>
+      <component :is="day" />-->
     </v-card>
-    <v-btn outlined @click="downloadPDF()">
+    <v-btn outlined @click="getPDFData()">
       download pdf
     </v-btn>
     <v-subheader>Min and max default slider</v-subheader>
@@ -68,12 +81,13 @@ export default {
       max: 90,
       slider: 40,
       pdf: '',
+      programJSON: {},
       currentPage: '',
       formDataObject: {
         age: '',
         experience: '',
         goal: '',
-        priorities: '',
+        priorities: [],
         daysPerWeek: '',
         timePerDay: ''
       }
@@ -86,9 +100,16 @@ export default {
     toForm () {
       this.$router.push('/program')
     },
-    async downloadPDF () {
+    async downloadPDF (url, input) {
+      const getRouting = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(input)
+      }
       try {
-        const response = await fetch('http://localhost:8080/pdf/generate')
+        const response = await fetch(url, getRouting)
         const blob = await response.blob()
         const newBlob = new Blob([blob])
         const blobUrl = window.URL.createObjectURL(newBlob)
@@ -142,9 +163,7 @@ export default {
       }
       const response = await fetch(url, getRouting)
       const data = await response.json()
-      console.log(data)
-      this.exxer = data
-      return data
+      return { data }
     },
 
     getBackendData () {
@@ -158,7 +177,20 @@ export default {
         timePerDay: 'FORTY',
         goal: 'STRENGTH'
       }
-      this.postFetch('http://localhost:8080/api/advancedprogram', input)
+      this.programJSON = this.postFetch('http://localhost:8080/api/generateprogram', input)
+    },
+    getPDFData () {
+      const input = {
+        age: 20,
+        experience: 'ADVANCED',
+        priorities: [
+          'QUADS'
+        ],
+        daysPerWeek: 2,
+        timePerDay: 'FORTY',
+        goal: 'STRENGTH'
+      }
+      this.programJSON = this.downloadPDF('http://localhost:8080/pdf/generate', input)
     }
   }
 }
