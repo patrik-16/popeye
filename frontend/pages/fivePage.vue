@@ -97,7 +97,7 @@ export default {
   methods: {
     submit (i) {
       if (i === 0) {
-        this.$data.timePerDay = 'FOURTY'
+        this.$data.timePerDay = 'FORTY'
       } else if (i === 1) {
         this.$data.timePerDay = 'SIXTY'
       } else if (i === 2) {
