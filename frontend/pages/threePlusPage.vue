@@ -79,15 +79,15 @@ export default {
     submit (i) {
       this.$router.push('/fourPage')
       if (i === 0) {
-        this.$data.priorities = 'Quad'
+        this.$data.priorities = 'QUADS'
       } else if (i === 1) {
-        this.$data.priorities = 'Chest'
+        this.$data.priorities = 'CHEST'
       } else if (i === 2) {
-        this.$data.priorities = 'Bicep'
+        this.$data.priorities = 'BICEP'
       } else if (i === 3) {
-        this.$data.priorities = 'Frontdelt'
+        this.$data.priorities = 'FRONTDELT'
       } else if (i === 4) {
-        this.$data.priorities = 'Lats'
+        this.$data.priorities = 'LATS'
       }
       localStorage.setItem('priorities', this.$data.priorities)
     }

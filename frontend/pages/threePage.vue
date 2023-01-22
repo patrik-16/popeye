@@ -109,11 +109,11 @@ export default {
     submit (i) {
       this.$router.push('/threePlusPage')
       if (i === 0) {
-        this.$data.goal = 'Hypertrophy'
+        this.$data.goal = 'HYPERTROPHY'
       } else if (i === 1) {
-        this.$data.goal = 'Strength'
+        this.$data.goal = 'STRENGTH'
       } else if (i === 2) {
-        this.$data.goal = 'Conditioning'
+        this.$data.goal = 'CONDITIONING'
       }
       localStorage.setItem('goal', this.$data.goal)
     }
