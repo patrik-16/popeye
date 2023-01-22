@@ -4,6 +4,11 @@
       flat
       color="transparent"
     >
+      <v-card-title align="center">
+        <h1 class="distance">
+          Your Program
+        </h1>
+      </v-card-title>
       <v-btn
         class="distance"
         outlined
@@ -76,26 +81,17 @@
       <v-card-text>
         <v-row>
           <v-col class="pr-4">
-            <v-range-slider
-              :tick-labels="range"
-              class="align-center"
-              :value="[0, 1]"
-              :max="5"
-              :min="2"
-              hide-details
+            <v-slider
+              v-model="value"
+              :tick-labels="tickLabels"
+              min="2"
+              max="5"
+              steps="1"
               ticks="always"
               tick-size="4"
             >
-              <template #append>
-                <v-text-field
-                  class="mt-0 pt-0"
-                  hide-details
-                  single-line
-                  type="number"
-                  style="width: 60px"
-                />
-              </template>
-            </v-range-slider>
+              Pick another amount of days
+            </v-slider>
           </v-col>
         </v-row>
       </v-card-text>
@@ -116,6 +112,11 @@ export default {
       currentPage: '',
       range: [
         '2', '3', '4', '5'
+      ],
+      value: 0,
+      dayNumer: 0,
+      tickLabels: [
+        2, 3, 4, 5
       ],
       formDataObject: {
         age: '',
@@ -177,6 +178,9 @@ export default {
       } catch (e) {
         console.log(e)
       }
+    },
+    changeDays () {
+      this.$data.formDataObject.daysPerWeek = this.$data.value
     },
     toLanding () {
       this.$router.push('/')
