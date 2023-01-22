@@ -11,6 +11,7 @@
     </v-btn>
     <v-card>
       <v-card-title>Your Program</v-card-title>
+      <v-card-text> Hallo {{ programJSON }}</v-card-text>
       <!--<dayProgram :programJSON="programJSON"></dayProgram>-->
       <div>
         <div v-for="day in programJSON" :key="day.day">
@@ -167,7 +168,12 @@ export default {
         timePerDay: this.$data.formDataObject.timePerDay,
         goal: this.$data.formDataObject.goal
       }
-      this.programJSON = this.postFetch('http://localhost:8080/api/generateprogram', input)
+      const data = this.$data
+      this.$data.programJSON = this.postFetch('http://localhost:8080/api/generateprogram', input)
+        .then((result) => {
+          data.programJSON = result
+        })
+      console.log(this.$data.programJSON)
     },
     getPDFData () {
       const input = {

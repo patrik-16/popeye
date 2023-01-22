@@ -19,7 +19,8 @@
 <script>
 
 export default {
-  name: 'createdProgram',
+  name: 'CreatedProgram',
+  // eslint-disable-next-line vue/require-prop-types
   props: ['programJSON']
 }
 </script>
