@@ -101,7 +101,7 @@ export default {
 
 .pillar {
   width: 30vw;
-  height: 30vh;
+  height: 24rem;
   background: rgba(0, 0, 0, 0.1);
   padding: 20px;
 }
