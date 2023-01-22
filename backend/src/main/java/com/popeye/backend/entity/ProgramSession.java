@@ -96,22 +96,24 @@ public class ProgramSession {
         this.exerciseList.removeAll(exerciseList);
         this.exerciseList = filteredList;
 
-        handlePriority(allExercises, userinput.getPriorities(), userinput.getGoal(), userinput.getTimePerDay());
+        if (!userinput.getPriorities().contains(Bodypart.NONE)) {
+            handlePriority(allExercises, userinput.getPriorities(), userinput.getGoal(), userinput.getTimePerDay());
+        }
 
         int setsForTimeAdaption = 0;
-        if(userinput.getGoal().equals(Goal.HYPERTROPHY)) {
+        if (userinput.getGoal().equals(Goal.HYPERTROPHY)) {
             setsForTimeAdaption = 3;
         }
         //modify reps and sets
         if (userinput.getGoal().equals(Goal.STRENGTH)) {
-            for(Exercise e : exerciseList) {
+            for (Exercise e : exerciseList) {
                 switch (e.getDifficulty()) {
                     case EASY -> {
                         setsForTimeAdaption = 3;
                         modifyRepsSets(e, setsForTimeAdaption, 8, 1.0F);
                     }
                     case MEDIUM -> {
-                        if(userinput.getTimePerDay().equals(TimePerDay.FORTY)) {
+                        if (userinput.getTimePerDay().equals(TimePerDay.FORTY)) {
                             setsForTimeAdaption = 3;
                         } else {
                             setsForTimeAdaption = 4;
@@ -119,7 +121,7 @@ public class ProgramSession {
                         modifyRepsSets(e, setsForTimeAdaption, 6, 1.0F);
                     }
                     case HARD -> {
-                        if(userinput.getTimePerDay().equals(TimePerDay.FORTY)) {
+                        if (userinput.getTimePerDay().equals(TimePerDay.FORTY)) {
                             setsForTimeAdaption = 3;
                         } else {
                             setsForTimeAdaption = 6;
@@ -129,7 +131,7 @@ public class ProgramSession {
                 }
             }
         } else if (userinput.getGoal().equals(Goal.CONDITIONING)) {
-            for(Exercise e : exerciseList) {
+            for (Exercise e : exerciseList) {
                 switch (e.getDifficulty()) {
                     //TODO: enter values
                     case EASY -> {
@@ -179,7 +181,7 @@ public class ProgramSession {
 
     private int calculateRestTime(TimePerDay timePerDay, int sets) {
         int secondsExercises = 0;
-        for(Exercise e : this.exerciseList) {
+        for (Exercise e : this.exerciseList) {
             secondsExercises += SECONDS_PER_SET * e.getSets();
         }
         // e.g. 6 exercises: 5 rests
@@ -192,10 +194,11 @@ public class ProgramSession {
         currentExercise.setIntensiveness(intensiveness);
     }
 
+
     private void handlePriority(List<Exercise> allExercises, List<Bodypart> priorities, Goal goal, TimePerDay timePerDay) {
         List<Exercise> prioExerciseList = new ArrayList<>();
         int amountPrios = 2;
-        if(goal.equals(Goal.STRENGTH) && timePerDay.equals(TimePerDay.FORTY)) {
+        if (goal.equals(Goal.STRENGTH) && timePerDay.equals(TimePerDay.FORTY)) {
             amountPrios = 1;
         }
 
@@ -203,11 +206,11 @@ public class ProgramSession {
         //if priority doesn't exist: look for two exercises with this priority and add them on first and second position - delete the last 2 exercises
         //if goal is Strength one prio exercise is required - else 2 exercises with prio are required
         int countPrioExercises = 0;
-        for(Bodypart priority : priorities) {
+        for (Bodypart priority : priorities) {
             //loops through all Exercises which where before filtering in the current session
-            for(Exercise e: allExercises) {
-                if(e.getBodypartToEffectiveness().containsKey(priority.toString())) {
-                    if(!exerciseExistsInSession(e)) {
+            for (Exercise e : allExercises) {
+                if (e.getBodypartToEffectiveness().containsKey(priority.toString())) {
+                    if (!exerciseExistsInSession(e)) {
                         prioExerciseList.add(e);
                     } else {
                         countPrioExercises += 1;
@@ -221,20 +224,20 @@ public class ProgramSession {
             if (!prioExerciseList.isEmpty()) {
                 this.exerciseList.add(i, prioExerciseList.get(0));
                 prioExerciseList.remove(0);
-                if(timePerDay.equals(TimePerDay.FORTY) || timePerDay.equals(TimePerDay.SIXTY)) {
+                if (timePerDay.equals(TimePerDay.FORTY) || timePerDay.equals(TimePerDay.SIXTY)) {
                     this.exerciseList.remove(this.exerciseList.size() - 1);
                 }
             }
         }
-        if(timePerDay.equals(TimePerDay.EIGHTY)) {
+        if (timePerDay.equals(TimePerDay.EIGHTY)) {
             this.exerciseList.remove(this.exerciseList.size() - 1);
         }
     }
 
     private Boolean exerciseExistsInSession(Exercise exercise) {
 
-        for(Exercise e : this.exerciseList) {
-            if(e.equals(exercise)){
+        for (Exercise e : this.exerciseList) {
+            if (e.equals(exercise)) {
                 //this exercise switches to the first position
                 Exercise ex = e;
                 this.exerciseList.remove(ex);
