@@ -88,11 +88,12 @@ export default {
     submit (i) {
       if (i === 0) {
         this.$router.push('/fourPage')
-        this.data.experience = 'Beginner'
+        this.$data.experience = 'Beginner'
       } else if (i === 1) {
         this.$router.push('/threePage')
-        this.data.experience = 'Advanced'
+        this.$data.experience = 'Advanced'
       }
+      localStorage.setItem('experience', this.$data.experience)
     },
     toNextPage () {
       if (this.item.title === 'Beginner') {

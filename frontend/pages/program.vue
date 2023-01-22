@@ -62,28 +62,15 @@
     </v-card-text>
     <!--Slavica Part-->
     <div>
-      <p>age: {{ formDataObject.age }} experience: {{ formDataObject.experience }} gaol:{{ formDataObject.goal }} prio:{{ formDataObject.priorities }} dayspW: {{ formDataObject.daysPerWeek }} timepD:{{ formDataObject.timePerDay }}</p>
-      <one-page v-if="currentPage === 'one'" @submit="pageOneSubmit" />
-      <two-page v-if="currentPage === 'two'" @submit="pageTwoSubmit" />
-      <three-page v-if="currentPage === 'three'" @submit="pageThreeSubmit" />
-      <three-plus-page v-if="currentPage === 'threeplus'" @submit="pageThreePlusSubmit" />
-      <four-page v-if="currentPage === 'four'" @submit="pageFourSubmit" />
-      <five-page v-if="currentPage === 'five'" @goTo="pageFiveSubmit" />
+      <p>age: {{ formDataObject.age }} experience: {{ formDataObject.experience }} goal:{{ formDataObject.goal }} prio:{{ formDataObject.priorities }} dayspW: {{ formDataObject.daysPerWeek }} timepD:{{ formDataObject.timePerDay }}</p>
     </div>
   </v-card>
 </template>
 
 <script>
-import OnePage from '@/pages/onePage.vue'
-import TwoPage from '@/pages/twoPage.vue'
-import ThreePage from '@/pages/threePage.vue'
-import ThreePlusPage from '@/pages/threePlusPage.vue'
-import FourPage from '@/pages/fourPage.vue'
-import FivePage from '@/pages/fivePage.vue'
 
 export default {
   name: 'Program',
-  components: { OnePage, TwoPage, ThreePage, ThreePlusPage, FourPage, FivePage },
   data () {
     return {
       min: -50,
@@ -101,6 +88,17 @@ export default {
         timePerDay: ''
       }
     }
+  },
+  /**
+   * The mounted () method is executed when the component is loaded https://vuejs.org/api/options-lifecycle.html#mounted
+   */
+  mounted () {
+    this.$data.formDataObject.age = localStorage.getItem('age')
+    this.$data.formDataObject.experience = localStorage.getItem('experience')
+    this.$data.formDataObject.goal = localStorage.getItem('goal')
+    this.$data.formDataObject.priorities = localStorage.getItem('priorities')
+    this.$data.formDataObject.daysPerWeek = localStorage.getItem('daysPerWeek')
+    this.$data.formDataObject.timePerDay = localStorage.getItem('timePerDay')
   },
   methods: {
     /**
@@ -137,30 +135,6 @@ export default {
     },
     toLanding () {
       this.$router.push('/')
-    },
-    pageOneSubmit (data) {
-      this.$data.formDataObject.age = OnePage.data().age
-      this.$data.currentPage = 'one'
-    },
-    pageTwoSubmit (data) {
-      this.$data.formDataObject.experience = TwoPage.data().experience
-      this.$data.currentPage = 'two'
-    },
-    pageThreeSubmit (data) {
-      this.$data.formDataObject.goal = ThreePage.data().goal
-      this.$data.currentPage = 'three'
-    },
-    pageThreePlusSubmit (data) {
-      this.$data.formDataObject.priorities = ThreePlusPage.data().priorities
-      this.$data.currentPage = 'threeplus'
-    },
-    pageFourSubmit (data) {
-      this.$data.formDataObject.daysPerWeek = FourPage.data().daysPerWeek
-      this.$data.currentPage = 'four'
-    },
-    pageFiveSubmit (data) {
-      this.$data.formDataObject.timePerDay = FivePage.data().timePerDay
-      this.$data.currentPage = 'five'
     },
     async postFetch (url, input) {
       const getRouting = {

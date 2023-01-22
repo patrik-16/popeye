@@ -90,10 +90,11 @@ export default {
       } else if (i === 3) {
         this.$data.daysPerWeek = '5'
       }
+      localStorage.setItem('daysPerWeek', this.$data.daysPerWeek)
     }
   },
   data: () => ({
-    daysPerWeek: 'x',
+    daysPerWeek: '',
     icons: ['mdi-weight-lifter'],
     items: [
       { title: '2' },

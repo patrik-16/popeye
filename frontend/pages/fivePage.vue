@@ -97,21 +97,22 @@ export default {
   methods: {
     submit (i) {
       if (i === 0) {
-        this.$data.timesPerDay = '2'
+        this.$data.timePerDay = 'FOURTY'
       } else if (i === 1) {
-        this.$data.timesPerDay = '3'
+        this.$data.timePerDay = 'SIXTY'
       } else if (i === 2) {
-        this.$data.timesPerDay = '4'
+        this.$data.timePerDay = 'EIGHTY'
       } else if (i === 3) {
-        this.$data.timesPerDay = '5'
+        this.$data.timePerDay = 'UNLIMITED'
       }
+      localStorage.setItem('timePerDay', this.$data.timePerDay)
     },
     goTo () {
       this.$router.push('/program')
     }
   },
   data: () => ({
-    timesPerDay: '',
+    timePerDay: '',
     daysPerWeek: program.data().formDataObject.daysPerWeek,
     icons: ['mdi-weight-lifter'],
     hover: '',

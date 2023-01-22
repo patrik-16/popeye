@@ -81,7 +81,7 @@
 export default {
   name: 'ThreePage',
   data: () => ({
-    goal: 'x',
+    goal: '',
     icons: ['mdi-weight-lifter'],
     items: [
       {
@@ -115,6 +115,7 @@ export default {
       } else if (i === 2) {
         this.$data.goal = 'Conditioning'
       }
+      localStorage.setItem('goal', this.$data.goal)
     }
   }
 }

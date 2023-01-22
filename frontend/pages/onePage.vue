@@ -67,6 +67,7 @@ export default {
       this.$emit('submit', this.$data)
     },
     toTwoPage () {
+      localStorage.setItem('age', this.$data.age)
       this.$router.push('/twoPage')
     }
   }

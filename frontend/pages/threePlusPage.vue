@@ -89,6 +89,7 @@ export default {
       } else if (i === 4) {
         this.$data.priorities = 'Lats'
       }
+      localStorage.setItem('priorities', this.$data.priorities)
     }
   },
   data: () => ({
