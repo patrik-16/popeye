@@ -2,10 +2,9 @@
   <v-app class="app">
     <v-container class="upperContainer pa-4 text-center">
       <v-app-bar-title class="text-sm-subtitle-1">
-        <h2>What is your goal? </h2>
-        <br>
-        <h3>Click on one bodypart you want to focus on</h3>
+        <h2>Click on one bodypart you want to focus on </h2>
         <div><br></div>
+        <br>
       </v-app-bar-title>
       <v-row
         class="fill-height"

@@ -78,27 +78,10 @@ export default {
           to: '/onePage'
         },
         {
-          icon: 'mdi-account-outline',
-          title: 'Login',
-          to: '/login'
-        },
-        /* TODO: only show if login is true ..... */
-        {
-          icon: 'mdi-account',
-          title: 'Profile',
-          to: '/profile'
-        },
-        {
           icon: 'mdi-weight-lifter',
           title: 'view your Program',
           to: '/program'
-        },
-        {
-          icon: 'mdi-account-outline',
-          title: 'Logout',
-          to: '/'
         }
-
       ],
       title: 'Popeye'
     }

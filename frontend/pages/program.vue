@@ -69,7 +69,7 @@
           download pdf
         </v-btn>
       </div>
-      <v-subheader>Do you want to adjust the amount of days?</v-subheader>
+<!--      <v-subheader>Do you want to adjust the amount of days?</v-subheader>
 
       <v-card-text>
         <v-row>
@@ -87,7 +87,7 @@
             </v-slider>
           </v-col>
         </v-row>
-      </v-card-text>
+      </v-card-text>-->
     </v-card>
   </v-container>
 </template>
@@ -230,7 +230,7 @@ export default {
 
 <style scoped>
 .distance {
-  margin: 2rem;
+  margin-bottom: 3rem;
 }
 
 .upperContainer {
