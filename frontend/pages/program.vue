@@ -96,8 +96,6 @@ export default {
     this.$data.formDataObject.age = localStorage.getItem('age')
     this.$data.formDataObject.experience = localStorage.getItem('experience')
     if (this.$data.formDataObject.experience === 'BEGINNER') {
-      this.$data.formDataObject.goal = ''
-      this.$data.formDataObject.priorities = ''
       this.$data.formDataObject.daysPerWeek = localStorage.getItem('daysPerWeek')
       this.$data.formDataObject.timePerDay = localStorage.getItem('timePerDay')
     } else if (this.$data.formDataObject.experience === 'ADVANCED') {
