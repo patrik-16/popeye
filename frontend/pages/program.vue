@@ -11,7 +11,11 @@
     </v-btn>
     <v-card>
       <v-card-title>Your Program</v-card-title>
-      <v-card-text> Hallo {{ programJSON }}</v-card-text>
+      <v-card-text> {{ programJSON[0] }}</v-card-text>
+      <v-card-text> {{ programJSON[1] }}</v-card-text>
+      <v-card-text> {{ programJSON[2] }}</v-card-text>
+      <v-card-text> {{ programJSON[3] }}</v-card-text>
+      <v-card-text> {{ programJSON[4] }}</v-card-text>
       <!--<dayProgram :programJSON="programJSON"></dayProgram>-->
       <div>
         <div v-for="day in programJSON" :key="day.day">
@@ -77,7 +81,8 @@ export default {
       max: 90,
       slider: 40,
       pdf: '',
-      programJSON: {},
+      programJSON: [
+      ],
       currentPage: '',
       formDataObject: {
         age: '',
@@ -155,7 +160,6 @@ export default {
       const data = await response.json()
       return { data }
     },
-
     getBackendData () {
       const input = {
         age: this.$data.formDataObject.age,

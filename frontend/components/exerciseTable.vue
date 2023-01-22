@@ -2,14 +2,13 @@
   <v-data-table
     :headers="headers"
     :items="exercises"
-    sort-by="day"
+    sort-by="name"
+    item-key="name"
     class="elevation-1"
     group-by="day"
     show-group-by
   >
-
   </v-data-table>
-
 </template>
 
 <script>
