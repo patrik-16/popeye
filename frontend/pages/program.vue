@@ -11,16 +11,11 @@
     </v-btn>
     <v-card>
       <v-card-title>Your Program</v-card-title>
-      <v-card-text> {{ programJSON[0] }}</v-card-text>
-      <v-card-text> {{ programJSON[1] }}</v-card-text>
-      <v-card-text> {{ programJSON[2] }}</v-card-text>
-      <v-card-text> {{ programJSON[3] }}</v-card-text>
-      <v-card-text> {{ programJSON[4] }}</v-card-text>
       <!--<dayProgram :programJSON="programJSON"></dayProgram>-->
       <div>
         <div v-for="day in programJSON" :key="day.day">
           <h3>Day {{ day.day }}</h3>
-          <div v-for="exercise in day.programJSON" :key="exercise.name">
+          <div v-for="exercise in day.exerciseList" :key="exercise.name">
             <p>{{ exercise.name }}</p>
             <p>Sets: {{ exercise.sets }}</p>
             <p>Reps: {{ exercise.reps }}</p>
