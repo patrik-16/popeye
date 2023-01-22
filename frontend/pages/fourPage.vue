@@ -27,7 +27,7 @@
             <v-card
               :elevation="hover ? 12 : 2"
               :class="{ 'on-hover': hover }"
-              color="grey"
+              color="black"
               @click="submit(i)"
             >
               <v-card-title class="text-h4 white--text">
