@@ -1,13 +1,10 @@
 package com.popeye.backend.controller;
 
-import com.popeye.backend.entity.Program;
 import com.popeye.backend.entity.Userinput;
 import com.popeye.backend.services.PDFGeneratorService;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 

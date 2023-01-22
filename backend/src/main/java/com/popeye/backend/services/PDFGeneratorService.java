@@ -1,7 +1,6 @@
 package com.popeye.backend.services;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 import com.lowagie.text.*;
@@ -13,7 +12,6 @@ import com.popeye.backend.entity.Exercise;
 import com.popeye.backend.entity.Program;
 import com.popeye.backend.entity.ProgramSession;
 import com.popeye.backend.entity.Userinput;
-import com.popeye.backend.enums.Bodypart;
 import com.popeye.backend.enums.Experience;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;

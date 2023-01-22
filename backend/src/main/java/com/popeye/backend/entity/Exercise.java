@@ -1,7 +1,6 @@
 package com.popeye.backend.entity;
 
 import com.popeye.backend.constants.ProgramConstants;
-import com.popeye.backend.enums.Bodypart;
 import com.popeye.backend.enums.Difficulty;
 import com.popeye.backend.enums.Experience;
 import lombok.Getter;

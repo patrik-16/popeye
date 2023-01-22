@@ -7,8 +7,6 @@ import com.popeye.backend.enums.Goal;
 import com.popeye.backend.enums.TimePerDay;
 import lombok.Getter;
 import lombok.Setter;
-import org.checkerframework.checker.mustcall.qual.CreatesMustCallFor;
-import org.springframework.http.StreamingHttpOutputMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -133,7 +131,6 @@ public class ProgramSession {
         } else if (userinput.getGoal().equals(Goal.CONDITIONING)) {
             for (Exercise e : exerciseList) {
                 switch (e.getDifficulty()) {
-                    //TODO: enter values
                     case EASY -> {
                         setsForTimeAdaption = 2;
                         modifyRepsSets(e, setsForTimeAdaption, 15, 3.0F);
@@ -152,19 +149,17 @@ public class ProgramSession {
 
         this.timeAdaptation(userinput, setsForTimeAdaption);
 
-        //TODO: delete this printing thing - just for me to check if its working
+        /*to check if calculated session are ok
         for (Exercise currentExercise : this.exerciseList) {
             System.out.println("Day: " + this.getDay() + ": " + currentExercise.getName() + currentExercise.getReps() + currentExercise.getDifficulty() + " rest time: " + currentExercise.getRest());
         }
-        System.out.println(this.getDay() + "Day - all in one: " + this.exerciseList.size() + "exercises and total time: " + this.getSecondsPerSession());
+        System.out.println(this.getDay() + "Day - all in one: " + this.exerciseList.size() + "exercises and total time: " + this.getSecondsPerSession());*/
 
         return this;
     }
 
     /***
      * This function focus on the userinput timePerDay and does the corresponding calculation
-     * @param userinput
-     * @return the adapted Exercises
      */
     private void timeAdaptation(Userinput userinput, int setsForTimeAdaption) {
         System.out.println(userinput.getTimePerDay());
@@ -173,7 +168,6 @@ public class ProgramSession {
             case SIXTY -> this.updateRestTime(calculateRestTime(TimePerDay.SIXTY, setsForTimeAdaption));
             case EIGHTY -> this.updateRestTime(calculateRestTime(TimePerDay.EIGHTY, setsForTimeAdaption));
             case UNLIMITED -> {
-                System.out.println("This Person wants to train real hard");//TODO: add two more exercises? ;
                 this.updateRestTime(calculateRestTime(TimePerDay.EIGHTY, setsForTimeAdaption) + 30);
             }
         }

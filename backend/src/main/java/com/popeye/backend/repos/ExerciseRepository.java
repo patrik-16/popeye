@@ -4,7 +4,6 @@ import com.popeye.backend.entity.Exercise;
 import com.popeye.backend.enums.Difficulty;
 import com.popeye.backend.enums.Experience;
 import com.popeye.backend.enums.Goal;
-import com.popeye.backend.repos.FirebaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

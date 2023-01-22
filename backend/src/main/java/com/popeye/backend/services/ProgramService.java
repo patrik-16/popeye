@@ -46,13 +46,14 @@ public class ProgramService {
 
     /***
      * Function that generates Sessions regarding daysPerWeek and fullbody, lower, upper...
-     * @param: userinput
+     * @param userinput from the user
      * @return a program that is designed concerning Goal, Priorities, daysPerWeek and timePerDay
      */
     private Program generateAdvancedProgram(Userinput userinput) {
 
         switch (userinput.getDaysPerWeek()) {
             case 1 -> {
+                //will not happen, because user can only decide between 2 and 5
                 return null; //TODO handle error exception in frontend
             }
             case 2 -> {
