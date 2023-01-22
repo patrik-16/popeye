@@ -69,7 +69,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'Program',
   data () {
@@ -171,7 +170,7 @@ export default {
       const data = this.$data
       this.$data.programJSON = this.postFetch('http://localhost:8080/api/generateprogram', input)
         .then((result) => {
-          data.programJSON = result
+          data.programJSON = result.data.program
         })
       console.log(this.$data.programJSON)
     },
