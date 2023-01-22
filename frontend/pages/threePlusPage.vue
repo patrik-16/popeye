@@ -1,113 +1,117 @@
 <template>
-  <v-container class="pa-4 text-center">
-    <v-row>
-      <v-card-text
-        class="title"
-      >
-        <h1>What do you want to focus on?</h1>
+  <v-app class="app">
+    <v-container class="upperContainer pa-4 text-center">
+      <v-app-bar-title class="text-sm-subtitle-1">
+        <h2>What is your goal? </h2>
+        <br>
+        <h3>Click on one bodypart you want to focus on</h3>
         <div><br></div>
-        <h3 class="mt-1 "> Click on one, two or three areas (zB) </h3>
-        <div><br></div>
-      </v-card-text>
-    </v-row>
-    <v-row
-      class="fill-height"
-      align="center"
-      justify="center"
-    >
-      <template
-        v-for="(item, i) in items"
+      </v-app-bar-title>
+      <v-row
+        class="fill-height"
+        align="center"
+        justify="center"
       >
-        <v-col
-          :key="i"
-          cols="12"
-          md="4"
+        <template
+          v-for="(item, i) in items"
         >
-          <v-hover v-slot="{ hover }">
-            <v-card
-              :elevation="hover ? 12 : 2"
-              :class="{ 'on-hover': hover }"
-              @click="goTo"
-            >
-              <v-img
-                :src="item.img"
-                height="225px"
+          <v-col
+            :key="i"
+            cols="12"
+            md="4"
+          >
+            <v-hover v-slot="{ hover }">
+              <v-card
+                :elevation="hover ? 12 : 2"
+                :class="{ 'on-hover': hover }"
+                @click="submit(i)"
               >
-                <v-card-title class="text-h4 white--text">
-                  <v-row
-                    class="fill-height flex-column"
-                    justify="space-between"
-                  >
-                    <p class="mt-10 subheading">
-                      {{ item.title }}
-                    </p>
-
-                    <div>
-                      <p class="ma-0 text-body-1 font-weight-bold">
-                        {{ item.text }}
-                      </p>
-                      <p class="text-caption font-weight-bold">
-                        {{ item.subtext }}
-                      </p>
-                    </div>
-
-                    <div class="align-self-center">
-                      <v-btn
-                        v-for="(icon, index) in icons"
-                        :key="index"
-                        :class="{ 'show-btns': hover }"
-                        :color="transparent"
-                        icon
+                <v-img
+                  :src="item.img"
+                  height="225px"
+                >
+                  <div class="pillar">
+                    <v-card-title class="text-h5 white--text">
+                      <v-row
+                        class="fill-height flex-column"
+                        justify="space-between"
                       >
-                        <v-icon
-                          :class="{ 'show-btns': hover }"
-                          :color="transparent"
-                        >
-                          {{ icon }}
-                        </v-icon>
-                      </v-btn>
-                    </div>
-                  </v-row>
-                </v-card-title>
-              </v-img>
-            </v-card>
-          </v-hover>
-        </v-col>
-      </template>
-    </v-row>
-  </v-container>
+                        <p class="mt-15 subheading text-center">
+                          {{ item.title }}
+                        </p>
+
+                        <div class="align-self-center text-center">
+                          <v-btn
+                            v-for="(icon, index) in icons"
+                            :key="index"
+                            :class="{ 'show-btns': hover }"
+                            :color="transparent"
+                            icon
+                          >
+                            <v-icon
+                              :class="{ 'show-btns': hover }"
+                              :color="transparent"
+                            >
+                              {{ icon }}
+                            </v-icon>
+                          </v-btn>
+                        </div>
+                      </v-row>
+                    </v-card-title>
+                  </div>
+                </v-img>
+              </v-card>
+            </v-hover>
+          </v-col>
+        </template>
+      </v-row>
+    </v-container>
+  </v-app>
 </template>
 
 <script>
 
 export default {
-  name: 'TwoPage',
+  name: 'ThreePlusPage',
   methods: {
-    goTo () {
+    submit (i) {
       this.$router.push('/fourPage')
+      if (i === 0) {
+        this.$data.priorities = 'QUADS'
+      } else if (i === 1) {
+        this.$data.priorities = 'CHEST'
+      } else if (i === 2) {
+        this.$data.priorities = 'BICEP'
+      } else if (i === 3) {
+        this.$data.priorities = 'FRONTDELT'
+      } else if (i === 4) {
+        this.$data.priorities = 'LATS'
+      }
+      localStorage.setItem('priorities', this.$data.priorities)
     }
   },
   data: () => ({
+    priorities: '',
     icons: ['mdi-weight-lifter'],
     items: [
       {
-        title: 'Legs',
+        title: 'Quad',
         img: '/legs.png'
-      },
-      {
-        title: 'Arms',
-        img: '/arms.jpg'
-      },
-      {
-        title: 'Back',
-        img: '/back.jpg'
       },
       {
         title: 'Chest',
         img: '/chest.jpg'
       },
       {
-        title: 'Glutes',
+        title: 'Bicep',
+        img: '/arms.jpg'
+      },
+      {
+        title: 'Frontdelt',
+        img: '/frontdelt1.webp.crdownload'
+      },
+      {
+        title: 'Lats',
         img: '/glutes.webp'
       }
     ],
@@ -117,6 +121,7 @@ export default {
 </script>
 
 <style scoped>
+
 .v-card {
   transition: opacity .4s ease-in-out;
 }
@@ -129,6 +134,12 @@ export default {
   color: rgba(255, 255, 255, 1) !important;
 }
 
-.title {
+.pillar {
+  background: rgba(0, 0, 0, 0.6);
+  height: 15rem;
+}
+
+.upperContainer {
+ margin-top: 6rem;
 }
 </style>

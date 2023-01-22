@@ -1,23 +1,148 @@
 <template>
-  <v-app>
-    <div>
-      <h1>Page for the last question</h1>
-      <v-btn outlined @click="downloadPDF()">
+  <v-container class="pa-4 text-center">
+    <v-card
+      flat
+      color="transparent"
+    >
+      <v-card-title align="center">
+        <h1 class="distance">
+          Your Program
+        </h1>
+      </v-card-title>
+      <v-btn
+        class="distance"
+        outlined
+        @click="getBackendData()"
+      >
+        Calculate Program
+      </v-btn>
+      <v-card>
+        <v-card-title
+          align="center"
+          justify="center"
+        >
+          <h3> Your Program </h3>
+        </v-card-title>
+        <!--<dayProgram :programJSON="programJSON"></dayProgram>-->
+        <div>
+          <v-row
+            class="fill-height"
+            align="center"
+            justify="center"
+          >
+            <template>
+              <v-col
+                v-for="day in programJSON"
+                :key="day.day"
+                cols="14"
+                md="2"
+              >
+                <v-card
+                  color="blue-grey lighten-4"
+                >
+                  <v-card-title
+                    align="left"
+                  >Day {{ day.day }}</v-card-title>
+                  <v-card-text
+                    align="left"
+                    v-for="exercise in day.exerciseList"
+                    :key="exercise.name">
+                    <h4>Exercise: {{ exercise.name }}</h4>
+                    <li v-for="bodypart in exercise.bodypartToEffectiveness" :key="bodypart.name">
+                      Bodypart: {{ bodypart }}
+                    </li>
+                    <p>Sets: {{ exercise.sets }}</p>
+                    <p>Reps: {{ exercise.reps }}</p>
+                    <p>Rest: {{ exercise.rest }} seconds</p>
+                    <p>Intensiveness: {{ exercise.intensiveness }}</p>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+            </template>
+          </v-row>
+        </div>
+      </v-card>
+      <v-btn
+        outlined
+        class="distance"
+        @click="getPDFData()"
+      >
         download pdf
       </v-btn>
-    </div>
-  </v-app>
+      <v-subheader>Do you want to adjust the amount of days? </v-subheader>
+
+      <v-card-text>
+        <v-row>
+          <v-col class="pr-4">
+            <v-range-slider
+              :tick-labels="range"
+              class="align-center"
+              :value="[0, 1]"
+              :max="5"
+              :min="2"
+              hide-details
+              ticks="always"
+              tick-size="4"
+            >
+              <template #append>
+                <v-text-field
+                  class="mt-0 pt-0"
+                  hide-details
+                  single-line
+                  type="number"
+                  style="width: 60px"
+                />
+              </template>
+            </v-range-slider>
+          </v-col>
+        </v-row>
+      </v-card-text>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
-
 export default {
   name: 'Program',
-
-  data: () => ({
-    pdf: ''
-  }),
-
+  data () {
+    return {
+      min: -50,
+      max: 90,
+      slider: 40,
+      pdf: '',
+      programJSON: [],
+      currentPage: '',
+      range: [
+        '2', '3', '4', '5'
+      ],
+      formDataObject: {
+        age: '',
+        experience: '',
+        goal: '',
+        priorities: [],
+        daysPerWeek: '',
+        timePerDay: ''
+      }
+    }
+  },
+  /**
+   * The mounted () method is executed when the component is loaded https://vuejs.org/api/options-lifecycle.html#mounted
+   */
+  mounted () {
+    this.$data.formDataObject.age = localStorage.getItem('age')
+    this.$data.formDataObject.experience = localStorage.getItem('experience')
+    if (this.$data.formDataObject.experience === 'BEGINNER') {
+      this.$data.formDataObject.goal = 'NONE'
+      this.$data.formDataObject.priorities = 'NONE'
+      this.$data.formDataObject.daysPerWeek = localStorage.getItem('daysPerWeek')
+      this.$data.formDataObject.timePerDay = localStorage.getItem('timePerDay')
+    } else if (this.$data.formDataObject.experience === 'ADVANCED') {
+      this.$data.formDataObject.goal = localStorage.getItem('goal')
+      this.$data.formDataObject.priorities = localStorage.getItem('priorities')
+      this.$data.formDataObject.daysPerWeek = localStorage.getItem('daysPerWeek')
+      this.$data.formDataObject.timePerDay = localStorage.getItem('timePerDay')
+    }
+  },
   methods: {
     /**
      * Uses VueRouter to send the user to the formPage.vue
@@ -25,9 +150,16 @@ export default {
     toForm () {
       this.$router.push('/program')
     },
-    async downloadPDF () {
+    async downloadPDF (url, input) {
+      const getRouting = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(input)
+      }
       try {
-        const response = await fetch('http://localhost:8080/pdf/generate')
+        const response = await fetch(url, getRouting)
         const blob = await response.blob()
         const newBlob = new Blob([blob])
         const blobUrl = window.URL.createObjectURL(newBlob)
@@ -43,11 +175,62 @@ export default {
       } catch (e) {
         console.log(e)
       }
+    },
+    toLanding () {
+      this.$router.push('/')
+    },
+    async postFetch (url, input) {
+      const getRouting = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(input)
+      }
+      const response = await fetch(url, getRouting)
+      const data = await response.json()
+      return { data }
+    },
+    getBackendData () {
+      const input = {
+        age: this.$data.formDataObject.age,
+        experience: this.$data.formDataObject.experience,
+        priorities: [
+          this.$data.formDataObject.priorities
+        ],
+        daysPerWeek: this.$data.formDataObject.daysPerWeek,
+        timePerDay: this.$data.formDataObject.timePerDay,
+        goal: this.$data.formDataObject.goal
+      }
+      const data = this.$data
+      this.$data.programJSON = this.postFetch('http://localhost:8080/api/generateprogram', input)
+        .then((result) => {
+          data.programJSON = result.data.program
+        })
+      console.log(this.$data.programJSON)
+    },
+    getPDFData () {
+      const input = {
+        age: this.$data.formDataObject.age,
+        experience: this.$data.formDataObject.experience,
+        priorities: [
+          this.$data.formDataObject.priorities
+        ],
+        daysPerWeek: this.$data.formDataObject.daysPerWeek,
+        timePerDay: this.$data.formDataObject.timePerDay,
+        goal: this.$data.formDataObject.goal
+      }
+      this.programJSON = this.downloadPDF('http://localhost:8080/pdf/generate', input)
+    },
+    showLog () {
+      console.log(this.programJSON)
     }
   }
 }
 </script>
 
 <style scoped>
-
+.distance {
+  margin: 2rem;
+}
 </style>

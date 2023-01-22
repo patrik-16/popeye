@@ -12,7 +12,7 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/png', href: '~/static/icon.png' }
+      { rel: 'icon', type: 'image/png', href: '/favicon.ico' }
     ]
   },
 
@@ -55,8 +55,8 @@ export default {
       lang: 'en'
     },
     icon: {
-      source: '~/static/icon.png',
-      fileName: 'icon.png'
+      source: '/favicon.ico',
+      fileName: 'favicon.ico'
     }
   },
 

@@ -4,7 +4,9 @@
       <v-card-text
         class="title"
       >
-        <h1 class="pa-4">How much time per day do you have?</h1>
+        <h1 class="pa-4">
+          How much time per day do you have?
+        </h1>
         <div><br></div>
       </v-card-text>
     </v-row>
@@ -19,14 +21,14 @@
         <v-col
           :key="i"
           cols="12"
-          md="4"
+          md="3"
         >
           <v-hover v-slot="{ hover }">
             <v-card
               :elevation="hover ? 12 : 2"
               :class="{ 'on-hover': hover }"
-              @click="goTo"
               color="grey"
+              @click="submit(i)"
             >
               <v-card-title class="text-h4 white--text">
                 <v-row
@@ -64,21 +66,35 @@
 </template>
 
 <script>
+import program from '@/pages/program.vue'
 
 export default {
-  name: 'TwoPage',
+  name: 'FivePage',
   methods: {
-    goTo () {
+    submit (i) {
       this.$router.push('/program')
+      if (i === 0) {
+        this.$data.timePerDay = 'FORTY'
+      } else if (i === 1) {
+        this.$data.timePerDay = 'SIXTY'
+      } else if (i === 2) {
+        this.$data.timePerDay = 'EIGHTY'
+      } else if (i === 3) {
+        this.$data.timePerDay = 'UNLIMITED'
+      }
+      localStorage.setItem('timePerDay', this.$data.timePerDay)
     }
   },
   data: () => ({
+    timePerDay: '',
+    daysPerWeek: program.data().formDataObject.daysPerWeek,
     icons: ['mdi-weight-lifter'],
+    hover: '',
     items: [
       { title: '40 min' },
       { title: '60 min' },
       { title: '1h 20 min' },
-      { title: 'it doesn\'t matter' }
+      { title: 'no matter' }
     ],
     transparent: 'rgba(255, 255, 255, 0)'
   })
