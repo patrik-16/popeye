@@ -1,10 +1,15 @@
 <template>
-  <v-container class="upperContainer pa-4 text-center">
-    <v-app-bar-title class="text-sm-subtitle-1">
-      <h2>How much time per day do you have?</h2>
-      <div><br></div>
-      <br>
-    </v-app-bar-title>
+  <v-container class="pa-4 text-center">
+    <v-row>
+      <v-card-text
+        class="title"
+      >
+        <h1 class="pa-4">
+          How much time per day do you have?
+        </h1>
+        <div><br></div>
+      </v-card-text>
+    </v-row>
     <v-row
       class="fill-height"
       align="center"
@@ -22,7 +27,7 @@
             <v-card
               :elevation="hover ? 12 : 2"
               :class="{ 'on-hover': hover }"
-              color="black"
+              color="grey"
               @click="submit(i)"
             >
               <v-card-title class="text-h4 white--text">
@@ -57,26 +62,6 @@
         </v-col>
       </template>
     </v-row>
-    <v-row>
-      <div><br></div>
-    </v-row>
-    <v-row
-      class="fill-height mt-10"
-      align="center"
-      justify="center"
-    >
-      <v-container class="pa-8">
-        <v-btn
-          color="indigo darken-2"
-          depressed
-          outlined
-          x-large
-          @click="goTo"
-        >
-          Get your program now!
-        </v-btn>
-      </v-container>
-    </v-row>
   </v-container>
 </template>
 
@@ -87,6 +72,7 @@ export default {
   name: 'FivePage',
   methods: {
     submit (i) {
+      this.$router.push('/program')
       if (i === 0) {
         this.$data.timePerDay = 'FORTY'
       } else if (i === 1) {
@@ -97,9 +83,6 @@ export default {
         this.$data.timePerDay = 'UNLIMITED'
       }
       localStorage.setItem('timePerDay', this.$data.timePerDay)
-    },
-    goTo () {
-      this.$router.push('/program')
     }
   },
   data: () => ({
@@ -132,9 +115,5 @@ export default {
 }
 
 .title {
-}
-
-.upperContainer {
-  margin-top: 6rem;
 }
 </style>
