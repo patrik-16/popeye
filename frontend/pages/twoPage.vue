@@ -38,7 +38,7 @@
                         class="fill-height flex-column"
                         justify="space-between"
                       >
-                        <p class="mt-14 subheading">
+                        <p class="mt-14 subheading font-size">
                           {{ item.title }}
                         </p>
 
