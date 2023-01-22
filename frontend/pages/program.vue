@@ -1,17 +1,14 @@
 <template>
-  <v-container class="pa-4 text-center">
+  <v-container class="upperContainer pa-4 text-center">
     <v-card
       flat
       color="transparent"
     >
-      <v-card-title align="center">
-        <h1 class="distance">
-          Your Program
-        </h1>
-      </v-card-title>
       <v-btn
         class="distance"
         outlined
+        depressed
+        color="indigo darken-2"
         @click="getBackendData()"
       >
         Calculate Program
@@ -20,6 +17,7 @@
         <v-card-title
           align="center"
           justify="center"
+          class="upperContainer"
         >
           <h3> Your Program </h3>
         </v-card-title>
@@ -27,7 +25,6 @@
         <div>
           <v-row
             class="fill-height"
-            align="center"
             justify="center"
           >
             <template>
@@ -42,15 +39,13 @@
                 >
                   <v-card-title
                     align="left"
-                  >Day {{ day.day }}</v-card-title>
+                  >Day {{ day.day }}
+                  </v-card-title>
                   <v-card-text
                     align="left"
                     v-for="exercise in day.exerciseList"
                     :key="exercise.name">
                     <h4>Exercise: {{ exercise.name }}</h4>
-                    <li v-for="bodypart in exercise.bodypartToEffectiveness" :key="bodypart.name">
-                      Bodypart: {{ bodypart }}
-                    </li>
                     <p>Sets: {{ exercise.sets }}</p>
                     <p>Reps: {{ exercise.reps }}</p>
                     <p>Rest: {{ exercise.rest }} seconds</p>
@@ -62,14 +57,18 @@
           </v-row>
         </div>
       </v-card>
-      <v-btn
-        outlined
-        class="distance"
-        @click="getPDFData()"
-      >
-        download pdf
-      </v-btn>
-      <v-subheader>Do you want to adjust the amount of days? </v-subheader>
+      <div class="upperContainer">
+        <v-btn
+          outlined
+          depressed
+          color="indigo darken-2"
+          class="distance"
+          @click="getPDFData()"
+        >
+          download pdf
+        </v-btn>
+      </div>
+      <v-subheader>Do you want to adjust the amount of days?</v-subheader>
 
       <v-card-text>
         <v-row>
@@ -232,5 +231,9 @@ export default {
 <style scoped>
 .distance {
   margin: 2rem;
+}
+
+.upperContainer {
+  margin-top: 2rem;
 }
 </style>
