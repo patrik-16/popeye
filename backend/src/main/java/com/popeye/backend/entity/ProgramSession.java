@@ -73,7 +73,7 @@ public class ProgramSession {
     public ProgramSession sessionAdaptation(Userinput userinput, Multimap<String, Integer> filteringMap) {
 
         //saved all exercises of session created in ProgramService, if we need more exercises later for priority
-        List<Exercise> allExercises = new ArrayList<>(this.exerciseList);
+        List<Exercise> allExercises = new ArrayList<>(this.exerciseList); // wir speichern uns mal alle exercises ab aus der Datenbank für später
         List<Exercise> filteredList = new ArrayList<>();
 
         filteringMap.forEach(
@@ -81,7 +81,7 @@ public class ProgramSession {
                         -> {
                     for (int i = 0; i < this.exerciseList.size(); i++) {
                         if (this.exerciseList.get(i).getBodypartToEffectiveness().containsKey(key)) {
-                            String effectiveness = this.exerciseList.get(i).getBodypartToEffectiveness().get(key);
+                            String effectiveness = this.exerciseList.get(i).getBodypartToEffectiveness().get(key); //with get key we actually get the value, definied in multimaps
                             if (Integer.valueOf(effectiveness).equals(value)) {
                                 filteredList.add(this.exerciseList.get(i));
                             }
@@ -94,15 +94,15 @@ public class ProgramSession {
         this.exerciseList.removeAll(exerciseList);
         this.exerciseList = filteredList;
 
-        if (!userinput.getPriorities().contains(Bodypart.NONE)) {
+        if (!userinput.getPriorities().contains(Bodypart.NONE)) { //if NONE we do not handle priorities, not used in frontend currently
             handlePriority(allExercises, userinput.getPriorities(), userinput.getGoal(), userinput.getTimePerDay());
         }
 
-        int setsForTimeAdaption = 0;
+        int setsForTimeAdaption = 0; //not much to do in hypertrophy case, since in database it is defined with 3 sets
         if (userinput.getGoal().equals(Goal.HYPERTROPHY)) {
             setsForTimeAdaption = 3;
         }
-        //modify reps and sets
+        //modify reps and sets according to difficulty
         if (userinput.getGoal().equals(Goal.STRENGTH)) {
             for (Exercise e : exerciseList) {
                 switch (e.getDifficulty()) {
@@ -155,11 +155,11 @@ public class ProgramSession {
         }
         System.out.println(this.getDay() + "Day - all in one: " + this.exerciseList.size() + "exercises and total time: " + this.getSecondsPerSession());*/
 
-        return this;
+        return this; // ???return this program session
     }
 
     /***
-     * This function focus on the userinput timePerDay and does the corresponding calculation
+     * This function focus on the userinput and does the corresponding calculation
      */
     private void timeAdaptation(Userinput userinput, int setsForTimeAdaption) {
         System.out.println(userinput.getTimePerDay());
@@ -178,11 +178,12 @@ public class ProgramSession {
         for (Exercise e : this.exerciseList) {
             secondsExercises += SECONDS_PER_SET * e.getSets();
         }
-        // e.g. 6 exercises: 5 rests
-        return ((timePerDay.getSeconds() - secondsExercises) / this.exerciseList.size()) / sets;
+        // e.g. 6 exercises: 6 rests (pause auch nach dem letzten satz letzte übung)
+        return ((timePerDay.getSeconds() - secondsExercises) / this.exerciseList.size()) / sets; //pausenzeit für die ganze session nochmal durch die sets
     }
 
-    private void modifyRepsSets(Exercise currentExercise, int sets, int reps, Float intensiveness) {
+    //modify one exercise at a time
+    private void modifyRepsSets(Exercise currentExercise, int sets, int reps, Float intensiveness) { //könnte man noch umbenennen nach intensiveness auch
         currentExercise.setSets(sets);
         currentExercise.setReps(reps);
         currentExercise.setIntensiveness(intensiveness);
@@ -191,20 +192,20 @@ public class ProgramSession {
 
     private void handlePriority(List<Exercise> allExercises, List<Bodypart> priorities, Goal goal, TimePerDay timePerDay) {
         List<Exercise> prioExerciseList = new ArrayList<>();
-        int amountPrios = 2;
-        if (goal.equals(Goal.STRENGTH) && timePerDay.equals(TimePerDay.FORTY)) {
+        int amountPrios = 2; //die Anzahl an exercises nach prio die in der finalen session drin sein sollte
+        if (goal.equals(Goal.STRENGTH) && timePerDay.equals(TimePerDay.FORTY)) { //strength nur 1 weils so wenig übungen sind
             amountPrios = 1;
         }
 
         //if priority exist put exercise on first position and look for one other priority exercise and put it on the second position; afterwards delete last element of exercise
         //if priority doesn't exist: look for two exercises with this priority and add them on first and second position - delete the last 2 exercises
         //if goal is Strength one prio exercise is required - else 2 exercises with prio are required
-        int countPrioExercises = 0;
-        for (Bodypart priority : priorities) {
+        int countPrioExercises = 0; //zählt die übungen die als prio schon in der session sind (z.B.: Bizeps kommt einmal vor = 1 countPrioExercises
+        for (Bodypart priority : priorities) { //weil wir im userinput list übergeben
             //loops through all Exercises which where before filtering in the current session
             for (Exercise e : allExercises) {
-                if (e.getBodypartToEffectiveness().containsKey(priority.toString())) {
-                    if (!exerciseExistsInSession(e)) {
+                if (e.getBodypartToEffectiveness().containsKey(priority.toString())) { //holen wir uns die übungen gefiltert nach bodypart aus allExercises
+                    if (!exerciseExistsInSession(e)) { //wenn die übungen nicht in der session existiert, fügen wir sie der prio Liste hinzu und erhöh den counter
                         prioExerciseList.add(e);
                     } else {
                         countPrioExercises += 1;
@@ -212,13 +213,14 @@ public class ProgramSession {
                 }
             }
         }
+        System.out.println(countPrioExercises);
 
         //if 2 exercises with prio allready exist in session: do nothing - else
-        for (int i = countPrioExercises; i <= amountPrios; i++) {
+        for (int i = countPrioExercises; i <= amountPrios; i++) { // so wie's jetzt ist kommen 3 Übungen rein (weil kleiner gleich)
             if (!prioExerciseList.isEmpty()) {
-                this.exerciseList.add(i, prioExerciseList.get(0));
-                prioExerciseList.remove(0);
-                if (timePerDay.equals(TimePerDay.FORTY) || timePerDay.equals(TimePerDay.SIXTY)) {
+                this.exerciseList.add(i, prioExerciseList.get(0)); //füge die übung an erster Stelle ein in der session
+                prioExerciseList.remove(0); //entferne die übung aus der Liste und die nächste rückt nach
+                if (timePerDay.equals(TimePerDay.FORTY) || timePerDay.equals(TimePerDay.SIXTY)) { //wenn nur 40 oder 60min Zeit, dann entfern die letzte übung einfach
                     this.exerciseList.remove(this.exerciseList.size() - 1);
                 }
             }
